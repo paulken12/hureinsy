@@ -16,7 +16,7 @@ class CreateEmpMedicalInfoTable extends Migration
         Schema::create('emp_medical_info', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('emp_basic_info_id');
-            $table->integer('master_blood_key')->nullable();
+            $table->string('master_blood_key')->nullable();
             $table->string('height')->nullable();
             $table->string('weight')->nullable();
             $table->timestamps();

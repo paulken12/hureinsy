@@ -8,6 +8,7 @@ class EmpBasicInfo extends Model
 {
     protected $table = 'emp_basic_info';
     protected $guarded = [];
+    protected $dates = ['date_of_birth'];
 
     public function path() {
         return 'profile/'. $this->first_name;

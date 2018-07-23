@@ -20,7 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 //user home page - constructor already have auth
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 //middleware => auth group to check if the user is login
 //if not login go to login page
@@ -36,15 +36,69 @@ Route::group(['middleware' => 'auth'],function()
     //user profile redirection
     Route::get('profile/{employees}', 'EmpProfileController@show')->name('profiles');
 
+    //=================================================== CREATE ================================================================
+
+    Route::get('employee/profile', 'EmpProfileController@create');
+
+    //=================================================== EDIT ================================================================
+
     //redirect to edit form
     Route::get('profile/{profile}/basic/edit', 'EmpBasicInfoController@edit')->name('profile.basic.edit');
     //redirect to contact form
     Route::get('profile/{profile}/contact/edit', 'EmpContactInfoController@edit')->name('profile.contact.edit');
 
+    Route::get('profile/{profile}/address/edit', 'EmpAddressInfoController@edit')->name('profile.address.edit');
+
+    Route::get('profile/{profile}/family/edit', 'EmpFamilyBackgroundController@edit')->name('profile.family.edit');
+
+    Route::get('profile/{profile}/education/edit', 'EmpEducationController@edit')->name('profile.education.edit');
+
+    Route::get('profile/{profile}/experience/edit', 'EmpExperienceController@edit')->name('profile.experience.edit');
+
+    Route::get('profile/{profile}/reference/edit', 'EmpReferenceController@edit')->name('profile.reference.edit');
+
+    Route::get('profile/{profile}/emergency/edit', 'EmpEmergencyController@edit')->name('profile.emergency.edit');
+
+    Route::get('profile/{profile}/medical/edit', 'EmpMedicalController@edit')->name('profile.medical.edit');
+
+    Route::get('profile/{profile}/skills/edit', 'EmpSkillController@edit')->name('profile.skills.edit');
+
+    Route::get('profile/{profile}/training/edit', 'EmpTrainingController@edit')->name('profile.training.edit');
+
+    Route::get('profile/{profile}/conviction/edit', 'EmpCriminalController@edit')->name('profile.conviction.edit');
+
+    Route::get('profile/{profile}/benefits/edit', 'EmpBenefitController@edit')->name('profile.benefits.edit');
+
+    //=================================================== UPDATE ================================================================
+
     //update the basic information
     Route::post('profile/{profile}/basic', 'EmpBasicInfoController@update')->name('profile.basic.update');
     //update contact
     Route::post('profile/{profile}/contact', 'EmpContactInfoController@update')->name('profile.contact.update');
+
+    Route::post('profile/{profile}/address', 'EmpAddressInfoController@update')->name('profile.address.update');
+
+    Route::post('profile/{profile}/family', 'EmpFamilyBackgroundController@update')->name('profile.family.update');
+
+    Route::post('profile/{profile}/education', 'EmpEducationController@update')->name('profile.education.update');
+
+    Route::post('profile/{profile}/experience', 'EmpExperienceController@update')->name('profile.experience.update');
+
+    Route::post('profile/{profile}/reference', 'EmpReferenceController@update')->name('profile.reference.update');
+
+    Route::post('profile/{profile}/emergency', 'EmpEmergencyController@update')->name('profile.emergency.update');
+
+    Route::post('profile/{profile}/medical', 'EmpMedicalController@update')->name('profile.medical.update');
+
+    Route::post('profile/{profile}/skills', 'EmpSkillController@update')->name('profile.skills.update');
+
+    Route::post('profile/{profile}/training', 'EmpTrainingController@update')->name('profile.training.update');
+
+    Route::post('profile/{profile}/conviction', 'EmpCriminalController@update')->name('profile.conviction.update');
+
+    Route::post('profile/{profile}/benefits', 'EmpBenefitController@update')->name('profile.benefits.update');
+
+    //=================================================== UPDATE END ================================================================
 
     Route::get('authorization', 'PermissionRoleController@index')->name('authorization');
 

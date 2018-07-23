@@ -16,7 +16,7 @@ class CreateEmpSkillInfoTable extends Migration
         Schema::create('emp_skill_info', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('emp_basic_info_id');
-            $table->string('spacial_skill')->nullable();
+            $table->string('special_skill')->nullable();
             $table->string('hobbies')->nullable();
             $table->string('membership')->nullable();
             $table->timestamps();

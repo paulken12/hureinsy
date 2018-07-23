@@ -22,7 +22,7 @@ class CreateEmpWorkExperienceTable extends Migration
             $table->date('date_from')->nullable();
             $table->date('date_to')->nullable();
             $table->string('industry')->nullable();
-            $table->boolean('salary')->nullable();
+            $table->integer('salary')->nullable();
             $table->string('reason_for_leaving')->nullable();
             $table->timestamps();
         });

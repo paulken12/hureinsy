@@ -29,8 +29,10 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+//         before gate, get all admin and su
 //        $gate->before(function ($user)
 //        {
+//             //can edit, update,delete all
 //            foreach ($user->roles as $role) {
 //                if ($role->name === 'su' ||
 //                    $role->name === 'adm'||
@@ -38,16 +40,21 @@ class AuthServiceProvider extends ServiceProvider
 //            }
 //        });
 
-        foreach ($this->getPermissions() as $permission)
-        {
-            $gate->define($permission->name, function ($user) use ($permission)
-            {
-               return $user->hasRole($permission->roles);
-            });
-        }
+        //iterate the getPermission
+         foreach ($this->getPermissions() as $permission)
+         {
+             //get the permission name and pass to var $permission
+             $gate->define($permission->name, function ($user) use ($permission)
+             {
+                 //check if the user has role
+                 //User model traits
+                return $user->hasRole($permission->roles);
+             });
+         }
     }
 
-    protected function getPermissions() {
-        return Permission::with('roles')->get();
-    }
+    //get all permissions
+     protected function getPermissions() {
+         return Permission::with('roles')->get();
+     }
 }

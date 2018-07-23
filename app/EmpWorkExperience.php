@@ -13,4 +13,8 @@ class EmpWorkExperience extends Model
     {
         return $this->belongsTo(EmpBasicInfo::class);
     }
+
+    public function title() {
+        return $this->belongsTo(MasterJobTitle::class, 'master_job_title_key');
+    }
 }

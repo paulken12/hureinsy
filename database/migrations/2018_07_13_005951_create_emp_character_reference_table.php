@@ -22,7 +22,7 @@ class CreateEmpCharacterReferenceTable extends Migration
             $table->string('middle_name')->nullable();
             $table->string('company_name')->nullable();
             $table->string('company_address')->nullable();
-            $table->integer('contact_num')->nullable();
+            $table->string('contact_num')->nullable();
             $table->timestamps();
         });
     }

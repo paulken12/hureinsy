@@ -23,3 +23,8 @@ php artisan migrate
 
 php artisan db:seed --class=DatabaseSeeder
 
+#--------------------------------------------------------------
+to fix the broken image 
+
+php artisan storage:link
+

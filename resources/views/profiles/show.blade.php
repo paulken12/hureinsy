@@ -2,33 +2,35 @@
 
 @section('content')
     @foreach ($employees->basicInfo as $basicInfo)
-    <div class="card mb-3">
-        <div class="card-header">
-            {{$basicInfo->first_name}}&nbsp;{{$basicInfo->last_name}}
+        <div class="card mb-3">
+            <div class="card-header">
+                {{$basicInfo->first_name}}&nbsp;{{$basicInfo->last_name}}
 
-            {{--owner can update his/her profile but not others--}}
-            @can('update', $basicInfo)
-                <span class="float-right">
-                    <a href="{{route('profile.basic.edit', ['first_name'=>$basicInfo->first_name])}}" class="btn btn-secondary btn-sm">Edit</a>
+                {{--owner can update his/her profile but not others--}}
+                @can('update', $basicInfo)
+                    <span class="float-right">
+                    <a href="{{route('profile.basic.edit', ['first_name'=>$basicInfo->first_name])}}"
+                       class="btn btn-secondary btn-sm">Update</a>
                 </span>
-            @endcan
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col">
-                    <img src="{{asset($employees->avatar_path)}}" alt="Avatar" style="height: 130px; width: 130px; background: #4e555b">
-                </div>
-                <div class="col-sm-10">
-                    Company Id: {{$basicInfo->company_id}} &nbsp;<br>
-                    Gender: {{$basicInfo->gender->gender}} &nbsp;<br>
-                    Civil Status: {{$basicInfo->civilStatus->civil_status}} &nbsp;<br>
-                    Citizenship: {{$basicInfo->citizenship->citizenship}} &nbsp;<br>
-                    Birth date: {{$basicInfo->date_of_birth}} &nbsp;<br>
-                    Birth place: {{$basicInfo->birth_place? : '-'}}<br>
+                @endcan
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <img src="{{asset($employees->avatar_path)}}" alt="Avatar"
+                             style="height: 130px; width: 130px; background: #4e555b">
+                    </div>
+                    <div class="col-sm-10">
+                        Company Id: {{$basicInfo->company_id}} &nbsp;<br>
+                        Gender: {{$basicInfo->gender->gender}} &nbsp;<br>
+                        Civil Status: {{$basicInfo->civilStatus->civil_status}} &nbsp;<br>
+                        Citizenship: {{$basicInfo->citizenship->citizenship}} &nbsp;<br>
+                        Birth date: {{$basicInfo->date_of_birth->format('jS \o\f F ,Y')}} &nbsp;<br>
+                        Birth place: {{$basicInfo->birth_place? : '-'}}<br>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
         {{--login owner can only view his/her full profile--}}
         @can('update',$basicInfo)
@@ -82,7 +84,8 @@
 
                 @can('address_view')
                     <div class="card-footer text-muted">
-                        <a href="#" class="btn btn-secondary btn-sm float-right">Update</a>
+                        <a href="{{route('profile.address.edit', ['first_name'=>$basicInfo->first_name])}}"
+                           class="btn btn-secondary btn-sm float-right">Update</a>
                     </div>
                 @endcan
             </div>
@@ -103,9 +106,12 @@
                 </div>
 
                 @can('contact_view')
+
                     <div class="card-footer text-muted">
-                        <a href="#" class="btn btn-secondary btn-sm float-right">Update</a>
-                        {{--{{route('profile.contact.edit', ['first_name'=>$basicInfo->first_name])}}--}}
+                        <span class="float-right">
+                            <a href="{{route('profile.contact.edit', ['first_name'=>$basicInfo->first_name])}}"
+                               class="btn btn-secondary btn-sm">Update</a>
+                        </span>
                     </div>
                 @endcan
             </div>
@@ -115,8 +121,8 @@
                 <div class="card-body">
                     <h4>Benefits</h4>
                     <hr>
-                   @forelse($basicInfo->benefit as $benefit)
-                        SSSe No. : {{$benefit->sss_num}} <br>
+                    @forelse($basicInfo->benefit as $benefit)
+                        SSS No. : {{$benefit->sss_num}} <br>
                         PAGIBIG No. : {{$benefit->pagibig_num}}<br>
                         PHILHEALTH No. : {{$benefit->philhealth_num}} <br>
                         TIN No. : {{$benefit->tin_num}}<br>
@@ -128,7 +134,8 @@
 
                 @can('benefit_view')
                     <div class="card-footer text-muted">
-                        <input type="button" id="edit" name="" class="btn btn-secondary btn-sm float-right" title="" value="Update">
+                        <a href="{{route('profile.benefits.edit', ['first_name'=>$basicInfo->first_name])}}"
+                           class="btn btn-secondary btn-sm float-right">Update</a>
                     </div>
                 @endcan
             </div>
@@ -154,7 +161,8 @@
 
                 @can('family_view')
                     <div class="card-footer text-muted">
-                        <input type="button" id="edit" name="" class="btn btn-secondary btn-sm float-right" title="" value="Update">
+                        <a href="{{route('profile.family.edit', ['first_name'=>$basicInfo->first_name])}}"
+                           class="btn btn-secondary btn-sm float-right">Update</a>
                     </div>
                 @endcan
             </div>
@@ -177,7 +185,8 @@
 
                 @can('education_view')
                     <div class="card-footer text-muted">
-                        <input type="button" id="edit" name="" class="btn btn-secondary btn-sm float-right" title="" value="Update">
+                        <a href="{{route('profile.education.edit', ['first_name'=>$basicInfo->first_name])}}"
+                           class="btn btn-secondary btn-sm float-right">Update</a>
                     </div>
                 @endcan
             </div>
@@ -188,13 +197,13 @@
                     <h4>Work Experience</h4>
                     <hr>
                     @forelse ($basicInfo->experience as $experience)
-                        {{$experience->master_job_title_key}}
-                        Company name: {{$experience->company_name? : 'Not specified'}}&nbsp;
-                        Company address: {{$experience->company_address? : 'Not specified' }}&nbsp;
-                        Date from: {{$experience->date_from === '0000-00-00' ? '':$experience->date_from}}&nbsp;
-                        Date to: {{$experience->date_to === '0000-00-00' ? '':$experience->date_to}}&nbsp;
-                        Industry: {{$experience->industry? : 'Not specified'}}&nbsp;
-                        Salary: {{$experience->salary? : 'Not specified'}}&nbsp;
+                        <h5>{{$experience->title->job_titles}}</h5>
+                        Company name: {{$experience->company_name? : 'Not specified'}}&nbsp;<br>
+                        Company address: {{$experience->company_address? : 'Not specified' }}&nbsp;<br>
+                        Date from: {{$experience->date_from === '0000-00-00' ? '':$experience->date_from}}&nbsp;-
+                        Date to: {{$experience->date_to === '0000-00-00' ? '':$experience->date_to}}&nbsp;<br>
+                        Industry: {{$experience->industry? : 'Not specified'}}&nbsp;<br>
+                        Salary: {{$experience->salary? : 'Not specified'}}&nbsp;<br>
                         Reason for leaving: <br>{{$experience->reason_for_leaving? : 'Not specified'}}<br>
                     @empty
                         <p class="text-center">No work experience</p>
@@ -203,7 +212,8 @@
 
                 @can('experience_view')
                     <div class="card-footer text-muted">
-                        <input type="button" id="edit" name="" class="btn btn-secondary btn-sm float-right" title="" value="Update">
+                        <a href="{{route('profile.experience.edit', ['first_name'=>$basicInfo->first_name])}}"
+                           class="btn btn-secondary btn-sm float-right">Update</a>
                     </div>
                 @endcan
             </div>
@@ -214,11 +224,11 @@
                     <h4>Character Reference</h4>
                     <hr>
                     @forelse ($basicInfo->reference as $reference)
-                        Job title: {{$reference->job_title}}
-                        Name: {{$reference->first_name}}&nbsp;{{$reference->middle_name}}&nbsp;{{$reference->last_name}}
-                        Company name: {{$reference->company_name? : 'Not specified'}}
-                        Company address: {{$reference->company_address? : 'Not specified'}}
-                        Contact: {{$reference->contact_num? : 'Not specified'}}&nbsp;
+                        Job title: {{$reference->job_title}}<br>
+                        Name: {{$reference->first_name}}&nbsp;{{$reference->middle_name}}&nbsp;{{$reference->last_name}}<br>
+                        Company name: {{$reference->company_name? : 'Not specified'}}<br>
+                        Company address: {{$reference->company_address? : 'Not specified'}}<br>
+                        Contact: {{$reference->contact_num? : 'Not specified'}}&nbsp;<br>
                     @empty
                         <p class="text-center">No character reference</p>
                     @endforelse
@@ -226,7 +236,8 @@
 
                 @can('reference_view')
                     <div class="card-footer text-muted">
-                        <input type="button" id="edit" name="" class="btn btn-secondary btn-sm float-right" title="" value="Update">
+                        <a href="{{route('profile.reference.edit', ['first_name'=>$basicInfo->first_name])}}"
+                           class="btn btn-secondary btn-sm float-right">Update</a>
                     </div>
                 @endcan
             </div>
@@ -249,7 +260,8 @@
 
                 @can('emergency_view')
                     <div class="card-footer text-muted">
-                        <input type="button" id="edit" name="" class="btn btn-secondary btn-sm float-right" title="" value="Update">
+                        <a href="{{route('profile.emergency.edit', ['first_name'=>$basicInfo->first_name])}}"
+                           class="btn btn-secondary btn-sm float-right">Update</a>
                     </div>
                 @endcan
             </div>
@@ -260,7 +272,7 @@
                     <h4>Medical Information</h4>
                     <hr>
                     @forelse ($basicInfo->medical as $medical)
-                        Blood type: {{$medical->bloodType->blood_tye? : 'Not specified'}}<br>
+                        Blood type: {{$medical->bloodType->blood_type ? : 'Not specified'}}<br>
                         Height(m): {{$medical->height ? : 'Not specified'}}<br>
                         Weight(kg): {{$medical->weight ? : 'Not specified'}}<br>
                     @empty
@@ -270,7 +282,8 @@
 
                 @can('medical_view')
                     <div class="card-footer text-muted">
-                        <input type="button" id="edit" name="" class="btn btn-secondary btn-sm float-right" title="" value="Update">
+                        <a href="{{route('profile.medical.edit', ['first_name'=>$basicInfo->first_name])}}"
+                           class="btn btn-secondary btn-sm float-right">Update</a>
                     </div>
                 @endcan
             </div>
@@ -280,10 +293,10 @@
                 <div class="card-body">
                     <h4>Skill Set</h4>
                     <hr>
-                    @forelse ($basicInfo->reference as $reference)
-                        Technical skill: {{$reference->spacial_skill}}<br>
-                        Hobbies {{$reference->hobbies}}<br>
-                        Organization: {{$reference->membership? : 'Not specified'}}
+                    @forelse ($basicInfo->skill as $skill)
+                        Technical skill: {{$skill->special_skill}}<br>
+                        Hobbies: {{$skill->hobbies}}<br>
+                        Organization: {{$skill->membership? : 'Not specified'}}
                     @empty
                         <p class="text-center">No skills</p>
                     @endforelse
@@ -291,7 +304,8 @@
 
                 @can('skill_view')
                     <div class="card-footer text-muted">
-                        <input type="button" id="edit" name="" class="btn btn-secondary btn-sm float-right" title="" value="Update">
+                        <a href="{{route('profile.skills.edit', ['first_name'=>$basicInfo->first_name])}}"
+                           class="btn btn-secondary btn-sm float-right">Update</a>
                     </div>
                 @endcan
             </div>
@@ -304,10 +318,10 @@
                 <h4>Trainings</h4>
                 <hr>
                 @forelse ($basicInfo->training as $training)
-                    {{$training->title}}
-                    {{$training->date_from === '0000-00-00' ? '':$training->date_from}}&nbsp;
-                    {{$training->date_to === '0000-00-00' ? '':$training->date_to}}&nbsp;
-                    {{$training->place_seminar}}<br>
+                    Title: {{$training->title}}<br>
+                    Date from: {{$training->date_from === '0000-00-00' ? '':$training->date_from}}&nbsp;<br>
+                    Date to: {{$training->date_to === '0000-00-00' ? '':$training->date_to}}&nbsp;<br>
+                    Location: {{$training->place_seminar}}<br>
                 @empty
                     <p class="text-center">No trainings attended</p>
                 @endforelse
@@ -317,7 +331,8 @@
             @can('training_view')
                 @can('update', $basicInfo)
                     <div class="card-footer text-muted">
-                        <input type="button" id="edit" name="" class="btn btn-secondary btn-sm float-right" title="" value="Update">
+                        <a href="{{route('profile.training.edit', ['first_name'=>$basicInfo->first_name])}}"
+                           class="btn btn-secondary btn-sm float-right">Update</a>
                     </div>
                 @endcan
             @endcan
@@ -327,23 +342,24 @@
         @can('update', $basicInfo)
             {{--Conviction--}}
             <div class="card mb-3">
-            <div class="card-body">
-                <h4>Conviction</h4>
-                <hr>
-                @forelse ($basicInfo->criminalInfo as $criminalInfo)
-                    Crime committed: {{$criminalInfo->has_crime}}
-                    Remarks: {{$criminalInfo->comment? : 'Not specified'}}&nbsp;
-                @empty
-                    <p class="text-center">No crime committed</p>
-                @endforelse
-            </div>
-
-            @can('criminal_view')
-                <div class="card-footer text-muted">
-                    <input type="button" id="edit" name="" class="btn btn-secondary btn-sm float-right" title="" value="Update">
+                <div class="card-body">
+                    <h4>Conviction</h4>
+                    <hr>
+                    @forelse ($basicInfo->criminalInfo as $criminalInfo)
+                        Crime committed: {{$criminalInfo->has_crime}}<br>
+                        Remarks: {{$criminalInfo->comment? : 'Not specified'}}&nbsp;<br>
+                    @empty
+                        <p class="text-center">No crime committed</p>
+                    @endforelse
                 </div>
-            @endcan
-        </div>
+
+                @can('criminal_view')
+                    <div class="card-footer text-muted">
+                        <a href="{{route('profile.conviction.edit', ['first_name'=>$basicInfo->first_name])}}"
+                           class="btn btn-secondary btn-sm float-right">Update</a>
+                    </div>
+                @endcan
+            </div>
         @endcan
     @endforeach
 @endsection
