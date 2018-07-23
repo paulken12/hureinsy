@@ -43,6 +43,6 @@ class EmpContactInfoController extends Controller
             $user->save();
         }
 
-        return back();
+        return back()->with('flash', 'Updated successfully!');
     }
 }

@@ -42,6 +42,6 @@ class EmpFamilyBackgroundController extends Controller
             }
         }
 
-        return back()->with($profile);
+        return back()->with($profile)->with('flash', 'Updated successfully!');
     }
 }

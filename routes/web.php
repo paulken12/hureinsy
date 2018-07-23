@@ -104,8 +104,8 @@ Route::group(['middleware' => 'auth'],function()
 
     Route::get('authorization/edit', 'PermissionRoleController@edit')->name('authorization.edit');
 
-    Route::get('users', 'UserController@index')->name('users');
+    Route::get('admin/users', 'UserController@index')->name('users');
 
-
+    Route::get('admin/new/user', 'UserController@create')->name('new.user');
 
 });

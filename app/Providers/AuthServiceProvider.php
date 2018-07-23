@@ -29,16 +29,16 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-//         before gate, get all admin and su
-//        $gate->before(function ($user)
-//        {
-//             //can edit, update,delete all
-//            foreach ($user->roles as $role) {
-//                if ($role->name === 'su' ||
-//                    $role->name === 'adm'||
-//                    $role->name === 'hr') return true;
-//            }
-//        });
+         //before gate, get all admin and su
+        $gate->before(function ($user)
+        {
+             //can edit, update,delete all
+            foreach ($user->roles as $role) {
+                if ($role->name === 'su' ||
+                    $role->name === 'adm'||
+                    $role->name === 'hr') return true;
+            }
+        });
 
         //iterate the getPermission
          foreach ($this->getPermissions() as $permission)

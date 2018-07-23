@@ -4,7 +4,7 @@
     @foreach ($employees->basicInfo as $basicInfo)
         <div class="card mb-3">
             <div class="card-header">
-                {{$basicInfo->first_name}}&nbsp;{{$basicInfo->last_name}}
+                <strong>{{$basicInfo->first_name}}&nbsp;{{$basicInfo->last_name}}</strong>
 
                 {{--owner can update his/her profile but not others--}}
                 @can('update', $basicInfo)

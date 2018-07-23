@@ -90,7 +90,7 @@
                                         <li class="list-group-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
                                         <li class="list-group-item"><a href="{{route('employees.index')}}">Personnel List</a></li>
                                         @can('admin_view')
-                                            <li class="list-group-item"><a href="#">New employee</a></li>
+                                            <li class="list-group-item"><a href="{{route('new.user')}}">New employee</a></li>
                                             <li class="list-group-item">
                                                 <a href="#adminSetting" data-toggle="collapse" aria-expanded="false">
                                                     Admin Setting
@@ -117,6 +117,8 @@
                     <div class="col">
                         @yield('content')
                     </div>
+
+                    <flash message="{{ session('flash') }}"></flash>
                 </div>
             </div>
         </main>

@@ -3,7 +3,7 @@
 @section('content')
     @can('admin_view')
         <div class="card">
-            <div class="card-header">Role</div>
+            <div class="card-header">Users</div>
             <div class="card-body">
                 <table class="table table-light table-sm table-striped">
                     <thead>
