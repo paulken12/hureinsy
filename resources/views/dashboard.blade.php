@@ -14,6 +14,7 @@
             You are logged in!
                 <br>
             Some stuff here
+
         </div>
     </div>
 @endsection

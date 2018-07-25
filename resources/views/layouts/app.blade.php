@@ -10,15 +10,22 @@
 
     <title>{{ config('app.name', 'Hureinsy') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
 
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Scripts -->
+    <script>
+        window.app = {!! json_encode([
+            'csrfToken' => csrf_token(),
+            'user' => Auth::user(),
+            'signedIn' => Auth::check()
+        ]) !!};
+    </script>
 </head>
 <body>
     <div id="app">
@@ -74,7 +81,9 @@
                     @auth()
                         <div class="col-sm-3">
                             <div class="card">
-                                <img class="rounded-circle ml-auto mr-auto mt-4" src="{{asset(Auth::user()->avatar_path)}}" alt="User Avatar" width="100" height="100">
+                                {{--<img class="rounded-circle ml-auto mr-auto mt-4" src="{{asset(Auth::user()->avatar_path)}}" alt="User Avatar" width="100" height="100">--}}
+                                <avatar-form :user="{{ Auth::user() }}"></avatar-form>
+
                                 <div class="card-body text-center">
                                     <p class="card-title">
                                         <a href="{{route('profiles',Auth::user()->name)}}">{{Auth::user()->email}}</a>
@@ -123,5 +132,10 @@
             </div>
         </main>
     </div>
+
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    @yield('scripts')
 </body>
 </html>

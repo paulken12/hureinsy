@@ -6,6 +6,7 @@ use App\EmpBasicInfo;
 use App\MasterCitizenship;
 use App\MasterCivilStatus;
 use App\User;
+use foo\bar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -17,6 +18,26 @@ class EmpBasicInfoController extends Controller
 
         //return to the personnel list page
        return view('user.index',compact('employees'));
+    }
+
+    /**
+     * Store a new user avatar.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store()
+    {
+        request()->validate([
+            'avatar' => ['required', 'image']
+        ]);
+
+        dd('here');
+
+        auth()->user()->update([
+            'avatar_path' => request()->file('avatar')->store('avatars', 'public')
+        ]);
+
+        return back();
     }
 
     public function edit(User $profile) {

@@ -11,6 +11,7 @@
                             {{$basicInfo->first_name}}&nbsp;{{$basicInfo->last_name}}
                         </div>
                         <div class="card-body">
+
                             <form action="{{route('profile.basic.update', ['first_name'=>$basicInfo->first_name])}}"
                                   method="POST">
 

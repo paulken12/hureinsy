@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\DB;
 
 class EmpProfileController extends Controller
 {
-    public function show(User $employees) {
+    public function show(User $profile) {
 
-        return view('profiles.show',compact('employees'));
+        return view('profiles.show',compact('profile'));
     }
 
     public function create() {

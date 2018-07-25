@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @foreach ($employees->basicInfo as $basicInfo)
+    @foreach ($profile->basicInfo as $basicInfo)
         <div class="card mb-3">
             <div class="card-header">
                 <strong>{{$basicInfo->first_name}}&nbsp;{{$basicInfo->last_name}}</strong>
@@ -17,7 +17,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col">
-                        <img src="{{asset($employees->avatar_path)}}" alt="Avatar"
+                        <img src="{{$profile->avatar_path}}" alt="Avatar" class="rounded-circle"
                              style="height: 130px; width: 130px; background: #4e555b">
                     </div>
                     <div class="col-sm-10">
@@ -99,7 +99,7 @@
                         Telephone No. : {{$contact->telephone_num}} <br>
                         Mobile No. : {{$contact->mobile_num}}<br>
                         Other No. : {{$contact->other_mobile}}<br>
-                        Email. : {{$employees->email}}<br>
+                        Email. : {{$profile->email}}<br>
                     @empty
                         <p class="text-center">No contact available</p>
                     @endforelse
@@ -272,7 +272,7 @@
                     <h4>Medical Information</h4>
                     <hr>
                     @forelse ($basicInfo->medical as $medical)
-                        Blood type: {{$medical->bloodType->blood_type ? : 'Not specified'}}<br>
+                        Blood type: {{$medical->master_blood_key ? : 'Not specified'}}<br>
                         Height(m): {{$medical->height ? : 'Not specified'}}<br>
                         Weight(kg): {{$medical->weight ? : 'Not specified'}}<br>
                     @empty

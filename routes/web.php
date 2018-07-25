@@ -26,6 +26,9 @@ Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 //if not login go to login page
 Route::group(['middleware' => 'auth'],function()
 {
+    Route::get('api/users', 'Api\UsersController@index');
+
+    Route::post('api/users/{user}/avatar', 'Api\UserAvatarController@store')->name('avatar');
     //view-create-edit-delete page redirection
     Route::resource('employees', 'EmpBasicInfoController');
 
@@ -34,7 +37,7 @@ Route::group(['middleware' => 'auth'],function()
     Route::post('changePassword', 'ChangePasswordController@change')->name('changePassword');
 
     //user profile redirection
-    Route::get('profile/{employees}', 'EmpProfileController@show')->name('profiles');
+    Route::get('profile/{profile}', 'EmpProfileController@show')->name('profiles');
 
     //=================================================== CREATE ================================================================
 
@@ -107,5 +110,6 @@ Route::group(['middleware' => 'auth'],function()
     Route::get('admin/users', 'UserController@index')->name('users');
 
     Route::get('admin/new/user', 'UserController@create')->name('new.user');
+
 
 });

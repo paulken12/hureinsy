@@ -1,5 +1,5 @@
 <template>
-    <div class="alert alert-flash"
+    <div class="alert alert-flash shadow rounded"
          :class="'alert-'+level"
          role="alert"
          v-show="show"
@@ -56,5 +56,13 @@
         right: 15px;
         top: 75px;
         z-index: 9999;
+    }
+
+    .alert-success
+    {
+        background: #4caf50;
+        color: #ffffff;
+        width: 280px;
+        padding: 10px;
     }
 </style>

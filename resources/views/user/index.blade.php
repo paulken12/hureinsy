@@ -6,7 +6,7 @@
             @foreach ($employees as $employee)
                 <div class="card mt-1">
                     <div class="card-body m-2 p-0">
-                        <img class="rounded-circle" src="{{asset($employee->owner->avatar_path)}}" alt="Avatar" style="height: 50px">
+                        <img class="rounded-circle" src="{{$employee->owner->avatar_path}}" alt="Avatar" style="height: 50px">
                         &nbsp;{{$employee->company_id}} &nbsp;
                         <a href="{{$employee->path()}}">{{$employee->first_name}} {{$employee->middle_name}} &nbsp;{{$employee->last_name}}</a>
                     </div>
