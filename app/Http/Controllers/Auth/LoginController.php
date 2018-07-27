@@ -40,6 +40,22 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
+        if (!$user->confirmed())
+        {
+            $message = 'You must confirm your email address';
+
+            // Log the user out.
+            $this->logout($request);
+
+            // Return them to the log in form.
+            return redirect()->back()
+            ->withInput($request->only($this->username(), 'remember'))
+                ->withErrors([
+                    // This is where we are providing the error message.
+                    $this->username() => $message,
+                ]);
+        }
+
         // if the user is Inactive == 2
         if ($user->master_employee_status_key === 2) {
 
@@ -56,13 +72,6 @@ class LoginController extends Controller
                     $this->username() => $message,
                 ]);
         }
-//        elseif ($user->verified())
-//        {
-//            // login
-//        }
-//        else
-//        {
-//            //notify to verified email
-//        }
+
     }
 }

@@ -20,7 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('avatar_path')->nullable();
             $table->integer('master_employee_status_key');
-            $table->boolean('verified'); //----> email should be verified
+            $table->boolean('verified')->default(false); //----> email should be verified
+            $table->string('verification_token',25)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

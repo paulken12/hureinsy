@@ -6,17 +6,18 @@ use App\EmpBasicInfo;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class UserProfileTest extends TestCase
 {
+    use RefreshDatabase;
+
     /** @test */
     function a_user_has_a_profile()
     {
 
-        $user = User::find(136);
+        $user = create('App\User');
         $this->signIn();
-        $this->get("profiles/{$user->name}")
+        $this->get("/profile/{$user->name}")
             ->assertSee($user->name);
     }
 
@@ -33,6 +34,19 @@ class UserProfileTest extends TestCase
 
         $this->get("profiles/" . auth()->user()->name)
             ->assertSee($info->name);
+
+    }
+
+    /** @test*/
+    function authenticated_user_must_verified_their_email()
+    {
+        $user = create('App\User');
+
+        $this->assertRedirect("/profiles/{$user->name}")
+            ->assertSee($user->name);
+
+        $this->assertRedirect('profile/'.$user->name.'/basic')
+            ->assertSessionHas('flush','Confirm email address first');
 
     }
 }

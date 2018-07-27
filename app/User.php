@@ -13,8 +13,13 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password', 'avatar_path',
     ];
+
     protected $hidden = [
         'password', 'remember_token',
+    ];
+
+    protected $casts = [
+      'verified'=>'boolean'
     ];
 
 
@@ -48,5 +53,16 @@ class User extends Authenticatable
         else{
             return asset('images/avatars/guest.png');
         }
+    }
+
+    public function verified() {
+        $this->verified = true;
+        $this->verification_token = null;
+
+        $this->save();
+    }
+
+    public function confirmed() {
+        return auth()->user()->verified;
     }
 }

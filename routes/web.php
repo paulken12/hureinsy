@@ -109,7 +109,11 @@ Route::group(['middleware' => 'auth'],function()
 
     Route::get('admin/users', 'UserController@index')->name('users');
 
-    Route::get('admin/new/user', 'UserController@create')->name('new.user');
+    Route::get('register/employee', 'NewEmployee\RegisterEmployeeController@create')->name('register.create');
+
+    Route::post('register/employee', 'NewEmployee\RegisterEmployeeController@store')->name('register.store');
 
 
 });
+
+Route::get('/register/confirm', 'Auth\RegisterConfirmationController@create')->name('register.confirm');

@@ -13,7 +13,7 @@ trait EmployeeRole
 
     public function assignRole($role)
     {
-        return $this->roles()->save(Role::whereName($role)->firstOrFail());
+        return $this->roles()->save(Role::where('name',$role)->firstOrFail());
     }
 
     public function hasRole($role)
