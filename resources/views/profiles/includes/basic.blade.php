@@ -58,24 +58,35 @@
 @can('basic_edit')
     <div class="row">
         <div class="col">
-            <div class="form-group">
-                <label for="master_gender_key">Gender</label>
-                <input type="text" id="master_gender_key" name="master_gender_key" class="form-control" title="Gender"
-                       value="{{empty($basicInfo->gender->gender) ? '':$basicInfo->gender->gender}}" {{empty($basicInfo) ? '':"disabled"}}>
-            </div>
+            @if(!empty($basicInfo->gender->gender))
+                <div class="form-group">
+                    <label for="master_gender_key">Gender</label>
+                    <input type="text" id="master_gender_key" name="master_gender_key" class="form-control" title="Gender"
+                           value="{{empty($basicInfo->gender->gender) ? '':$basicInfo->gender->gender}}" {{empty($basicInfo) ? '':"disabled"}}>
+                </div>
+            @else
+                <div class="form-group">
+                    <label for="master_civil_status_key">Gender</label>
+                    <select name="master_civil_status_key" id="master_civil_status_key" class="form-control">
+                        @foreach ($gender as $sex)
+                            <option value="{{$sex->key}}">{{$sex->gender}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            @endif
         </div>
         <div class="col">
             <div class="form-group">
                 <label for="date_of_birth">Birth Date</label>
                 <input type="text" id="date_of_birth" name="date_of_birth" class="form-control" title="Birth date"
-                       value="{{empty($basicInfo->date_of_birth) ? '':$basicInfo->date_of_birth}}" {{empty($basicInfo) ? '':"disabled"}}>
+                       value="{{empty($basicInfo->date_of_birth) ? '':$basicInfo->date_of_birth}}" {{empty($basicInfo->date_of_birth) ? '':"disabled"}}>
             </div>
         </div>
         <div class="col">
             <div class="form-group">
                 <label for="birth_place">Birth Place</label>
                 <input type="text" id="birth_place" name="birth_place" class="form-control" title="Birth place"
-                       value="{{empty($basicInfo->birth_place) ? '':$basicInfo->birth_place}}" {{empty($basicInfo) ? '':"disabled"}}>
+                       value="{{empty($basicInfo->birth_place) ? '':$basicInfo->birth_place}}" {{empty($basicInfo->birth_place) ? '':"disabled"}}>
             </div>
         </div>
     </div>

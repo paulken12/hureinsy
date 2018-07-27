@@ -11,6 +11,12 @@ class ChangePasswordController extends Controller
 {
     public function show()
     {
+        //if the profile of authenticated user is not complete redirect back
+//        if(!auth()->user()->confirmed())
+//        {
+//            return back()->with('flash', 'Please complete your information first');
+//        }
+
         return view('auth.passwords.change');
     }
 

@@ -16,6 +16,7 @@ class RegisterEmployeeController extends Controller
 {
     //
     public function create() {
+
         $user = EmpBasicInfo::orderBy('id','desc')->first();
 
         $roles = Role::orderBy('id','desc')->get();

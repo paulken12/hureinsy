@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Gate;
 class EmpBasicInfoController extends Controller
 {
     public function index() {
+
+        //if the profile of authenticated user is not complete redirect back
+//        if(!auth()->user()->confirmed())
+//        {
+//            return back()->with('flash', 'Please complete your information first');
+//        }
+
         //get all employees and paginate to 15 data
         $employees = EmpBasicInfo::paginate(15);
 

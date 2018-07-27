@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\MasterBloodType;
 use App\MasterCitizenship;
 use App\MasterCivilStatus;
+use App\MasterEducationalType;
 use App\MasterGender;
 use App\User;
 use Illuminate\Http\Request;
@@ -20,19 +21,6 @@ class RegisterConfirmationController extends Controller
      */
     public function create()
     {
-
-        /*=======================================================================================
-
-
-        let the user login using their credentials
-        if logged in check if the verification token is empty
-
-        if not empty redirect to create profile (create middleware verified)
-
-        if verification token is empty redirect to their profile
-
-        
-        //====================================================================================== */
         //get the user has the token
         $user = User::where('verification_token', request('token'))->first();
 
@@ -43,6 +31,8 @@ class RegisterConfirmationController extends Controller
 
         //if the token is exist login the user
         Auth::login($user);
+
+        $basicInfo = $user->basicInfo->first();
 
         //get all data in the master civil status table
         $civilStatus = MasterCivilStatus::all();
@@ -56,8 +46,14 @@ class RegisterConfirmationController extends Controller
         //get all data in the master blood type table
         $blood = MasterBloodType::all();
 
+        //get all data in the master blood type table
+        $educations = MasterEducationalType::all();
 
-        return view('profiles.create',compact('employees','civilStatus','citizenship','gender','blood'));
+        return view('profiles.create',compact(
+            'user','civilStatus',
+            'citizenship','gender',
+            'blood','basicInfo',
+            'educations'));
 
     }
 

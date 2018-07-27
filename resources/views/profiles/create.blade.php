@@ -49,7 +49,10 @@
                                 <div class="card-body">
                                     <h5>Educational Background</h5>
                                     <hr>
-                                    @include('profiles.includes.education')
+                                    <education-form :user="{{ $user }}"
+                                                    :educations="{{ $educations }}"
+                                    ></education-form>
+                                    {{--@include('profiles.includes.education')--}}
                                 </div>
                             </div>
                             <br>

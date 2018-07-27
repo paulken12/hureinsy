@@ -20,11 +20,11 @@ Route::get('/', function () {
 Auth::routes();
 
 //user home page - constructor already have auth
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware('confirmed');
 
 //middleware => auth group to check if the user is login
 //if not login go to login page
-Route::group(['middleware' => 'auth'],function()
+Route::group(['middleware' => ['auth','confirmed']],function()
 {
     Route::get('api/users', 'Api\UsersController@index');
 
