@@ -5,6 +5,7 @@ Laravel and vue project test
 
 - cd to the project directory and run the command
 
+
     >composer install 
 
     >copy .env.example .env 
@@ -15,11 +16,13 @@ Laravel and vue project test
 
 - open .env file and modify the database connection
 
-	DB_DATABASE=database_name
-	DB_USERNAME=root
-	DB_PASSWORD=
+
+    DB_DATABASE=database_name
+    DB_USERNAME=root
+    DB_PASSWORD=
 
 - copy the csv files in the drive and paste to hureinsy>database>seeds>csv
+
 
     >php artisan migrate
 
@@ -30,6 +33,7 @@ Laravel and vue project test
     >npm run dev
 
 - open terminal and cd to the project directory and run the command
+    
     
     >php artisan serve
 
