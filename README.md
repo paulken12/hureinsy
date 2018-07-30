@@ -1,30 +1,40 @@
 # hureinsy
 Laravel and vue project test
 
-git clone https://github.com/paulken12/hureinsy.git
+- git clone https://github.com/paulken12/hureinsy.git
 
-composer install 
+- cd to the project directory and run the command
 
-cp .env.example .env - linux (for windows copy)
+    >composer install 
 
-php artisan key:generate
+    >copy .env.example .env 
 
-create database xampp/wamp : database_name - collations : utf8mb4_unicode_ci
+    >php artisan key:generate
 
-open .env file and modify the database connection
+- create database xampp/wamp : database_name - collations : utf8mb4_unicode_ci
+
+- open .env file and modify the database connection
 
 	DB_DATABASE=database_name
 	DB_USERNAME=root
 	DB_PASSWORD=
 
-copy the csv files in the drive and paste to hureinsy>database>seeds>csv
+- copy the csv files in the drive and paste to hureinsy>database>seeds>csv
 
-php artisan migrate
+    >php artisan migrate
 
-php artisan db:seed --class=DatabaseSeeder
+    >php artisan db:seed --class=DatabaseSeeder
 
-#--------------------------------------------------------------
+    >npm install
+
+    >npm run dev
+
+- open terminal and cd to the project directory and run the command
+    
+    >php artisan serve
+
+--------------------------------------------------------------
 to fix the broken image 
 
-php artisan storage:link
+    php artisan storage:link
 
