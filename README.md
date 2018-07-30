@@ -17,9 +17,11 @@ Laravel and vue project test
 - open .env file and modify the database connection
 
 
+    ```dotenv
     DB_DATABASE=database_name
     DB_USERNAME=root
     DB_PASSWORD=
+    ```
 
 - copy the csv files in the drive and paste to hureinsy>database>seeds>csv
 
@@ -38,6 +40,9 @@ Laravel and vue project test
     >php artisan serve
 
 --------------------------------------------------------------
+
+##### Image 
+
 - To fix the broken image 
 
 
@@ -46,26 +51,29 @@ Laravel and vue project test
     
     
 --------------------------------------------------------------
-Mail
+
+##### Mail 
 
 - For the mailing, create an account in mailtrap.io and update the .env file
 
 
-
-    >MAIL_DRIVER=smtp
-    >MAIL_HOST=smtp.mailtrap.io
-    >MAIL_PORT=2525
-    >MAIL_USERNAME= username
-    >MAIL_PASSWORD= password
-    
-    
-    
+    ```dotenv
+    MAIL_DRIVER=smtp
+    MAIL_HOST=smtp.mailtrap.io
+    MAIL_PORT=2525
+    MAIL_USERNAME= username
+    MAIL_PASSWORD= password
+    ```
+   
     
  - for offline change MAIL_DRIVER smtp to log
     and locate your logs App > Storage > logs > laravel.log
     scroll down, find the mail URI and paste into your browser 
    
+    ```dotenv
+       MAIL_DRIVER=log
+    ```
    
-    >MAIL_DRIVER=log
+    
     
     
