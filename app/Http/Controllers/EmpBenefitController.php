@@ -13,29 +13,31 @@ class EmpBenefitController extends Controller
 
     public function update(Request $request, $profile) {
 
-        $user_ben = $request->validate([
-            'key'=>'required|numeric',
-            'sss_num'=>'nullable',
-            'pagibig_num'=>'nullable',
-            'philhealth_num'=>'nullable',
-            'tin_num'=>'nullable',
-            'payroll_account'=>'nullable',
+        $request->validate([
+            'gov_sss_num'=>'nullable',
+            'gov_pagibig_num'=>'nullable',
+            'gov_philhealth_num'=>'nullable',
+            'gov_tin_num'=>'nullable',
+            'gov_payroll_account'=>'nullable',
         ]);
 
         $user = User::whereName($profile)->first();
-        //iterate the profile to get the crime and save
+        //iterate the profile to get the gov benefit and save
         foreach ($user->basicInfo as $info) {
+
             foreach ($info->benefit as $benefit) {
 
-                if($benefit->id === (int)$user_ben['key'])
-                {
-                    $benefit->sss_num = $request->input('sss_num');
-                    $benefit->pagibig_num = $request->input('pagibig_num');
-                    $benefit->philhealth_num = $request->input('philhealth_num');
-                    $benefit->tin_num = $request->input('tin_num');
-                    $benefit->payroll_account = $request->input('payroll_account');
-                    $benefit->update();
-                }
+                $benefit->sss_num = $request->input('gov_sss_num');
+
+                $benefit->pagibig_num = $request->input('gov_pagibig_num');
+
+                $benefit->philhealth_num = $request->input('gov_philhealth_num');
+
+                $benefit->tin_num = $request->input('gov_tin_num');
+
+                $benefit->payroll_account = $request->input('gov_payroll_account');
+
+                $benefit->update();
             }
         }
 

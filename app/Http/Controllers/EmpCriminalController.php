@@ -14,9 +14,9 @@ class EmpCriminalController extends Controller
     public function update(Request $request, $profile) {
 
         $user_cri = $request->validate([
-            'key'=>'required|numeric',
-            'has_crime'=>'nullable',
-            'comment'=>'nullable',
+            'crime_key'=>'required',
+            'crime_has_crime'=>'nullable',
+            'crime_comment'=>'nullable',
         ]);
 
         $user = User::whereName($profile)->first();
@@ -24,10 +24,10 @@ class EmpCriminalController extends Controller
         foreach ($user->basicInfo as $info) {
             foreach ($info->criminalInfo as $criminalInfo) {
 
-                if($criminalInfo->id === (int)$user_cri['key'])
+                if($criminalInfo->id === (int)$user_cri['crime_key'])
                 {
-                    $criminalInfo->has_crime = $request->input('has_crime');
-                    $criminalInfo->comment = $request->input('comment');
+                    $criminalInfo->has_crime = $request->input('crime_has_crime');
+                    $criminalInfo->comment = $request->input('crime_comment');
                     $criminalInfo->update();
                 }
             }

@@ -24,7 +24,7 @@ Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middle
 
 //middleware => auth group to check if the user is login
 //if not login go to login page
-Route::group(['middleware' => ['auth','confirmed']],function()
+Route::group(['middleware' => ['auth','confirmed','permissions']],function()
 {
     Route::get('api/users', 'Api\UsersController@index');
 
@@ -116,4 +116,5 @@ Route::group(['middleware' => ['auth','confirmed']],function()
 
 });
 
+Route::post('/register/confirmed', 'Auth\RegisterConfirmationController@store')->name('register.confirmed')->middleware('auth');
 Route::get('/register/confirm', 'Auth\RegisterConfirmationController@create')->name('register.confirm');

@@ -99,5 +99,9 @@ class EmpBasicInfo extends Model
     public function citizenship() {
         return $this->belongsTo(MasterCitizenship::class, 'master_citizenship_key');
     }
+
+    public function extension() {
+        return $this->belongsTo(MasterNameExtension::class, 'master_name_extension_key');
+    }
 }
 

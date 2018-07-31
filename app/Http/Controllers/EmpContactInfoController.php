@@ -17,10 +17,15 @@ class EmpContactInfoController extends Controller
 
         //validate the fields from the server side
         $request->validate([
+
             'telephone_num' => 'nullable|numeric',
+
             'mobile_num' => 'nullable|numeric',
+
             'other_mobile' => 'nullable|numeric',
+
             'email' => 'required|email|unique:users,email,'.auth()->user()->id
+
         ]);
 
         //get the profile
@@ -28,21 +33,28 @@ class EmpContactInfoController extends Controller
 
        //iterate the profile to get the contact and save
         foreach ($user->basicInfo as $info) {
+
             foreach ($info->contact as $contact) {
-                $contact->telephone_num = $request->telephone_num;
-                $contact->mobile_num = $request->mobile_num;
-                $contact->other_mobile = $request->other_mobile;
-                $contact->save();
+
+                $contact->telephone_num = $request->input('telephone_num');
+
+                $contact->mobile_num = $request->input('mobile_num');
+
+                $contact->other_mobile = $request->input('other_mobile');
+
+                $contact->update();
            }
        }
 
         //if the input field == the email return
         //if not save the new email --------------> soon to be send an verification
-        if($user->email != $request->email) {
-            $user->email = $request->email;
-            $user->save();
+        if($user->email != $request->input('email')) {
+
+            $user->email = $request->input('email');
+
+            $user->update();
         }
 
-        return view('')->with('flash', 'Updated successfully!');
+        return redirect()->back()->with($profile)->with('flash', 'Updated successfully!');
     }
 }

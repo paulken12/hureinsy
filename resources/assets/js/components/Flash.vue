@@ -9,13 +9,13 @@
 
 <script>
     export default {
-        props: ['message'],
+        props: 'message',
 
         data() {
             return {
-                body: this.message,
-                level: 'success',
-                show: false
+                body    : this.message,
+                level   : 'success',
+                show    : false
             }
         },
 
@@ -59,6 +59,22 @@
     }
 
     .alert-success
+    {
+        background: #4caf50;
+        color: #ffffff;
+        width: 280px;
+        padding: 10px;
+    }
+
+    .alert-warning
+    {
+        background: #4caf50;
+        color: #ffffff;
+        width: 280px;
+        padding: 10px;
+    }
+
+    .alert-danger
     {
         background: #4caf50;
         color: #ffffff;

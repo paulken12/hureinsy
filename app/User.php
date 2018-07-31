@@ -23,9 +23,11 @@ class User extends Authenticatable
     ];
 
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function basicInfo(){
 
-    public function basicInfo()
-    {
         return $this->hasMany(EmpBasicInfo::class);
     }
     /**
@@ -33,8 +35,8 @@ class User extends Authenticatable
      *
      * @return string
      */
-    public function getRouteKeyName()
-    {
+    public function getRouteKeyName(){
+
         return 'name';
     }
 
@@ -44,25 +46,32 @@ class User extends Authenticatable
      * @param  string $avatar
      * @return string
      */
-    public function getAvatarPathAttribute($avatar)
-    {
-        if($avatar)
-        {
-            return asset('storage/'.$avatar);
-        }
-        else{
-            return asset('images/avatars/guest.png');
-        }
+    public function getAvatarPathAttribute($avatar){
+
+        //return if user has a image if null return default
+        return $avatar ? asset('storage/'.$avatar) :  asset('images/avatars/guest.png');
     }
 
+    /**
+     * Verified the user
+     */
     public function verified() {
+
+        //verified the user
         $this->verified = true;
+
+        //delete the token
         $this->verification_token = null;
 
         $this->save();
     }
 
+    /**
+     * Check if the user is verified
+     * @return mixed
+     */
     public function confirmed() {
+
         return auth()->user()->verified;
     }
 }

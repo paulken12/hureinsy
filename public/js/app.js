@@ -47702,7 +47702,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n.alert-flash {\n    position: fixed;\n    right: 15px;\n    top: 75px;\n    z-index: 9999;\n}\n.alert-success\n{\n    background: #4caf50;\n    color: #ffffff;\n    width: 280px;\n    padding: 10px;\n}\n", ""]);
+exports.push([module.i, "\n.alert-flash {\n    position: fixed;\n    right: 15px;\n    top: 75px;\n    z-index: 9999;\n}\n.alert-success\n{\n    background: #4caf50;\n    color: #ffffff;\n    width: 280px;\n    padding: 10px;\n}\n.alert-warning\n{\n    background: #4caf50;\n    color: #ffffff;\n    width: 280px;\n    padding: 10px;\n}\n.alert-danger\n{\n    background: #4caf50;\n    color: #ffffff;\n    width: 280px;\n    padding: 10px;\n}\n", ""]);
 
 // exports
 
@@ -47757,7 +47757,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['message'],
+    props: 'message',
 
     data: function data() {
         return {
@@ -48317,7 +48317,7 @@ var render = function() {
     "div",
     [
       _vm._l(_vm.rows, function(row, index) {
-        return _c("div", { staticClass: "card mb-2" }, [
+        return _c("div", { key: row, staticClass: "card mb-2" }, [
           _c("div", { staticClass: "card-body" }, [
             _c("div", { staticClass: "form-group" }, [
               _c("label", { attrs: { for: "key" } }, [

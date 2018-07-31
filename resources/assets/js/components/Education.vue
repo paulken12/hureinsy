@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="card mb-2" v-for="(row, index) in rows">
+        <div class="card mb-2" v-for="(row, index) in rows" :key="row">
             <div class="card-body">
 
                 <div class="form-group">

@@ -67,11 +67,11 @@ class EmpBasicInfoController extends Controller
 
     public function update(Request $request, $profile) {
         $validate = $this->validate($request,[
-            'first_name'=>'required',
-            'middle_name'=>'required',
-            'last_name'=>'required',
-            'master_civil_status_key'=>'required',
-            'master_citizenship_key'=>'required',
+            'basic_first_name'=>'required',
+            'basic_middle_name'=>'required',
+            'basic_last_name'=>'required',
+            'basic_civil_status_key'=>'required',
+            'basic_citizenship_key'=>'required',
         ]);
 
         dd($validate);

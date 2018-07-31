@@ -84,7 +84,7 @@ class RegisterController extends Controller
      */
     protected function registered(Request $request, $user)
     {
-        Mail::to($user)->send(new ConfirmEmail($user));
+//        Mail::to($user)->send(new ConfirmEmail($user));
         return redirect($this->redirectPath());
     }
 }

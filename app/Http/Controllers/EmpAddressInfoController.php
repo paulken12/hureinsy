@@ -14,34 +14,55 @@ class EmpAddressInfoController extends Controller
    public function update(Request $request, $profile) {
 
        $user_add = $request->validate([
-            'key'=>'required',
-            'unit_num'=>'nullable',
-            'block'=>'nullable',
-            'street_name'=>'nullable',
-            'subdivision'=>'nullable',
-            'barangay'=>'nullable',
-            'city'=>'nullable',
-            'province'=>'nullable',
-            'zip_code'=>'nullable',
+            'add_key'=>'required',
+            'add_unit_num'=>'nullable',
+            'add_block'=>'nullable',
+            'add_street_name'=>'nullable',
+            'add_subdivision'=>'nullable',
+            'add_barangay'=>'nullable',
+            'add_city'=>'nullable',
+            'add_province'=>'nullable',
+            'add_zip_code'=>'nullable',
        ]);
 
-       $user = User::whereName($profile)->first();
-       //iterate the profile to get the address and save
-       foreach ($user->basicInfo as $info) {
-           foreach ($info->address as $address) {
-                if($address->master_address_key === $user_add['key'])
-                {
-                    $address->master_address_key = $request->key;
-                    $address->unit_num = $request->unit_num;
-                    $address->block = $request->block;
-                    $address->street_name = $request->street_name;
-                    $address->subdivision = $request->subdivision;
-                    $address->barangay = $request->barangay;
-                    $address->city = $request->city;
-                    $address->province = $request->province;
-                    $address->zip_code = $request->zip_code;
-                    $address->update();
-                }
+
+       //using the for loop
+       // if the client request to update the data at the same time
+       //we just need to replace the update button to single button in the view
+       for($i=0; $i < count($user_add['add_key']); ++$i ) {
+
+           //get the user using the profile name
+           $user = User::whereName($profile)->first();
+
+           //iterate the profile to get the data and save
+           foreach ($user->basicInfo as $info) {
+
+               //iterate the relationship
+               foreach ($info->address as $address) {
+
+                   //if the database id is equal to the hidden input id
+                   if($address->id === (int)$user_add['add_key'][$i]) {
+
+                       //update the database
+                       $address->unit_num = $request->input('add_unit_num')[$i];
+
+                       $address->block = $request->input('add_block')[$i];
+
+                       $address->street_name = $request->input('add_street_name')[$i];
+
+                       $address->subdivision = $request->input('add_subdivision')[$i];
+
+                       $address->barangay = $request->input('add_barangay')[$i];
+
+                       $address->city = $request->input('add_city')[$i];
+
+                       $address->province = $request->input('add_province')[$i];
+
+                       $address->zip_code = $request->input('add_zip_code')[$i];
+
+                       $address->update();
+                   }
+               }
            }
        }
 

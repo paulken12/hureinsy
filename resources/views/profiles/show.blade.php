@@ -4,7 +4,7 @@
     @foreach ($profile->basicInfo as $basicInfo)
         <div class="card mb-3">
             <div class="card-header">
-                <strong>{{$basicInfo->first_name}}&nbsp;{{$basicInfo->last_name}}</strong>
+                <strong>{{$basicInfo->first_name}}&nbsp;{{$basicInfo->last_name}} {{empty($basicInfo->extension->name_extension) ? '':$basicInfo->extension->name_extension}}</strong>
 
                 {{--owner can update his/her profile but not others--}}
                 @can('update', $basicInfo)
@@ -153,7 +153,7 @@
                         Birth date: {{$family->date_of_birth === '0000-00-00' ?  '-' : $family->date_of_birth }}<br>
                         Occupation: {{$family->occupation? : 'Not specified'}}<br>
                         Employer: {{$family->employer? : 'Not specified' }}<br>
-                        Gender: {{$family->gender->gender}}<br>
+                        Gender: {{$family->gender}}<br>
                     @empty
                         <p class="text-center">This alien doesn't have family</p>
                     @endforelse
@@ -197,14 +197,14 @@
                     <h4>Work Experience</h4>
                     <hr>
                     @forelse ($basicInfo->experience as $experience)
-                        <h5>{{$experience->title->job_titles}}</h5>
+                        <h5>{{$experience->emp_work_experience}}</h5>
                         Company name: {{$experience->company_name? : 'Not specified'}}&nbsp;<br>
                         Company address: {{$experience->company_address? : 'Not specified' }}&nbsp;<br>
                         Date from: {{$experience->date_from === '0000-00-00' ? '':$experience->date_from}}&nbsp;-
                         Date to: {{$experience->date_to === '0000-00-00' ? '':$experience->date_to}}&nbsp;<br>
                         Industry: {{$experience->industry? : 'Not specified'}}&nbsp;<br>
                         Salary: {{$experience->salary? : 'Not specified'}}&nbsp;<br>
-                        Reason for leaving: <br>{{$experience->reason_for_leaving? : 'Not specified'}}<br>
+                        Reason for leaving: <br>{{$experience->reason_for_leaving? : 'Not specified'}}<br><br>
                     @empty
                         <p class="text-center">No work experience</p>
                     @endforelse
@@ -228,7 +228,7 @@
                         Name: {{$reference->first_name}}&nbsp;{{$reference->middle_name}}&nbsp;{{$reference->last_name}}<br>
                         Company name: {{$reference->company_name? : 'Not specified'}}<br>
                         Company address: {{$reference->company_address? : 'Not specified'}}<br>
-                        Contact: {{$reference->contact_num? : 'Not specified'}}&nbsp;<br>
+                        Contact: {{$reference->contact_num? : 'Not specified'}}&nbsp;<br><br>
                     @empty
                         <p class="text-center">No character reference</p>
                     @endforelse
@@ -321,7 +321,7 @@
                     Title: {{$training->title}}<br>
                     Date from: {{$training->date_from === '0000-00-00' ? '':$training->date_from}}&nbsp;<br>
                     Date to: {{$training->date_to === '0000-00-00' ? '':$training->date_to}}&nbsp;<br>
-                    Location: {{$training->place_seminar}}<br>
+                    Location: {{$training->place_seminar}}<br><br>
                 @empty
                     <p class="text-center">No trainings attended</p>
                 @endforelse

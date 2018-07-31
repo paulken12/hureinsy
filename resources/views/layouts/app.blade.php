@@ -17,6 +17,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -75,7 +76,7 @@
             </div>
         </nav>
 
-        <main class="main" style="margin-top: 70px; margin-bottom: 50px">
+        <main class="main" style="margin-top: 80px; margin-bottom: 50px">
             <div class="container-fluid">
                 <div class="row">
                     @auth()
@@ -136,6 +137,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    @yield('scripts')
+
 </body>
 </html>

@@ -31,10 +31,15 @@ class RegisterEmployeeController extends Controller
     public function store(Request $request) {
 
         $request->validate([
+
             'raj_id'=>'numeric',
+
             'name'=>'required|string|max:255',
+
             'sss_num'=>'required',
+
             'email'=>'required|string|email|max:255|unique:users',
+
             'role_key'=>'required',
         ]);
 
@@ -43,10 +48,15 @@ class RegisterEmployeeController extends Controller
 
         //insert new user account
         $user = User::forceCreate([
+
             'name' => $request->input('name'),
+
             'email' => $request->input('email'),
+
             'password' => Hash::make($password),
+
             'master_employee_status_key' => 1,
+
             'verification_token' => str_random(25)
         ]);
 
@@ -55,8 +65,11 @@ class RegisterEmployeeController extends Controller
 
         //insert the basic info provided by management
         EmpBasicInfo::create([
+
             'company_id' =>$request->input('raj_id'),
+
             'user_id' =>$user->id,
+
             'first_name' =>$request->input('name'),
         ]);
 

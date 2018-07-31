@@ -8,36 +8,62 @@ use Illuminate\Http\Request;
 class EmpFamilyBackgroundController extends Controller
 {
     public function edit(User $profile) {
+
         return view('profiles.family.edit',compact('profile'));
     }
 
     public function update(Request $request,$profile) {
 
         $user_fam = $request->validate([
-            'key'=>'required|numeric',
-//                      comment for now
-//            'last_name'=>'required',
-//            'first_name'=>'required',
-//            'date_of_birth'=>'nullable',
-//            'master_gender_key'=>'required',
-            'employer'=>'nullable',
-            'occupation'=>'nullable',
+
+            'fam_key'=>'required',
+
+            'fam_last_name'=>'nullable',
+
+            'fam_first_name'=>'nullable',
+
+            'fam_date_of_birth'=>'nullable',
+
+            'fam_gender_key'=>'required',
+
+            'fam_employer'=>'nullable',
+
+            'fam_occupation'=>'nullable',
+
         ]);
 
-        $user = User::whereName($profile)->first();
-        //iterate the profile to get the address and save
-        foreach ($user->basicInfo as $info) {
-            foreach ($info->family as $family) {
-                if($family->id === (int)$user_fam['key'])
-                {
-//                      comment for now
-//                    $family->last_name = $request->last_name;
-//                    $family->first_name = $request->first_name;
-//                    $family->date_of_birth = $request->date_of_birth;
-//                    $family->master_gender_key = $request->master_gender_key;
-                    $family->employer = $request->employer;
-                    $family->occupation = $request->occupation;
-                    $family->update();
+        //using the for loop
+        // if the client request to update the data at the same time
+        //we just need to replace the update button to single button in the view
+        for($i=0; $i < count($user_fam['key']); ++$i ) {
+
+            //get the user using the profile name
+            $user = User::whereName($profile)->first();
+
+            //iterate the profile to get the data and save
+            foreach ($user->basicInfo as $info) {
+
+                //iterate the relationship
+                foreach ($info->family as $family) {
+
+                    //if the database id is equal to the hidden input id
+                    if($family->id === (int)$user_fam['key'][$i]) {
+
+                        //update the database
+                        $family->last_name = $request->input('fam_last_name')[$i];
+
+                        $family->first_name = $request->input('fam_first_name')[$i];
+
+                        $family->date_of_birth = $request->input('fam_date_of_birth')[$i];
+
+                        $family->master_gender_key = $request->input('fam_gender_key')[$i];
+
+                        $family->employer = $request->input('fam_employer')[$i];
+
+                        $family->occupation = $request->input('fam_occupation')[$i];
+
+                        $family->update();
+                    }
                 }
             }
         }
