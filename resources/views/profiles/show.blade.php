@@ -447,13 +447,13 @@
               <div class="card">
                 <div class="card-header" id="header-trainings">
                   <h3 class="mb-0">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#trainings-info" aria-expanded="false" aria-controls="contact-info">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#training" aria-expanded="false" aria-controls="training">
                       Trainings
                     </button>
                   </h3>
                 </div>
 
-                <div id="contact-info" class="collapse" aria-labelledby="header-trainings" data-parent="#trainings-collapse">
+                <div id="training" class="collapse" aria-labelledby="header-trainings" data-parent="#trainings-collapse">
                     <div class="card mb-3">
                         <div class="card-body">
                             <h4>Trainings</h4>

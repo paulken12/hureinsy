@@ -103,5 +103,9 @@ class EmpBasicInfo extends Model
     public function extension() {
         return $this->belongsTo(MasterNameExtension::class, 'master_name_extension_key');
     }
+
+    public function contractChange() {
+        return $this->belongsTo(MasterContractChange::class, 'master_contract_change_key');
+    }
 }
 
