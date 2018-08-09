@@ -15,10 +15,10 @@ class CreateEmpJobDetailTable extends Migration
     {
         Schema::create('emp_job_detail', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('master_department_key');
-            $table->integer('master_job_title_key');
-            $table->integer('master_team_key');
-            $table->integer('master_employee_status_key');
+            $table->string('master_department_key');
+            $table->string('master_job_title_key');
+            $table->string('master_team_key');
+            $table->string('master_employee_status_key');
             $table->timestamps();
         });
     }

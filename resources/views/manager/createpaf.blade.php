@@ -35,10 +35,13 @@
 			                   class="form-control" title="Name" value="{{$value->first_name}} {{$value->middle_name}} {{$value->last_name}}" disabled>
 					</div> 
 
+
 	 	            <div class="form-group">
 		                <label for="name">Date Hired</label>
+	            		@foreach($value->address as $values)
 			            <input type="text" id="name" name="name"
-			                   class="form-control" title="Name" value="" disabled>
+			                   class="form-control" title="Name" value="{{$values->unit_num}}" disabled>
+					@endforeach
 					</div> 
 
 	 	            <div class="form-group">
