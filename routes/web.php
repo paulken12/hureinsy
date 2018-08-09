@@ -113,6 +113,12 @@ Route::group(['middleware' => ['auth','confirmed','permissions']],function()
 
     Route::post('register/employee', 'NewEmployee\RegisterEmployeeController@store')->name('register.store');
 
+    Route::get('paf', 'Paf\PafController@create')->name('paf.create');
+
+    Route::post('paf', 'Paf\PafController@store')->name('paf.store');
+
+
+
 
 });
 

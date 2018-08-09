@@ -291,6 +291,11 @@ class MasterPermission extends Seeder
                 'name'=>'contract_delete',
                 'label'=>'Can delete user contract',
             ],
+
+            [
+                'name'=>'manager_view',
+                'label'=>'Can request a paf',
+            ],
         ];
 
         foreach ($value as $item) {

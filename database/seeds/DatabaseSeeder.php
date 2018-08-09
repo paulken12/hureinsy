@@ -30,5 +30,8 @@ class DatabaseSeeder extends Seeder
         $this->call(MasterCompany::class);
         $this->call(PermissionRole::class);
         $this->call(RoleUser::class);
+        $this->call(MasterJobType::class);
+        $this->call(MasterContractChange::class);
+
     }
 }

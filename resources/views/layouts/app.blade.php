@@ -117,6 +117,9 @@
                                             </a>
                                             <ul class="collapse" id="userSetting">
                                                 <li><a href="{{route('changePassword')}}">Change password</a></li>
+                                                @can('manager_view')
+                                                <li><a href="{{route('paf.create')}}">Request Personnel Action</a></li>
+                                                @endcan
                                             </ul>
                                         </li>
                                     </ul>
