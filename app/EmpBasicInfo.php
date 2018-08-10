@@ -88,6 +88,10 @@ class EmpBasicInfo extends Model
         return $this->hasMany(EmpImage::class);
     }
 
+    public function natureOfAction() {
+        return $this->hasMany(PafNatureOfAction::class);
+    }
+
     public function gender() {
         return $this->belongsTo(MasterGender::class, 'master_gender_key');
     }
@@ -102,6 +106,10 @@ class EmpBasicInfo extends Model
 
     public function extension() {
         return $this->belongsTo(MasterNameExtension::class, 'master_name_extension_key');
+    }
+
+    public function jobType() {
+        return $this->belongsTo(MasterJobType::class, 'master_job_type_key');
     }
 
     public function contractChange() {

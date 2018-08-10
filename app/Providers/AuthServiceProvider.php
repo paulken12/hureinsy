@@ -50,11 +50,11 @@ class AuthServiceProvider extends ServiceProvider
                  //User model traits
                 return $user->hasRole($permission->roles);
              });
-         }
+         } 
     }
 
     //get all permissions
      protected function getPermissions() {
-         return Permission::with('roles')->get();
+         return Permission::with('roles')->get(); 
      } 
 }
