@@ -115,12 +115,11 @@ Route::group(['middleware' => ['auth','confirmed','permissions']],function()
 
     //=================================================== PAF ================================================================
 
-    Route::get('paf', 'Paf\PafController@create')->name('create.paf');
+    Route::get('paf/search', 'Paf\RequestController@index')->name('paf.index');    
 
-    Route::post('paf', 'Paf\PafController@search')->name('search.paf');
+    Route::any('paf/search/result', 'Paf\RequestController@search')->name('paf.search');
 
-    Route::post('paf', 'Paf\PafController@store')->name('store.paf');
-
+    Route::post('paf/search/request', 'Paf\RequestController@store')->name('paf.store');
 });
 
 Route::post('/register/confirmed', 'Auth\RegisterConfirmationController@store')->name('register.confirmed')->middleware('auth');
