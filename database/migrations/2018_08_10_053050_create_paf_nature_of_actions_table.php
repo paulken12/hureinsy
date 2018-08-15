@@ -20,6 +20,8 @@ class CreatePafNatureOfActionsTable extends Migration
             $table->string('requested_by');
             $table->string('assessed_by');
             $table->string('approved_by');
+            $table->string('comfirmed_by');
+            $table->string('remarks')->nullable();
             $table->date('date_effective');
             $table->timestamps();
         });

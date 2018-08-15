@@ -29,6 +29,22 @@ class MasterContractChange extends Seeder
                 'type' => 'rehire',
             ],
             [
+                'key' => 'ttp',
+                'type' => 'trainee to project',
+            ],
+            [
+                'key' => 'reg',
+                'type' => 'regularization',
+            ],
+            [
+                'key' => 'eop',
+                'type' => 'end of probationary period',
+            ],
+            [
+                'key' => 'sai',
+                'type' => 'salary increase',
+            ],
+            [
                 'key' => 'sfr',
                 'type' => 'separation for rehire',
             ],

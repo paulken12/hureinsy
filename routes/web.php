@@ -120,6 +120,11 @@ Route::group(['middleware' => ['auth','confirmed','permissions']],function()
     Route::any('paf/search/result', 'Paf\RequestController@search')->name('paf.search');
 
     Route::post('paf/search/request', 'Paf\RequestController@store')->name('paf.store');
+
+    Route::get('paf/list', 'Paf\AssessmentController@index')->name('paf.list');    
+
+    Route::get('paf/list/show/{form}', 'Paf\AssessmentController@show')->name('paf.list.show');    
+
 });
 
 Route::post('/register/confirmed', 'Auth\RegisterConfirmationController@store')->name('register.confirmed')->middleware('auth');

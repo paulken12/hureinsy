@@ -118,7 +118,10 @@
                                             <ul class="collapse" id="userSetting">
                                                 <li><a href="{{route('changePassword')}}">Change password</a></li>
                                                 @can('manager_view')
-                                                <li><a href="{{route('paf.index')}}">Request Personnel Action</a></li>
+                                                    <li><a href="{{route('paf.index')}}">Request Personnel Action Form</a></li>
+                                                @endcan
+                                                @can('hr_view')
+                                                    <li><a href="{{route('paf.list')}}">Pending Personnel Action Form</a></li>
                                                 @endcan
                                             </ul>
                                         </li>
