@@ -61,10 +61,7 @@ class AssessmentController extends Controller
         $manager_id = $form->requested_by;
         $manager_name = EmpBasicInfo::where('company_id', $manager_id)->first();
         
-        
-
-        dd($manager_name->first_name);
-        return 'asd';
+        return view('hpaf.pending', compact('form', 'employee_name', 'manager_name'));
     }
 
     /**

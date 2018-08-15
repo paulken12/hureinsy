@@ -1,34 +1,7 @@
 @extends('layouts.app')
 @section('content')
 @if(empty($value))
-<form action="{{route('paf.search')}}" method="post">
-	{{csrf_field()}}
-	<div class="card">
-		@if(session('error'))
-			<div class="alert alert-danger" role="alert">
-				<h4 class="alert-heading">{{session('error')}}</h4>
-			</div>
-		@else
-			<div class="alert alert-success" role="alert">
-				<h4 class="alert-heading">{{session('success')}}</h4>
-			</div>
-		@endif
-		<div class="card-header">
-			<h4>Personnel Action Form</h4>
-		</div>
-		<div class="card-body">
-			<div class="form-group">
-				<label for="raj_id">Enter employee ID</label>
-				<input type="text" id="raj_id" name="raj_id" class="form-control " title="Id" required>
-			</div>
-			<div class="form-group text-center">
-				<button class="btn btn-success" type="submit">Search Employee</button>
-			</div>
-		</div>
-	</div>
-</form>
-@else
-<form action="{{route('paf.store')}}" method="post">
+<form action="" method="post">
 	<div class="card">
 		<div class="card-header">
 			<h4>Personnel Action Form</h4>
@@ -39,13 +12,13 @@
 				<div class="col">
 					<div class="form-group">
 						<label for="raj_id">Employee ID:</label>
-						<input type="text" id="raj_id" name="raj_id" class="form-control-plaintext" title="raj_id" value="{{$value->company_id}}">
+						<input type="text" id="raj_id" name="raj_id" class="form-control-plaintext" title="raj_id" value="{{$employee_name->company_id}}">
 					</div>
 				</div>
 				<div class="col">
 					<div class="form-group">
 						<label for="name">Name of Employee:</label>
-						<input type="text" id="name" name="name" class="form-control-plaintext" title="Name" value="{{$value->first_name}} {{$value->middle_name}} {{$value->last_name}}">
+						<input type="text" id="name" name="name" class="form-control-plaintext" title="Name" value="{{$employee_name->first_name}} {{$employee_name->middle_name}} {{$employee_name->last_name}}">
 					</div>
 				</div>
 			</div>
@@ -96,12 +69,7 @@
 				<div class="col">
 					<div class="form-group">
 						<label for="employment_status">Employment Status</label>
-						<select name="employment_status" id="employment_status" class="form-control" required>
-							<option style="display:none" value="" selected>--select--</option>
-							@foreach ($contractChange as $contract)
-								<option value="{{$contract->type}}">{{$contract->type}}</option>
-							@endforeach
-						</select>
+						<input type="text" id="employment_status" name="employment_status" class="form-control-plaintext" title="Employment_status" value="{{$form->employment_status}}">
 					</div>
 				</div>
 			</div>
@@ -116,9 +84,9 @@
 		</div>
 	</div>
 
-	@include('mpaf.include.job')
-	@include('mpaf.include.schedule')
-	@include('mpaf.include.compensation')
+	@include('hpaf.include.job')
+	@include('hpaf.include.schedule')
+	@include('hpaf.include.compensation')
 	
 	<div class="card">
 		<div class="card-body">
