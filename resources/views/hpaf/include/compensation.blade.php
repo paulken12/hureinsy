@@ -27,12 +27,12 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_salary" name="current_salary" class="form-control-plaintext" title="Current_salary" value="{{$employee_name->company_id}}">
+					<input type="text" id="current_salary" name="current_salary" class="form-control-plaintext" title="Current_salary" value="{{$employee_name->company_id}}" disabled>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_salary" name="proposed_salary" class="form-control" title="Proposed_salary">
+					<input type="text" id="proposed_salary" name="proposed_salary" class="form-control" title="Proposed_salary" disabled>
 				</div>
 			</div>
 		</div>
@@ -44,12 +44,12 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_bonus/allowance" name="current_bonus/allowance" class="form-control-plaintext" title="Current_bonus/allowance" value="{{$employee_name->company_id}}">
+					<input type="text" id="current_bonus/allowance" name="current_bonus/allowance" class="form-control-plaintext" title="Current_bonus/allowance" value="{{$employee_name->company_id}}" disabled>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_bonus/allowance" name="proposed_bonus/allowance" class="form-control" title="Proposed_bonus/allowance">
+					<input type="text" id="proposed_bonus/allowance" name="proposed_bonus/allowance" class="form-control" title="Proposed_bonus/allowance" disabled>
 				</div>
 			</div>
 		</div>
@@ -61,12 +61,12 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_benefits" name="current_benefits" class="form-control-plaintext" title="Current_benefits" value="{{$employee_name->company_id}}">
+					<input type="text" id="current_benefits" name="current_benefits" class="form-control-plaintext" title="Current_benefits" value="{{$employee_name->company_id}}" disabled>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_benefits" name="proposed_benefits" class="form-control" title="Proposed_benefits">
+					<input type="text" id="proposed_benefits" name="proposed_benefits" class="form-control" title="Proposed_benefits" disabled>
 				</div>
 			</div>
 		</div>

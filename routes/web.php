@@ -113,17 +113,25 @@ Route::group(['middleware' => ['auth','confirmed','permissions']],function()
 
     Route::post('register/employee', 'NewEmployee\RegisterEmployeeController@store')->name('register.store');
 
-    //=================================================== PAF ================================================================
+    //=================================================== PAF MANAGER ================================================================
 
     Route::get('paf/search', 'Paf\RequestController@index')->name('paf.index');    
 
     Route::any('paf/search/result', 'Paf\RequestController@search')->name('paf.search');
 
-    Route::post('paf/search/request', 'Paf\RequestController@store')->name('paf.store');
+    Route::post('paf/search/result/request', 'Paf\RequestController@store')->name('paf.store');
 
-    Route::get('paf/list', 'Paf\AssessmentController@index')->name('paf.list');    
+    //=================================================== PAF HR ================================================================ 
 
-    Route::get('paf/list/show/{form}', 'Paf\AssessmentController@show')->name('paf.list.show');    
+    Route::get('paf/list', 'Paf\AssessmentController@list')->name('paf.list');    
+
+    Route::get('paf/list/show/{form}', 'Paf\AssessmentController@show')->name('paf.list.show'); 
+
+    Route::post('paf/list/show/{form}/assessed', 'Paf\AssessmentController@assessment')->name('paf.assessment');
+
+    //=================================================== PAF EXECUTIVE  ================================================================ 
+
+    //=================================================== PAF EMPLOYEE ================================================================
 
 });
 

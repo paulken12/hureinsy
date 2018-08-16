@@ -27,7 +27,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_department" name="current_department" class="form-control-plaintext" title="Current_department" value="{{$value->company_id}}">
+					<input type="text" id="current_department" name="current_department" class="form-control-plaintext" title="Current_department" value="{{$value->company_id}}" disabled>
 				</div>
 			</div>
 			<div class="col">
@@ -49,7 +49,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_reportto" name="current_reportto" class="form-control-plaintext" title="Current_reportto" value="{{$value->company_id}}">
+					<input type="text" id="current_reportto" name="current_reportto" class="form-control-plaintext" title="Current_reportto" value="{{$value->company_id}}" disabled>
 				</div>
 			</div>
 			<div class="col">
@@ -73,7 +73,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_position/title" name="current_position/title" class="form-control-plaintext" title="Current_reportto" value="{{$value->company_id}}">
+					<input type="text" id="current_position/title" name="current_position/title" class="form-control-plaintext" title="Current_reportto" value="{{$value->company_id}}" disabled>
 				</div>
 			</div>
 			<div class="col">
@@ -95,7 +95,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_project_assignment" name="current_project_assignment" class="form-control-plaintext" title="Current_project_assignmento" value="{{$value->company_id}}">
+					<input type="text" id="current_project_assignment" name="current_project_assignment" class="form-control-plaintext" title="Current_project_assignmento" value="{{$value->company_id}}" disabled>
 				</div>
 			</div>
 			<div class="col">

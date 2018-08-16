@@ -27,7 +27,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_days_of_work" name="current_days_of_work" class="form-control-plaintext" title="Current_days_of_work" value="{{$value->company_id}}">
+					<input type="text" id="current_days_of_work" name="current_days_of_work" class="form-control-plaintext" title="Current_days_of_work" value="{{$value->company_id}}" disabled>
 				</div>
 			</div>
 			<div class="col">
@@ -44,7 +44,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_work_hours_per_week" name="current_work_hours_per_week" class="form-control-plaintext" title="Current_work_hours_per_week" value="{{$value->company_id}}">
+					<input type="text" id="current_work_hours_per_week" name="current_work_hours_per_week" class="form-control-plaintext" title="Current_work_hours_per_week" value="{{$value->company_id}}" disabled>
 				</div>
 			</div>
 			<div class="col">
@@ -61,7 +61,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_type_of_shift" name="current_type_of_shift" class="form-control-plaintext" title="Current_type_of_shift" value="{{$value->company_id}}">
+					<input type="text" id="current_type_of_shift" name="current_type_of_shift" class="form-control-plaintext" title="Current_type_of_shift" value="{{$value->company_id}}" disabled>
 				</div>
 			</div>
 			<div class="col">
@@ -78,7 +78,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_work_hours_per_day" name="current_work_hours_per_day" class="form-control-plaintext" title="Current_work_hours_per_day" value="{{$value->company_id}}">
+					<input type="text" id="current_work_hours_per_day" name="current_work_hours_per_day" class="form-control-plaintext" title="Current_work_hours_per_day" value="{{$value->company_id}}" disabled>
 				</div>
 			</div>
 			<div class="col">
@@ -95,7 +95,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_work_location" name="current_work_location" class="form-control-plaintext" title="Current_work_location" value="{{$value->company_id}}">
+					<input type="text" id="current_work_location" name="current_work_location" class="form-control-plaintext" title="Current_work_location" value="{{$value->company_id}}" disabled>
 				</div>
 			</div>
 			<div class="col">

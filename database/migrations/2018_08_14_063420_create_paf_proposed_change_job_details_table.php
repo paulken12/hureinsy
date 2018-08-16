@@ -18,9 +18,10 @@ class CreatePafProposedChangeJobDetailsTable extends Migration
             $table->integer('request_id')->unsigned();
             $table->string('proposed_department')->nullable();
             $table->string('proposed_reports_to')->nullable();
-            $table->string('proposed_position/title')->nullable();
+            $table->string('proposed_position_title')->nullable();
             $table->string('proposed_project_assignment')->nullable();
-            $table->string('proposed_remarks')->nullable();
+            $table->string('proposed_remarks_hr')->nullable();
+            $table->string('proposed_remarks_exec')->nullable();
             $table->timestamps();
 
             $table->foreign('request_id')

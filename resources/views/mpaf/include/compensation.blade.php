@@ -27,7 +27,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_salary" name="current_salary" class="form-control-plaintext" title="Current_salary" value="{{$value->company_id}}">
+					<input type="text" id="current_salary" name="current_salary" class="form-control-plaintext" title="Current_salary" value="{{$value->company_id}}" disabled>
 				</div>
 			</div>
 			<div class="col">
@@ -44,7 +44,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_bonus/allowance" name="current_bonus/allowance" class="form-control-plaintext" title="Current_bonus/allowance" value="{{$value->company_id}}">
+					<input type="text" id="current_bonus/allowance" name="current_bonus/allowance" class="form-control-plaintext" title="Current_bonus/allowance" value="{{$value->company_id}}" disabled>
 				</div>
 			</div>
 			<div class="col">
@@ -61,7 +61,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_benefits" name="current_benefits" class="form-control-plaintext" title="Current_benefits" value="{{$value->company_id}}">
+					<input type="text" id="current_benefits" name="current_benefits" class="form-control-plaintext" title="Current_benefits" value="{{$value->company_id}}" disabled>
 				</div>
 			</div>
 			<div class="col">

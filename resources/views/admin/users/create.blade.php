@@ -16,7 +16,7 @@
                     <div class="form-group">
                         <label for="raj_id">Id</label>
                         <input type="text" id="raj_id" name="raj_id"
-                               class="form-control " title="Id" value="{{$company_id}}">
+                               class="form-control-plaintext" title="Id" value="{{$company_id}}" readonly>
                     </div>
 
                     <div class="form-group">

@@ -27,12 +27,12 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_days_of_work" name="current_days_of_work" class="form-control-plaintext" title="Current_days_of_work" value="{{$employee_name->company_id}}">
+					<input type="text" id="current_days_of_work" name="current_days_of_work" class="form-control-plaintext" title="Current_days_of_work" value="{{$employee_name->company_id}}" disabled>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_days_of_work" name="proposed_days_of_work" class="form-control" title="Proposed_days_of_work">
+					<input type="text" id="proposed_days_of_work" name="proposed_days_of_work" class="form-control" title="Proposed_days_of_work" disabled>
 				</div>
 			</div>
 		</div>
@@ -44,12 +44,12 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_work_hours_per_week" name="current_work_hours_per_week" class="form-control-plaintext" title="Current_work_hours_per_week" value="{{$employee_name->company_id}}">
+					<input type="text" id="current_work_hours_per_week" name="current_work_hours_per_week" class="form-control-plaintext" title="Current_work_hours_per_week" value="{{$employee_name->company_id}}" disabled>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_work_hours_per_week" name="proposed_work_hours_per_week" class="form-control" title="Proposed_work_hours_per_week">
+					<input type="text" id="proposed_work_hours_per_week" name="proposed_work_hours_per_week" class="form-control" title="Proposed_work_hours_per_week" disabled>
 				</div>
 			</div>
 		</div>
@@ -61,12 +61,12 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_type_of_shift" name="current_type_of_shift" class="form-control-plaintext" title="Current_type_of_shift" value="{{$employee_name->company_id}}">
+					<input type="text" id="current_type_of_shift" name="current_type_of_shift" class="form-control-plaintext" title="Current_type_of_shift" value="{{$employee_name->company_id}}" disabled>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_type_of_shift" name="proposed_type_of_shift" class="form-control" title="Proposed_type_of_shift">
+					<input type="text" id="proposed_type_of_shift" name="proposed_type_of_shift" class="form-control" title="Proposed_type_of_shift" disabled>
 				</div>
 			</div>
 		</div>
@@ -78,12 +78,12 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_work_hours_per_day" name="current_work_hours_per_day" class="form-control-plaintext" title="Current_work_hours_per_day" value="{{$employee_name->company_id}}">
+					<input type="text" id="current_work_hours_per_day" name="current_work_hours_per_day" class="form-control-plaintext" title="Current_work_hours_per_day" value="{{$employee_name->company_id}}" disabled>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_work_hours_per_day" name="proposed_work_hours_per_day" class="form-control" title="Proposed_work_hours_per_day">
+					<input type="text" id="proposed_work_hours_per_day" name="proposed_work_hours_per_day" class="form-control" title="Proposed_work_hours_per_day" disabled>
 				</div>
 			</div>
 		</div>
@@ -95,12 +95,12 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_work_location" name="current_work_location" class="form-control-plaintext" title="Current_work_location" value="{{$employee_name->company_id}}">
+					<input type="text" id="current_work_location" name="current_work_location" class="form-control-plaintext" title="Current_work_location" value="{{$employee_name->company_id}}" disabled>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_work_location" name="proposed_work_location" class="form-control" title="Proposed_work_location">
+					<input type="text" id="proposed_work_location" name="proposed_work_location" class="form-control" title="Proposed_work_location" disabled>
 				</div>
 			</div>
 		</div>
