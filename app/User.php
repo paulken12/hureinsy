@@ -30,15 +30,7 @@ class User extends Authenticatable
 
         return $this->hasMany(EmpBasicInfo::class);
     }
-    /**
-     * Get the route key name.
-     *
-     * @return string
-     */
-    public function getRouteKeyName(){
 
-        return 'name';
-    }
 
     /**
      * Get the path to the user's avatar.

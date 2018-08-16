@@ -11,7 +11,7 @@
                         </div>
                         <div class="card-body ">
 
-                            <form action="{{route('profile.contact.update', ['profile'=>$profile])}}" METHOD="POST">
+                            <form action="{{route('profile.contact.update', ['slug'=>$basicInfo->slug])}}" METHOD="POST">
                                 {{csrf_field()}}
 
                                 @include('profiles.includes.contact')

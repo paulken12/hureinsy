@@ -17,8 +17,8 @@ class UserProfileTest extends TestCase
 
         $user = create('App\User');
         $this->signIn();
-        $this->get("/profile/{$user->name}")
-            ->assertSee($user->name);
+        $this->get("/profile/{$user->slug}")
+            ->assertSee($user->slug);
     }
 
     function profile_can_only_see_by_the_creator()

@@ -11,7 +11,7 @@
                             Conviction
                         </div>
                         <div class="card-body ">
-                            <form action="{{route('profile.conviction.update', ['profile'=>$profile])}}" METHOD="POST">
+                            <form action="{{route('profile.conviction.update', ['slug'=>$basicInfo->slug])}}" METHOD="POST">
 
                                 {{csrf_field()}}
 

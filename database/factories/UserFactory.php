@@ -43,4 +43,27 @@ $factory->define(App\EmpBasicInfo::class, function (Faker $faker) {
         'master_employee_type_key' => str_random(1),
     ];
 });
+$factory->define(App\Permission::class, function (Faker $faker) {
+
+    return [
+
+        'name' => 'su',
+        'label' =>'Developer',
+
+    ];
+});
+
+$factory->define(App\EmpSkillInfo::class, function (Faker $faker) {
+
+    return [
+
+        'emp_basic_info_id' => 136,
+        'special_skill' =>$faker->word,
+        'hobbies' => $faker->sentence,
+        'membership' => $faker->paragraph,
+
+    ];
+});
+
+
 

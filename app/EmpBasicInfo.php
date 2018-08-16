@@ -11,7 +11,7 @@ class EmpBasicInfo extends Model
     protected $dates = ['date_of_birth'];
 
     public function path() {
-        return 'profile/'. $this->first_name;
+        return 'profile/'. $this->slug;
     }
 
     /**
@@ -21,10 +21,10 @@ class EmpBasicInfo extends Model
      */
     public function getRouteKeyName()
     {
-        return 'first_name';
+        return 'slug';
     }
 
-    public function owner() {
+    public function user() {
         return $this->belongsTo(User::class,'user_id');
     }
 
@@ -80,28 +80,33 @@ class EmpBasicInfo extends Model
         return $this->hasMany(EmpSkillInfo::class);
     }
 
-    public function jobDetail() {
-        return $this->hasMany(EmpJobDetail::class);
-    }
-
-    public function image() {
-        return $this->hasMany(EmpImage::class);
-    }
-
     public function gender() {
         return $this->belongsTo(MasterGender::class, 'master_gender_key');
+    }
+
+    public function getGenderAttribute() {
+        return  $this->gender()->pluck('gender')->first();
     }
 
     public function civilStatus() {
         return $this->belongsTo(MasterCivilStatus::class, 'master_civil_status_key');
     }
 
+    public function getCivilStatusAttribute() {
+        return  $this->civilStatus()->pluck('civil_status')->first();
+    }
+
     public function citizenship() {
         return $this->belongsTo(MasterCitizenship::class, 'master_citizenship_key');
+    }
+
+    public function getCitizenshipAttribute() {
+        return  $this->citizenship()->pluck('citizenship')->first();
     }
 
     public function extension() {
         return $this->belongsTo(MasterNameExtension::class, 'master_name_extension_key');
     }
+
 }
 

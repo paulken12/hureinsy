@@ -6,7 +6,7 @@
             <div class="card-body">
 
                 <div class="form-group">
-                    <a href="{{route('profiles',$profile->name)}}" class="btn btn-sm btn-secondary">Back</a>
+                    <a href="{{route('profiles',['slug'=>$basicInfo->slug])}}" class="btn btn-sm btn-secondary">Back</a>
                 </div>
 
                 @forelse($basicInfo->education as $education)

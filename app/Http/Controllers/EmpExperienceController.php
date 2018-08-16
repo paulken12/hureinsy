@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\EmpBasicInfo;
 use Illuminate\Http\Request;
 
 class EmpExperienceController extends Controller
 {
-    public function edit(User $profile) {
+    public function edit(EmpBasicInfo $profile) {
+
+        $profile = $profile->user;
 
         return view('profiles.experience.edit',compact('profile'));
 
@@ -15,15 +17,24 @@ class EmpExperienceController extends Controller
 
     public function update(Request $request, $profile) {
 
+        $basic = EmpBasicInfo::whereSlug($profile)->first();
+
         $user_exp = $request->validate(
             [
                 'exp_key'=>'required',
+
                 'exp_company_name'=>'nullable',
+
                 'exp_company_address'=>'nullable',
+
                 'exp_date_from'=>'nullable',
+
                 'exp_date_to'=>'nullable',
+
                 'exp_industry'=>'nullable',
+
                 'exp_salary'=>'nullable',
+
                 'exp_reason_for_leaving'=>'nullable',
             ]
         );
@@ -33,11 +44,8 @@ class EmpExperienceController extends Controller
         //we just need to replace the update button to single button in the view
         for($i=0; $i < count($user_exp['exp_key']); ++$i ) {
 
-            //get the user using the profile name
-            $user = User::whereName($profile)->first();
-
             //iterate the profile to get the data and save
-            foreach ($user->basicInfo as $info) {
+            foreach ($basic->basicInfo as $info) {
 
                 //iterate the relationship
                 foreach ($info->experience as $experience) {
@@ -66,6 +74,6 @@ class EmpExperienceController extends Controller
             }
         }
 
-        return back()->with($profile)->with('flash', 'Updated successfully!');
+        return redirect(route(''))->with('flash','Updated successfully!');
     }
 }

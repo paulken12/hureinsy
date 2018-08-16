@@ -18,7 +18,17 @@ class EmpFamilyBackground extends Model
         return $this->belongsTo(MasterGender::class, 'master_gender_key');
     }
 
+    public function getGenderAttribute() {
+        return  $this->gender()->pluck('gender')->first();
+    }
+
     public function family() {
         return $this->belongsTo(MasterFamilyType::class, 'master_family_key');
     }
+
+    public function getFamilyAttribute() {
+        return  $this->family()->pluck('family_type')->first();
+    }
+
+
 }

@@ -2,17 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\EmpBasicInfo;
 use Illuminate\Http\Request;
 
 class EmpSkillController extends Controller
 {
-    public function edit(User $profile) {
+    public function edit(EmpBasicInfo $profile) {
+
+        $profile = $profile->user;
 
         return view('profiles.skills.edit', compact('profile'));
     }
 
     public function update(Request $request, $profile) {
+
+
+        $basic = EmpBasicInfo::whereSlug($profile)->first();
+
+
         $user_skill = $request->validate(
             [
                 'skill_key'=>'required',
@@ -25,25 +32,61 @@ class EmpSkillController extends Controller
             ]
         );
 
-        $user = User::whereName($profile)->first();
+
+        $this->make($basic->skill,$user_skill);
+
+        dd('bypass');
+
         //iterate the profile to get the skill and update
-        foreach ($user->basicInfo as $info) {
 
-            foreach ($info->skill as $skill) {
+        foreach ($basic->skill as $skill) {
 
-                if($skill->id === (int)$user_skill['skill_key'])
-                {
-                    $skill->special_skill = $request->input('skill_special_skill');
+            if($skill->id === (int)$user_skill['skill_key'])
+            {
+                $skill->special_skill = $request->input('skill_special_skill');
 
-                    $skill->hobbies = $request->input('skill_hobbies');
+                $skill->hobbies = $request->input('skill_hobbies');
 
-                    $skill->membership = $request->input('skill_membership');
+                $skill->membership = $request->input('skill_membership');
 
-                    $skill->update();
-                }
+                $skill->update();
             }
         }
 
-        return back()->with($profile)->with('flash', 'Updated successfully!');
+        return redirect(route('profile.skills.update'))->with('flash', 'Updated successfully!');
+    }
+
+    public function make($class, $attribute) {
+
+        foreach ($class as $data) {
+
+            foreach (array_keys($attribute) as $key => $value) {
+
+                dd($key);
+                if ($data->id === (int)$key[0])
+                {
+                    dd('here');
+
+                }
+                else{
+                    dd('nothing');
+                }
+            }
+
+
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -55,6 +55,10 @@ class EmpContactInfoController extends Controller
             $user->update();
         }
 
-        return redirect()->back()->with($profile)->with('flash', 'Updated successfully!');
+        flash('Message')->warning();
+
+        return redirect()->back()->with($profile);
+
+//        ->with('flash', 'Updated successfully!')
     }
 }

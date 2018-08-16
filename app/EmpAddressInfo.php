@@ -14,7 +14,12 @@ class EmpAddressInfo extends Model
         return $this->belongsTo(EmpBasicInfo::class);
     }
 
-    public function mAddress() {
+    public function address() {
         return $this->belongsTo(MasterAddressType::class, 'master_address_key');
     }
+
+    public function getAddressAttribute() {
+        return  $this->address()->pluck('address_type')->first();
+    }
+
 }

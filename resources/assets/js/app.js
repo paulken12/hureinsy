@@ -1,4 +1,4 @@
-
+import Form from './utilities/Form';
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -44,8 +44,8 @@ window.flash = function (message, level = 'success') {
 
 Vue.component('flash', require('./components/Flash.vue'));
 Vue.component('avatar-form', require('./components/AvatarForm.vue'));
-Vue.component('education-form', require('./components/Education.vue'));
-
+Vue.component('employee-form', require('./components/EmployeeForm.vue'));
+Vue.component('personnel-form', require('./components/PersonnelForm.vue'));
 
 const app = new Vue({
     el: '#app',

@@ -11,7 +11,7 @@
                             Character Reference
                         </div>
                         <div class="card-body ">
-                            <form action="{{route('profile.reference.update', ['profile'=>$profile])}}" METHOD="POST">
+                            <form action="{{route('profile.reference.update', ['slug'=>$basicInfo->slug])}}" METHOD="POST">
 
                                 {{csrf_field()}}
 

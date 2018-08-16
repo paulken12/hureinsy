@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\EmpBasicInfo;
 use Illuminate\Http\Request;
 
 class EmpReferenceController extends Controller
 {
-    public function edit(User $profile) {
+    public function edit(EmpBasicInfo $profile) {
+
+       $profile = $profile->user;
 
         return view('profiles.reference.edit', compact('profile'));
     }
 
     public function update(Request $request, $profile) {
+
+        $basic = EmpBasicInfo::whereSlug($profile)->first();
 
         $user_ref = $request->validate([
 
@@ -38,40 +42,32 @@ class EmpReferenceController extends Controller
         //we just need to replace the update button to single button in the view
         for($i=0; $i < count($user_ref['ref_key']); ++$i ) {
 
-            //get the user using the profile name
-            $user = User::whereName($profile)->first();
+            //iterate the relationship
+            foreach ($basic->reference as $reference) {
 
-            //iterate the profile to get the data and save
-            foreach ($user->basicInfo as $info) {
+                //if the database id is equal to the hidden input id
+                if($reference->id === (int)$user_ref['ref_key'][$i]) {
 
-                //iterate the relationship
-                foreach ($info->reference as $reference) {
+                    //update the database
+                    $reference->job_title = $request->input('ref_job_title')[$i];
 
-                    //if the database id is equal to the hidden input id
-                    if($reference->id === (int)$user_ref['ref_key'][$i]) {
+                    $reference->first_name = $request->input('ref_first_name')[$i];
 
-                        //update the database
-                        $reference->job_title = $request->input('ref_job_title')[$i];
+                    $reference->last_name = $request->input('ref_last_name')[$i];
 
-                        $reference->first_name = $request->input('ref_first_name')[$i];
+                    $reference->middle_name = $request->input('ref_middle_name')[$i];
 
-                        $reference->last_name = $request->input('ref_last_name')[$i];
+                    $reference->company_name = $request->input('ref_company_name')[$i];
 
-                        $reference->middle_name = $request->input('ref_middle_name')[$i];
+                    $reference->company_address = $request->input('ref_company_address')[$i];
 
-                        $reference->company_name = $request->input('ref_company_name')[$i];
+                    $reference->contact_num = $request->input('ref_contact_num')[$i];
 
-                        $reference->company_address = $request->input('ref_company_address')[$i];
-
-                        $reference->contact_num = $request->input('ref_contact_num')[$i];
-
-                        $reference->update();
-                    }
+                    $reference->update();
                 }
             }
         }
 
-        return back()->with($profile)->with('flash', 'Updated successfully!');
-
+        return redirect(route('profile.reference.update'))->with('flash', 'Updated successfully!');
     }
 }

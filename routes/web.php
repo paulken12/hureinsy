@@ -26,6 +26,9 @@ Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middle
 //if not login go to login page
 Route::group(['middleware' => ['auth','confirmed','permissions']],function()
 {
+
+
+
     Route::get('api/users', 'Api\UsersController@index');
 
     Route::post('api/users/{user}/avatar', 'Api\UserAvatarController@store')->name('avatar');
@@ -42,6 +45,8 @@ Route::group(['middleware' => ['auth','confirmed','permissions']],function()
     //=================================================== CREATE ================================================================
 
     Route::get('employee/profile', 'EmpProfileController@create');
+
+
 
     //=================================================== EDIT ================================================================
 
@@ -111,8 +116,31 @@ Route::group(['middleware' => ['auth','confirmed','permissions']],function()
 
     Route::get('register/employee', 'NewEmployee\RegisterEmployeeController@create')->name('register.create');
 
+
     Route::post('register/employee', 'NewEmployee\RegisterEmployeeController@store')->name('register.store');
 
+
+    Route::get('search/employee', 'PersonalActionController@index')->name('search.employee');
+
+    Route::get('search/create', 'PersonalActionController@create')->name('search.create');
+
+    Route::any('/search/searching', 'PersonalActionController@search')->name('search.me');
+
+    Route::post('/search', 'PersonalActionController@store')->name('search.store');
+
+
+
+//    Route::any('/search',function(){
+////        $q = Input::get ( 'q' );
+////        $attendance = \App\Attendance::where('employee_id','=',$q)->orWhere('name','LIKE','%'.$q.'%')->get();
+////        $employee = \App\Employee::all();
+//
+//        $search = Input::get('search_emp');
+//        $basic = EmpBasicInfo::where('company_id', $search)->first();
+//
+//        return view('paf.create')->withDetails($basic)->withQuery ( $search );
+//
+//    });
 
 });
 

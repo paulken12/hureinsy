@@ -12,7 +12,7 @@
                         </div>
                         <div class="card-body ">
 
-                            <form action="{{route('profile.experience.update', ['profile'=>$profile])}}" METHOD="POST">
+                            <form action="{{route('profile.experience.update', ['slug'=>$basicInfo->slug])}}" METHOD="POST">
                                 {{csrf_field()}}
 
                                 @include('profiles.includes.experience')

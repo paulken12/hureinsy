@@ -11,7 +11,7 @@
                             Benefits & Payroll Account
                         </div>
                         <div class="card-body ">
-                            <form action="{{route('profile.benefits.update', ['profile'=>$profile])}}" METHOD="POST">
+                            <form action="{{route('profile.benefits.update', ['slug'=>$basicInfo->slug])}}" METHOD="POST">
 
                                 {{csrf_field()}}
 

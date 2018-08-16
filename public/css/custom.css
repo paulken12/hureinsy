@@ -19,3 +19,13 @@
 .nav-tabs > li:hover > span {
     display: inline-block;
 }
+
+[v-cloak]{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 24px;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    background: #e2e2e2;
+}

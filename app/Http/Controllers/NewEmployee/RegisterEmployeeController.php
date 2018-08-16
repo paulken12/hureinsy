@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Mail;
 
 class RegisterEmployeeController extends Controller
 {
-    //
+
     public function create() {
 
         $user = EmpBasicInfo::orderBy('id','desc')->first();

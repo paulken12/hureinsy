@@ -26,6 +26,7 @@ class CreateEmpBasicInfoTable extends Migration
             $table->string('master_citizenship_key')->nullable();
             $table->date('date_of_birth')->nullable();
             $table->string('birth_place')->nullable();
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }

@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\AppHelper;
 use App\EmpBasicInfo;
 use App\EmpContactInfo;
 use App\MasterBloodType;
 use App\MasterCitizenship;
 use App\MasterCivilStatus;
 use App\MasterEducationalType;
+use App\MasterFamilyType;
 use App\MasterGender;
+use App\MasterNameExtension;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -34,7 +37,7 @@ class RegisterConfirmationController extends Controller
         //if the token is exist login the user
         Auth::login($user);
 
-        $basicInfo = $user->basicInfo->first();
+        $profile = $user->basicInfo->first();
 
         //get all data in the master table
         $civilStatus = MasterCivilStatus::all();
@@ -51,11 +54,15 @@ class RegisterConfirmationController extends Controller
         //get all data in the master blood type table
         $educations = MasterEducationalType::all();
 
+        $extension = MasterNameExtension::all();
+
+        $family = MasterFamilyType::all();
+
         return view('profiles.create', compact(
             'user', 'civilStatus',
             'citizenship', 'gender',
-            'blood', 'basicInfo',
-            'educations'));
+            'blood', 'profile','extension',
+            'educations','family'));
     }
 
     public function store(Request $request)
@@ -69,14 +76,16 @@ class RegisterConfirmationController extends Controller
             'basic_extension_key'    => 'nullable',
             'basic_civil_status_key' => 'required',
             'basic_gender_key'       => 'required',
-            'basic_date_of_birth'    => 'required',
+            'basic_date_of_birth'    => 'nullable',
             'basic_birth_place'      => 'nullable',
             'basic_citizenship_key'  => 'required',
 
             'telephone_num'          => 'nullable',
-            'mobile_num'             => 'required',
+            'mobile_num'             => 'nullable',
             'other_mobile'           => 'nullable',
 
+
+            'master_address_key'     => 'required',
             'add_unit_num'           => 'nullable',
             'add_block'              => 'nullable',
             'add_street_name'        => 'nullable',
@@ -86,6 +95,7 @@ class RegisterConfirmationController extends Controller
             'add_province'           => 'nullable',
             'add_zip_code'           => 'nullable',
 
+            'master_family_key'      => 'required',
             'fam_last_name'          => 'nullable',
             'fam_first_name'         => 'nullable',
             'fam_date_of_birth'      => 'nullable',
@@ -142,6 +152,9 @@ class RegisterConfirmationController extends Controller
             'comment'                => 'nullable',
         ]);
 
+
+        dd($info);
+
         //get the user id
         $user = User::find(auth()->user()->id);
 
@@ -169,25 +182,26 @@ class RegisterConfirmationController extends Controller
             $basicInfo->update();
         }
 
-        //check if the user email is equal to the input field
-        if($user->email != $request->input('email')) {
+//        //check if the user email is equal to the input field
+//        if($user->email != $request->input('email')) {
+//
+//            //email validation
+//            $email = $request->validate([
+//                'email' => 'required|string|email|max:255|unique:users'
+//                ]
+//            );
+//
+//            //update email
+//            $user->email = $email['email'];
+//
+//            $user->update();
+//        }
+//
+//        //government benefit to be encrypt and decrypt
+//
+//        auth()->user()->verified();
 
-            //email validation
-            $email = $request->validate([
-                'email' => 'required|string|email|max:255|unique:users'
-                ]
-            );
-
-            //update email
-            $user->email = $email['email'];
-
-            $user->update();
-        }
-
-        auth()->user()->verified();
-
-        return redirect('dashboard')->with('flash', 'You have successfully submit your form and email confirmed')
-            ->with('flash', 'Hello');
+        return redirect('dashboard')->with('flash', 'You have successfully submit your form and email verified');
 
     }
 }

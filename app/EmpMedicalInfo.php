@@ -17,4 +17,9 @@ class EmpMedicalInfo extends Model
     public function bloodType() {
         return $this->belongsTo(MasterBloodType::class, 'master_blood_key');
     }
+
+    public function getBloodTypeAttribute() {
+        return  $this->bloodType()->pluck('blood_type')->first();
+    }
+
 }

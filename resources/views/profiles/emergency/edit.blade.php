@@ -11,7 +11,7 @@
                             Emergency Contact
                         </div>
                         <div class="card-body ">
-                            <form action="{{route('profile.emergency.update', ['profile'=>$profile])}}" METHOD="POST">
+                            <form action="{{route('profile.emergency.update', ['slug'=>$basicInfo->slug])}}" METHOD="POST">
 
                                 {{csrf_field()}}
 

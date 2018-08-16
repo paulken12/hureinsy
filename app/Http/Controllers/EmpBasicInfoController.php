@@ -14,12 +14,6 @@ class EmpBasicInfoController extends Controller
 {
     public function index() {
 
-        //if the profile of authenticated user is not complete redirect back
-//        if(!auth()->user()->confirmed())
-//        {
-//            return back()->with('flash', 'Please complete your information first');
-//        }
-
         //get all employees and paginate to 15 data
         $employees = EmpBasicInfo::paginate(15);
 
@@ -27,27 +21,10 @@ class EmpBasicInfoController extends Controller
        return view('user.index',compact('employees'));
     }
 
-    /**
-     * Store a new user avatar.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function store()
-    {
-        request()->validate([
-            'avatar' => ['required', 'image']
-        ]);
 
-        dd('here');
+    public function edit(EmpBasicInfo $profile) {
 
-        auth()->user()->update([
-            'avatar_path' => request()->file('avatar')->store('avatars', 'public')
-        ]);
-
-        return back();
-    }
-
-    public function edit(User $profile) {
+        $profile = $profile->user;
 
         //get all data in the master civil status table
         $civilStatus = MasterCivilStatus::all();
@@ -66,14 +43,42 @@ class EmpBasicInfoController extends Controller
     }
 
     public function update(Request $request, $profile) {
-        $validate = $this->validate($request,[
-            'basic_first_name'=>'required',
-            'basic_middle_name'=>'required',
-            'basic_last_name'=>'required',
-            'basic_civil_status_key'=>'required',
-            'basic_citizenship_key'=>'required',
-        ]);
 
-        dd($validate);
+        //validate input fields server side
+        $validate = $request->validate(
+            [
+                'basic_first_name'=>'required',
+
+                'basic_middle_name'=>'required',
+
+                'basic_last_name'=>'required',
+
+                'basic_civil_status_key'=>'required',
+
+                'basic_citizenship_key'=>'required',
+            ]
+        );
+
+        $basic = EmpBasicInfo::whereSlug($profile)->first();
+
+        //iterate the profile to get the crime and save
+
+        $basic->first_name = $validate['basic_first_name'];
+
+        $basic->middle_name = $validate['basic_middle_name'];
+
+        $basic->last_name = $validate['basic_last_name'];
+
+        $basic->master_civil_status_key = $validate['basic_civil_status_key'];
+
+        $basic->master_citizenship_key = $validate['basic_citizenship_key'];
+
+        $basic->slug = str_slug($validate['basic_first_name'].' '.$validate['basic_last_name']);
+
+        $basic->update();
+
+        return redirect(route('profiles',$basic))->with('flash', 'Updated successfully!');
+
+
     }
 }

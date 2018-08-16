@@ -10,7 +10,7 @@
                             {{$family->family->family_type}}
                         </div>
                         <div class="card-body ">
-                            <form action="{{route('profile.family.update', ['profile'=>$profile])}}" METHOD="POST">
+                            <form action="{{route('profile.family.update', ['slug'=>$basicInfo->slug])}}" METHOD="POST">
                                 {{csrf_field()}}
 
                                 @include('profiles.includes.family')

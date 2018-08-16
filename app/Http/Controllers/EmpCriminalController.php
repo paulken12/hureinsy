@@ -27,7 +27,9 @@ class EmpCriminalController extends Controller
                 if($criminalInfo->id === (int)$user_cri['crime_key'])
                 {
                     $criminalInfo->has_crime = $request->input('crime_has_crime');
+
                     $criminalInfo->comment = $request->input('crime_comment');
+
                     $criminalInfo->update();
                 }
             }

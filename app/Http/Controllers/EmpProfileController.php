@@ -3,24 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\EmpBasicInfo;
-use App\MasterBloodType;
 use App\MasterCitizenship;
 use App\MasterCivilStatus;
+use App\MasterEducationalType;
 use App\MasterGender;
+use App\MasterNameExtension;
 use App\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+
 
 class EmpProfileController extends Controller
 {
-    public function show(User $profile) {
+    public function show(EmpBasicInfo $profile) {
+        $user = $profile->user;
 
-        //if the profile of authenticated user is not complete redirect back
-//        if(!$profile->confirmed())
-//        {
-//            return back()->with('flash', 'Please complete your information first');
-//        }
+        $gender = MasterGender::all();
+        $civilStatus = MasterCivilStatus::all();
+        $citizenship = MasterCitizenship::all();
+        $extension = MasterNameExtension::all();
+        $educations = MasterEducationalType::all();
 
+        return view('test', compact('user','profile','gender','civilStatus','citizenship','extension','educations'));
         return view('profiles.show',compact('profile'));
     }
 }

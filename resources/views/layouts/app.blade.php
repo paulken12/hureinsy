@@ -19,6 +19,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 
+
     <!-- Scripts -->
     <script>
         window.app = {!! json_encode([
@@ -82,13 +83,10 @@
                     @auth()
                         <div class="col-sm-3">
                             <div class="card">
-                                {{--<img class="rounded-circle ml-auto mr-auto mt-4" src="{{asset(Auth::user()->avatar_path)}}" alt="User Avatar" width="100" height="100">--}}
-                                <avatar-form :user="{{ Auth::user() }}"></avatar-form>
 
-                                <div class="card-body text-center">
-                                    <p class="card-title">
-                                        <a href="{{route('profiles',Auth::user()->name)}}">{{Auth::user()->email}}</a>
-                                    </p>
+                                <avatar-form :user="{{ Auth::user() }}" v-cloak></avatar-form>
+
+                                <div class="card-body text-center p-0">
                                     <small class="text-muted" style="text-transform: uppercase;">
                                         @foreach (Auth::user()->roles as $role)
                                             {{$role->label}}
@@ -98,18 +96,26 @@
                                 <div class="card-body">
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-                                        <li class="list-group-item"><a href="{{route('employees.index')}}">Personnel List</a></li>
-                                        @can('admin_view')
-                                            <li class="list-group-item"><a href="{{route('register.create')}}">New employee</a></li>
+                                        <li class="list-group-item"><a href="{{route('profiles',Auth::user()->basicInfo->first())}}">About me</a></li>
+                                        <li class="list-group-item"><a href="#">My team</a></li>
+
+                                        @cannot('admin_view')
+                                            <li class="list-group-item"><a href="{{route('employees.index')}}">Personnel List</a></li>
+                                        @endcannot
+
+                                    @can('admin_view')
                                             <li class="list-group-item">
-                                                <a href="#adminSetting" data-toggle="collapse" aria-expanded="false">
-                                                    Admin Setting
-                                                </a>
-                                                <ul class="collapse" id="adminSetting">
-                                                    <li><a href="{{route('users')}}">Users</a></li>
-                                                    <li><a href="{{route('authorization')}}">Permissions</a></li>
+                                                <a href="#empManagement" data-toggle="collapse" aria-expanded="false">
+                                                        Employee Management
+                                                    </a>
+                                                <ul class="collapse" id="empManagement">
+                                                    <li ><a href="{{route('employees.index')}}">Personnel List</a></li>
+                                                    <li ><a href="{{route('register.create')}}">New employee</a></li>
                                                 </ul>
                                             </li>
+
+                                            <li class="list-group-item"><a href="#">Schedule Management</a></li>
+                                            <li class="list-group-item"><a href="#">Personnel Action</a></li>
                                         @endcan
                                         <li class="list-group-item">
                                             <a href="#userSetting" data-toggle="collapse" aria-expanded="false">
@@ -125,6 +131,7 @@
                         </div>
                     @endauth
                     <div class="col">
+                        @include('flash::message')
                         @yield('content')
                     </div>
 
@@ -137,6 +144,10 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+
+    {{--<script defer>--}}
+        {{--$('div.alert').not('.alert-important').delay(3000).fadeOut(350);--}}
+    {{--</script>--}}
 
 </body>
 </html>

@@ -11,7 +11,7 @@
                             Skill and Hobbies
                         </div>
                         <div class="card-body ">
-                            <form action="{{route('profile.skills.update', ['profile'=>$profile])}}" METHOD="POST">
+                            <form action="{{route('profile.skills.update', ['slug'=>$basicInfo->slug])}}" METHOD="POST">
 
                                 {{csrf_field()}}
 

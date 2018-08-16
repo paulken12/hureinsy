@@ -1,4 +1,4 @@
-
+import Form from './utilities/Form';
 window._ = require('lodash');
 
 
@@ -40,6 +40,8 @@ if (token) {
 } else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
+
+window.Form = Form;
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
