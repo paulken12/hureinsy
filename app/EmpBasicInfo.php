@@ -111,9 +111,5 @@ class EmpBasicInfo extends Model
     public function jobType() {
         return $this->belongsTo(MasterJobType::class, 'master_job_type_key');
     }
-
-    public function contractChange() {
-        return $this->belongsTo(MasterContractChange::class, 'master_contract_change_key');
-    }
 }
 

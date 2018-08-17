@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\EmpBasicInfo;
+use App\MasterCompany;
 use App\MasterJobTitle;
 use App\MasterPafStatus;
 use App\MasterDepartment;
@@ -22,8 +23,8 @@ class RequestController extends Controller
     {   
         
         $user =EmpBasicInfo::where('user_id', Auth::user()->id)->first();
-        $list = PafNatureOfAction::where('requested_by', $user->id);
 
+        $list = PafNatureOfAction::where('requested_by', $user->id);
 
         return view('mpaf.request', compact('user', 'list'));
         
@@ -36,13 +37,15 @@ class RequestController extends Controller
 
         $value = EmpBasicInfo::where('company_id', $emp_id)->first();  
 
-        $contractChange = MasterContractChange::all();
+        $jobTitles = MasterJobTitle::all();
 
         $department = MasterDepartment::all();
 
+        $project_assignment = MasterCompany::all();
+
         $reportTo = User::all();
 
-        $jobTitles = MasterJobTitle::all();
+        $contractChange = MasterContractChange::all();
 
         $request_status = MasterPafStatus::all();
 
@@ -52,7 +55,7 @@ class RequestController extends Controller
 
         }else{
 
-            return view('mpaf.request', compact('value', 'contractChange', 'department', 'reportTo', 'jobTitles', 'request_status'));
+            return view('mpaf.request', compact('value', 'contractChange', 'department', 'reportTo', 'jobTitles', 'request_status', 'project_assignment'));
 
         }
     }
@@ -65,15 +68,17 @@ class RequestController extends Controller
         //dd($request->all());
         $request_id = PafNatureOfAction::create([
 
-            'company_id' => $request->input('raj_id'),
+            'employee_company_id' => $request->input('raj_id'),
 
-            'employment_status' => $request->input('employment_status'),
+            'master_key_employment_status' => $request->input('employment_status'),
 
-            'requested_by' => $user,
+            'requested_by_company_id' => $user,
 
-            'remarks'   => $request->input('remarks'),
+            'remarks' => $request->input('remarks'),
 
-            'master_key_request_status' => $request->input('request_status'),
+            'master_key_request_status' => 'pen',
+
+            'master_key_sub_request_status' => 'rev-hr',
 
         ]);
 
@@ -81,16 +86,16 @@ class RequestController extends Controller
 
             'request_id' => $request_id->id,
 
-            'proposed_department' => $request->input('proposed_department'),
+            'proposed_key_department' => $request->input('proposed_department'),
 
-            'proposed_reports_to' => $request->input('proposed_reportto'),
+            'user_id' => $request->input('proposed_reportto'),
 
-            'proposed_position_title' => $request->input('proposed_position_title'),
+            'proposed_key_position_title' => $request->input('proposed_position_title'),
 
-            'proposed_project_assignment' => $request->input('proposed_project_assignment'),
+            'proposed_key_project_assignment' => $request->input('proposed_project_assignment'),
         ]);
 
-        return redirect(route('paf.index'))->with('success', 'yehay');
+        return redirect(route('paf.index'))->with('success', 'success, your request will be sent to the hr.');
     }
 }
 

@@ -13,24 +13,20 @@ class MasterPafStatus extends Seeder
     {
         $values = [
             [
-                'key'=>'appr',
-                'request_status'=>'Approved'
+                'key'=>'com',
+                'request_status'=>'Completed'
             ],
             [
-                'key'=>'asse',
-                'request_status'=>'Assessed'
+                'key'=>'clo',
+                'request_status'=>'Closed'
             ],
             [
-                'key'=>'pend',
+                'key'=>'inc',
+                'request_status'=>'Incomplete'
+            ],
+            [
+                'key'=>'pen',
                 'request_status'=>'Pending'
-            ],
-            [
-                'key'=>'reje',
-                'request_status'=>'Rejected'
-            ],
-            [
-                'key'=>'reas',
-                'request_status'=>'Reassessment'
             ],
 
         ];

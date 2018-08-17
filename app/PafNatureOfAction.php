@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use app\MasterContractChange;
 
 class PafNatureOfAction extends Model
 {	
@@ -11,19 +12,27 @@ class PafNatureOfAction extends Model
 
     public function getRouteKeyName()
     {
-        return 'company_id';
+        return 'employee_company_id';
     }
     public function basicInfo()
     {
-        return $this->belongsTo(EmpBasicInfo::class);
-    } 
-    public function masterPafStatus()
-    {
-        return $this->belongsTo(MasterPafStatus::class);
+        return $this->belongsToMany(EmpBasicInfo::class, 'employee_company_id');
     } 
     function proposedChangeJobDetail() 
     {
         return $this->hasMany(PafProposedChangeJobDetail::class);
+    }
+    public function masterPafStatus()
+    {
+        return $this->belongsTo(MasterPafStatus::class, 'master_key_request_status');
+    } 
+    public function masterPafSubStatus()
+    {
+        return $this->belongsTo(MasterPafSubStatus::class, 'master_key_sub_request_status');
+    } 
+    public function contractChange() 
+    {
+        return $this->belongsTo(MasterContractChange::class, 'master_key_employment_status');
     }
 
 }

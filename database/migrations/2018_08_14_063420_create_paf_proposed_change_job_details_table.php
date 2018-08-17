@@ -16,10 +16,10 @@ class CreatePafProposedChangeJobDetailsTable extends Migration
         Schema::create('paf_proposed_change_job_details', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('request_id')->unsigned();
-            $table->string('proposed_department')->nullable();
-            $table->string('proposed_reports_to')->nullable();
-            $table->string('proposed_position_title')->nullable();
-            $table->string('proposed_project_assignment')->nullable();
+            $table->string('proposed_key_department')->nullable();
+            $table->string('user_id')->nullable();
+            $table->string('proposed_key_position_title')->nullable();
+            $table->string('proposed_key_project_assignment')->nullable();
             $table->string('proposed_remarks_hr')->nullable();
             $table->string('proposed_remarks_exec')->nullable();
             $table->timestamps();

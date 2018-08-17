@@ -10,6 +10,7 @@ use App\MasterJobTitle;
 use App\MasterPafStatus;
 use App\MasterDepartment;
 use App\PafNatureOfAction;
+use App\MasterPafSubStatus;
 use App\MasterContractChange;
 use App\PafProposedChangeJobDetail;
 use App\Http\Controllers\Controller;    
@@ -23,9 +24,13 @@ class AssessmentController extends Controller
 
         $request_status = MasterPafStatus::all();
 
+        $sub_request_status = MasterPafSubStatus::all();
+
         $requestList = PafNatureOfAction::paginate(15);
 
-        return view('hpaf.list', compact('requestList', 'request_status'));
+        $contractchange = MasterContractChange::all();
+
+        return view('hpaf.list', compact('requestList', 'sub_request_status', 'request_status','contractchange'));
 
     }
 
@@ -63,13 +68,15 @@ class AssessmentController extends Controller
 
         $request_status = MasterPafStatus::all();
 
+        $sub_request_status = MasterPafSubStatus::all();
+
         $employee_name = EmpBasicInfo::where('company_id', $form->company_id)->first();
 
         $manager_name = EmpBasicInfo::where('company_id', $form->requested_by)->first();
 
         $get_job_details = PafProposedChangeJobDetail::where('request_id', $form->id)->first(); 
         
-        return view('hpaf.pending', compact('form', 'employee_name', 'manager_name', 'get_job_details', 'request_status', 'user_role'));
+        return view('hpaf.pending', compact('form', 'employee_name', 'manager_name', 'get_job_details', 'request_status', 'sub_request_status', 'user_role'));
     }
 
     /**

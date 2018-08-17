@@ -35,7 +35,7 @@
 					<select name="proposed_department" id="proposed_department" class="form-control">
 						<option value="" selected>--select--</option>
 						@foreach ($department as $departments)
-						<option value="{{$departments->department}}">{{$departments->department}}</option>
+						<option value="{{$departments->key}}">{{$departments->department}}</option>
 						@endforeach
 					</select>
 				</div>
@@ -58,7 +58,7 @@
 						<option value="" selected>--select--</option>
 						@foreach($reportTo as $report)
 							@foreach ($report->roles->whereNotIn('id', '6') as $reports)
-								<option value="{{$report->name}}">{{$report->name}}</option>
+								<option value="{{$report->id}}">{{$report->name}}</option>
 							@endforeach
 						@endforeach
 					</select>
@@ -81,7 +81,7 @@
 					<select name="proposed_position/title" id="proposed_position/title" class="form-control">
 						<option value="" selected>--select--</option>
 						@foreach ($jobTitles as $titles)
-							<option value="{{$titles->job_titles}}">{{$titles->job_titles}}</option>
+							<option value="{{$titles->key}}">{{$titles->job_titles}}</option>
 						@endforeach
 					</select>
 				</div>
@@ -102,8 +102,8 @@
 				<div class="form-group">
 					<select name="proposed_project_assignment" id="proposed_project_assignment" class="form-control">
 						<option value="" selected>--select--</option>
-						@foreach ($jobTitles as $titles)
-							<option value="{{$titles->job_titles}}">{{$titles->job_titles}}</option>
+						@foreach ($project_assignment as $assignment)
+							<option value="{{$assignment->key}}">{{$assignment->name}}</option>
 						@endforeach
 					</select>
 				</div>
@@ -111,3 +111,4 @@
 		</div>
 	</div>
 </div>
+	

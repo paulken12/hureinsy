@@ -99,7 +99,7 @@
 							<select name="employment_status" id="employment_status" class="form-control" required>
 								<option style="display:none" value="" selected>--select--</option>
 								@foreach ($contractChange as $contract)
-									<option value="{{$contract->type}}">{{$contract->type}}</option>
+									<option value="{{$contract->key}}">{{$contract->type}}</option>
 								@endforeach
 							</select>
 						</div>
@@ -123,7 +123,6 @@
 		<div class="card">
 			<div class="card-body">
 				<div class="form-group text-center">
-					<input type="text" id="request_status" name="request_status" class="form-control-plaintext" title="request_status" value="pend" readonly hidden>
 					<button class="btn btn-success" type="submit">Request to Human Resource</button>
 				</div>
 			</div>

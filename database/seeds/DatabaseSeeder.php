@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MasterJobType::class);
         $this->call(MasterContractChange::class);
         $this->call(MasterPafStatus::class);
+        $this->call(MasterPafSubStatus::class);
 
     }
 }

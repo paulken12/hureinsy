@@ -104,5 +104,21 @@
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-2">
+				<div class="form-group">
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<input type="radio" name="sched_type" value="dept">Department Request<br>
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<input type="radio" name="sched_type" value="empl">Employee Request<br>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>

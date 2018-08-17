@@ -15,13 +15,14 @@ class CreatePafNatureOfActionsTable extends Migration
     {
         Schema::create('paf_nature_of_actions', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('company_id');
-            $table->string('employment_status');
-            $table->string('requested_by');
-            $table->string('assessed_by');
-            $table->string('approved_by');
-            $table->string('comfirmed_by');
+            $table->integer('employee_company_id');
+            $table->string('master_key_employment_status');
+            $table->string('requested_by_company_id');
+            $table->string('assessed_by_company_id');
+            $table->string('approved_by_company_id');
+            $table->string('comfirmed_by_company_id');
             $table->string('master_key_request_status');
+            $table->string('master_key_sub_request_status');
             $table->string('remarks')->nullable();
             $table->date('date_effective');
             $table->timestamps();
