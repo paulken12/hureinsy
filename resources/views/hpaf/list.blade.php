@@ -34,18 +34,16 @@
 		        </div>
 		    </div>
 			@foreach ($requestList as $lists)
-			@if(!empty($lists->assessed_by_company_id))
-			@else
 				<a href="{{route('paf.list.show', $lists->employee_company_id)}}">
 					<div class="row">
 				    	<div class="col">
 		                    <div class="container">
-		                    	{{$lists->basicInfo->user_id}} 
+		                    	{{$lists->employee_company_id}} 
 		                    </div>
 			           	</div>
 				    	<div class="col-3">
 		                    <div class="container">
-								{{$lists->contractChange->type}}
+								{{$lists->employmentStatus->employment_status}}
 		                    </div>
 				        </div>
 				    	<div class="col">
@@ -65,7 +63,6 @@
 				        </div>
 				    </div>
 			    </a>
-			@endif
 		    @endforeach
 		    </div>
 		    <div class="row mt-2">

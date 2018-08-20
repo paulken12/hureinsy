@@ -11,8 +11,11 @@ use App\MasterJobTitle;
 use App\MasterPafStatus;
 use App\MasterDepartment;
 use App\PafNatureOfAction;
-use App\MasterContractChange;
+use App\MasterPafScheduleType;
+use App\MasterEmploymentStatus;
 use App\PafProposedChangeJobDetail;
+use App\PafProposedChangeScheduleDetail;
+use App\PafProposedChangeCompensationDetail;
 use App\Http\Controllers\Controller;    
 use App\Http\Controllers\RoleController;
 
@@ -35,19 +38,21 @@ class RequestController extends Controller
 
         $emp_id = $request->input('raj_id');
 
-        $value = EmpBasicInfo::where('company_id', $emp_id)->first();  
-
         $jobTitles = MasterJobTitle::all();
 
         $department = MasterDepartment::all();
 
         $project_assignment = MasterCompany::all();
 
-        $reportTo = User::all();
-
-        $contractChange = MasterContractChange::all();
+        $employment_status = MasterEmploymentStatus::all();
 
         $request_status = MasterPafStatus::all();
+
+        $sched_type = MasterPafScheduleType::all();
+
+        $reportTo = User::all();
+
+        $value = EmpBasicInfo::where('company_id', $emp_id)->first();  
 
         if (empty($value)) {
 
@@ -55,7 +60,7 @@ class RequestController extends Controller
 
         }else{
 
-            return view('mpaf.request', compact('value', 'contractChange', 'department', 'reportTo', 'jobTitles', 'request_status', 'project_assignment'));
+            return view('mpaf.request', compact('value', 'employment_status', 'department', 'reportTo', 'jobTitles', 'request_status', 'project_assignment', 'sched_type'));
 
         }
     }
@@ -88,11 +93,40 @@ class RequestController extends Controller
 
             'proposed_key_department' => $request->input('proposed_department'),
 
-            'user_id' => $request->input('proposed_reportto'),
+            'proposed_reports_to' => $request->input('proposed_reportto'),
 
             'proposed_key_position_title' => $request->input('proposed_position_title'),
 
             'proposed_key_project_assignment' => $request->input('proposed_project_assignment'),
+        ]);
+
+        PafProposedChangeScheduleDetail::create([
+
+            'request_id' => $request_id->id,
+
+            'proposed_days_of_work' => $request->input('proposed_days_of_work'),
+
+            'proposed_work_hours_per_week' => $request->input('proposed_work_hours_per_week'),
+
+            'proposed_type_of_shift' => $request->input('proposed_type_of_shift'),
+
+            'proposed_work_hours_per_day' => $request->input('proposed_work_hours_per_day'),
+
+            'proposed_work_location' => $request->input('proposed_work_location'),
+
+            'proposed_key_schedule_type' => $request->input('sched_type'),
+        ]);
+
+        PafProposedChangeCompensationDetail::create([
+
+            'request_id' => $request_id->id,
+
+            'proposed_salary' => $request->input('proposed_salary'),
+
+            'proposed_bonus_allowance' => $request->input('proposed_bonus_allowance'),
+
+            'proposed_benefits' => $request->input('proposed_benefits'),
+
         ]);
 
         return redirect(route('paf.index'))->with('success', 'success, your request will be sent to the hr.');

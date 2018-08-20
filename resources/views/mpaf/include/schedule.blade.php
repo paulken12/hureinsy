@@ -109,16 +109,13 @@
 				<div class="form-group">
 				</div>
 			</div>
-			<div class="col">
-				<div class="form-group">
-					<input type="radio" name="sched_type" value="dept">Department Request<br>
+			@foreach($sched_type as $schedule)
+				<div class="col">
+					<div class="form-group">
+						<input type="radio" name="sched_type" value="{{$schedule->key}}">{{$schedule->schedule_type}}<br>
+					</div>
 				</div>
-			</div>
-			<div class="col">
-				<div class="form-group">
-					<input type="radio" name="sched_type" value="empl">Employee Request<br>
-				</div>
-			</div>
+			@endforeach
 		</div>
 	</div>
 </div>

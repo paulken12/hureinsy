@@ -98,8 +98,8 @@
 							<label for="employment_status">Employment Status</label>
 							<select name="employment_status" id="employment_status" class="form-control" required>
 								<option style="display:none" value="" selected>--select--</option>
-								@foreach ($contractChange as $contract)
-									<option value="{{$contract->key}}">{{$contract->type}}</option>
+								@foreach ($employment_status as $employment)
+									<option value="{{$employment->key}}">{{$employment->employment_status}}</option>
 								@endforeach
 							</select>
 						</div>

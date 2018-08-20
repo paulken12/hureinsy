@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<form action="" method="post">
+<form action="{{route('paf.hrassessment')}}" method="post">
 	{{csrf_field()}}	
 	<div class="card">
 		<div class="card-header">
@@ -12,6 +12,7 @@
 					<div class="form-group">
 						<label for="raj_id">Employee ID:</label>
 						<input type="text" id="raj_id" name="raj_id" class="form-control-plaintext" title="raj_id" value="{{$employee_name->company_id}}" readonly>
+						<input type="text" id="req_id" name="req_id" class="form-control-plaintext" title="req_id" value="{{$form->id}}" readonly hidden>
 					</div>
 				</div>
 				<div class="col">
@@ -68,7 +69,7 @@
 				<div class="col">
 					<div class="form-group">
 						<label for="employment_status">Employment Status</label>
-						<input type="text" id="employment_status" name="employment_status" class="form-control-plaintext" title="Employment_status" value="{{$form->employment_status}}" readonly>
+						<input type="text" id="employment_status" name="employment_status" class="form-control-plaintext" title="Employment_status" value="{{$form->employmentStatus->employment_status}}" readonly>
 					</div>
 				</div>
 			</div>
@@ -82,7 +83,6 @@
 			</div>
 		</div>
 	</div>
-
 	@include('hpaf.include.job')
 	@include('hpaf.include.schedule')
 	@include('hpaf.include.compensation')
@@ -95,15 +95,15 @@
 						<label for="request_status">Action</label>
 						<select name="request_status" id="request_status" class="form-control" required>
 							<option style="display:none" value="" selected>--select--</option>
-							@if($user_role->id > '2')
-								@foreach ($request_status->whereNotIn('id', ['1','3']) as $status)
+								@foreach ($request_status->whereNotIn('key', $form->master_key_request_status) as $status)
 									<option value="{{$status->key}}">{{$status->request_status}}</option>
 								@endforeach
-							@else
-								@foreach ($request_status->whereNotIn('id', '3') as $status)
-									<option value="{{$status->key}}">{{$status->request_status}}</option>
+						</select>
+						<select name="sub_request_status" id="sub_request_status" class="form-control" required>
+							<option style="display:none" value="" selected>--select--</option>
+								@foreach ($sub_request_status->whereNotIn('key', $form->master_key_sub_request_status) as $substatus)
+									<option value="{{$substatus->key}}">{{$substatus->sub_request_status}}</option>
 								@endforeach
-							@endif
 						</select>
 					</div>
 				</div>

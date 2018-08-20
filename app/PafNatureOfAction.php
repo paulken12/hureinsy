@@ -16,11 +16,19 @@ class PafNatureOfAction extends Model
     }
     public function basicInfo()
     {
-        return $this->belongsToMany(EmpBasicInfo::class, 'employee_company_id');
+        return $this->belongsTo(EmpBasicInfo::class, 'employee_company_id');
     } 
     function proposedChangeJobDetail() 
     {
         return $this->hasMany(PafProposedChangeJobDetail::class);
+    }
+    function proposedChangeCompensationDetail() 
+    {
+        return $this->hasMany(PafProposedChangeCompensationDetail::class);
+    }
+    function proposedChangeScheduleDetail() 
+    {
+        return $this->hasMany(PafProposedChangeScheduleDetail::class);
     }
     public function masterPafStatus()
     {
@@ -30,9 +38,9 @@ class PafNatureOfAction extends Model
     {
         return $this->belongsTo(MasterPafSubStatus::class, 'master_key_sub_request_status');
     } 
-    public function contractChange() 
+    public function employmentStatus() 
     {
-        return $this->belongsTo(MasterContractChange::class, 'master_key_employment_status');
+        return $this->belongsTo(MasterEmploymentStatus::class, 'master_key_employment_status');
     }
 
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePafProposedChangeJobDetailsTable extends Migration
+class CreatePafProposedChangeScheduleDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,15 @@ class CreatePafProposedChangeJobDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('paf_proposed_change_job_details', function (Blueprint $table) {
+        Schema::create('paf_proposed_change_schedule_details', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('request_id')->unsigned();
-            $table->string('proposed_key_department')->nullable();
-            $table->string('proposed_reports_to')->nullable();
-            $table->string('proposed_key_position_title')->nullable();
-            $table->string('proposed_key_project_assignment')->nullable();
+            $table->integer('proposed_days_of_work')->nullable();
+            $table->integer('proposed_work_hours_per_week')->nullable();
+            $table->string('proposed_type_of_shift')->nullable();
+            $table->integer('proposed_work_hours_per_day')->nullable();
+            $table->string('proposed_work_location')->nullable();
+            $table->string('proposed_key_schedule_type')->nullable();
             $table->string('proposed_remarks_hr')->nullable();
             $table->string('proposed_remarks_exec')->nullable();
             $table->timestamps();
@@ -38,6 +40,6 @@ class CreatePafProposedChangeJobDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('paf_proposed_change_job_details');
+        Schema::dropIfExists('paf_proposed_change_schedule_details');
     }
 }

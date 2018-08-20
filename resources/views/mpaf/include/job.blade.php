@@ -78,7 +78,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<select name="proposed_position/title" id="proposed_position/title" class="form-control">
+					<select name="proposed_position_title" id="proposed_position_title" class="form-control">
 						<option value="" selected>--select--</option>
 						@foreach ($jobTitles as $titles)
 							<option value="{{$titles->key}}">{{$titles->job_titles}}</option>

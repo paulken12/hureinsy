@@ -127,7 +127,7 @@ Route::group(['middleware' => ['auth','confirmed','permissions']],function()
 
     Route::get('paf/list/show/{form}', 'Paf\AssessmentController@show')->name('paf.list.show'); 
 
-    Route::post('paf/list/show/{form}/assessed', 'Paf\AssessmentController@assessment')->name('paf.assessment');
+    Route::post('paf/list/show/assessed', 'Paf\AssessmentController@assessment')->name('paf.hrassessment');
 
     //=================================================== PAF EXECUTIVE  ================================================================ 
 

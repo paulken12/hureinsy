@@ -49,7 +49,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_bonus/allowance" name="proposed_bonus/allowance" class="form-control" title="Proposed_bonus/allowance">
+					<input type="text" id="proposed_bonus_allowance" name="proposed_bonus_allowance" class="form-control" title="Proposed_bonus_allowance">
 				</div>
 			</div>
 		</div>
