@@ -129,7 +129,7 @@ class RequestController extends Controller
 
         ]);
 
-        return redirect(route('paf.index'))->with('success', 'success, your request will be sent to the hr.');
+        return redirect(route('paf.index'))->with('success', 'Request complete, your request will be sent to the hr.');
     }
 }
 

@@ -121,6 +121,10 @@ Route::group(['middleware' => ['auth','confirmed','permissions']],function()
 
     Route::post('paf/search/result/request', 'Paf\RequestController@store')->name('paf.store');
 
+    Route::get('paf/request/list', 'Paf\ReassessmentController@list')->name('paf.list.reassess');  
+
+    Route::get('paf/request/show/{form}', 'Paf\ReassessmentController@show')->name('paf.list.reassess.show');
+
     //=================================================== PAF HR ================================================================ 
 
     Route::get('paf/list', 'Paf\AssessmentController@list')->name('paf.list');    

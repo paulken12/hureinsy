@@ -3,23 +3,23 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h4>Personnel Action Form Pendings</h4>
+            <h4>Reassessment List</h4>
         </div>
         <div class="card-body">
 		    <div class="row">
 		    	<div class="col">
                     <div class="container">
-                    	Employee 
+                    	Request no 
                     </div>
 	           	</div>
-		    	<div class="col-3">
+		    	<div class="col">
                     <div class="container">
-                    	Purpose
+                    	Employee id
                     </div>
 		        </div>
 		    	<div class="col">
                     <div class="container">
-                    	Requested by
+                    	purpose
                     </div>
 		        </div>
 		    	<div class="col">
@@ -27,59 +27,46 @@
                     	Assessed by
                     </div>
 		        </div>
-		    	<div class="col">
+		    	<div class="col-5">
                     <div class="container">
-                    	Approved by
-                    </div>
-		        </div>
-		    	<div class="col">
-                    <div class="container">
-                    	Confirmed by
+                    	Status
                     </div>
 		        </div>
 		    </div>
-			@foreach ($requestList->whereIn('master_key_request_status', 'pend') as $lists)
-			@if(!empty($lists->assessed_by))
-			@else
-				<a href="{{route('paf.list.show', $lists->company_id)}}">
+			@foreach($request_list as $lists)
+				<a href="{{route('paf.list.reassess.show', $lists->employee_company_id)}}">
 					<div class="row">
 				    	<div class="col">
 		                    <div class="container">
-		                    	{{$lists->company_id}} 
+		                    	{{$lists->id}} 
 		                    </div>
 			           	</div>
-				    	<div class="col-3">
+				    	<div class="col">
 		                    <div class="container">
-		                    	{{$lists->employment_status}} 
+		                    	{{$lists->employee_company_id}}
 		                    </div>
 				        </div>
 				    	<div class="col">
 		                    <div class="container">
-		                    	{{$lists->requested_by}} 
+		                    	{{$lists->employmentStatus->employment_status}} 
 		                    </div>
 				        </div>
 				    	<div class="col">
 		                    <div class="container">
-		                    	{{$lists->assessed_by}} 
+		                    	{{$lists->assessed_by_company_id}} 
 		                    </div>
 				        </div>
-				    	<div class="col">
+				    	<div class="col-5">
 		                    <div class="container">
-		                    	{{$lists->approved_by}} 
-		                    </div>
-				        </div>
-				    	<div class="col">
-		                    <div class="container">
-		                    	{{$lists->confirmed_by}} 
+		    					{{$lists->masterPafStatus->request_status}} - {{$lists->masterPafSubStatus->sub_request_status}}
 		                    </div>
 				        </div>
 				    </div>
 			    </a>
-			@endif
 		    @endforeach
 		    </div>
 		    <div class="row mt-2">
-		        <span class="mr-auto ml-auto">{{$requestList->links()}}</span>
+		        <span class="mr-auto ml-auto">{{$request_list->links()}}</span>
 		    </div>
         </div>
 @endsection

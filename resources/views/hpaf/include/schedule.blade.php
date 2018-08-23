@@ -112,7 +112,9 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_work_location" name="proposed_work_location" class="form-control-plaintext" title="Proposed_work_location" value="{{$get_schedule_details->schedType->schedule_type}}" readonly>
+					@if(!empty($get_schedule_details->proposed_key_schedule_type))
+					<input type="text" id="sched_type" name="sched_type" class="form-control-plaintext" title="sched_type" value="{{$get_schedule_details->schedType->schedule_type}}" readonly>
+					@endif
 				</div>
 			</div>
 			<div class="col">
@@ -128,7 +130,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_remarks_schedule" name="proposed_remarks_schedule" class="form-control" title="proposed_remarks_schedule">
+					<input type="text" id="proposed_remarks_schedule" name="proposed_remarks_schedule" class="form-control" title="proposed_remarks_schedule" value="{{$get_schedule_details->proposed_remarks_hr}}">
 				</div>
 			</div>
 		</div>

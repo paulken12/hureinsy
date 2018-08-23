@@ -92,7 +92,7 @@ class AssessmentController extends Controller
 
         $compensation_update->save();
 
-        return 'www';
+        return redirect(route('paf.list'))->with('success', 'Request form updated');;
     }
 
     /**

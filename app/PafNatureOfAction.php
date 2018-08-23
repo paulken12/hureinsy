@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use app\MasterContractChange;
+use Illuminate\Support\Facades\Auth;
 
 class PafNatureOfAction extends Model
 {	
@@ -41,6 +41,9 @@ class PafNatureOfAction extends Model
     public function employmentStatus() 
     {
         return $this->belongsTo(MasterEmploymentStatus::class, 'master_key_employment_status');
+    }
+    public function scopeRequest(){
+        return $this->where('requested_by_company_id', Auth::user()->basicInfo->pluck('company_id')->first())->paginate(15);
     }
 
 }

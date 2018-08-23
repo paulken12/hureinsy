@@ -7,6 +7,7 @@
 			<div class="card-header">
 				<h4>Personnel Action Form</h4>
 			</div>
+
 			@if(session('error'))
 				<h4 class="alert-danger">{{session('error')}}</h4>
 			@else

@@ -57,28 +57,4 @@
         top: 75px;
         z-index: 9999;
     }
-
-    .alert-success
-    {
-        background: #4caf50;
-        color: #ffffff;
-        width: 280px;
-        padding: 10px;
-    }
-
-    .alert-warning
-    {
-        background: #4caf50;
-        color: #ffffff;
-        width: 280px;
-        padding: 10px;
-    }
-
-    .alert-danger
-    {
-        background: #4caf50;
-        color: #ffffff;
-        width: 280px;
-        padding: 10px;
-    }
 </style>
