@@ -34,7 +34,11 @@ class MasterPafSubStatus extends Seeder
             ],
             [
                 'key'=>'rev-ma',
-                'sub_request_status'=>'Manager and Employee currently evaluating request'
+                'sub_request_status'=>'Manager and Employee has canceled the request'
+            ],
+            [
+                'key'=>'rev-mat',
+                'sub_request_status'=>'Manager has resubmitted the request'
             ],
         ];
 

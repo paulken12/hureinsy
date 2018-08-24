@@ -64,9 +64,9 @@
 				    </div>
 			    </a>
 		    @endforeach
-		    </div>
-		    <div class="row mt-2">
-		        <span class="mr-auto ml-auto">{{$request_list->links()}}</span>
-		    </div>
-        </div>
+	    </div>
+	    <div class="row mt-2">
+	        <span class="mr-auto ml-auto">{{$request_list->links()}}</span>
+	    </div>
+    </div>
 @endsection

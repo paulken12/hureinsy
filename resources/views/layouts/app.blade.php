@@ -127,7 +127,7 @@
                                             <ul class="collapse" id="personnelActionManagement">
                                                 @can('manager_view')
                                                     <li><a href="{{route('paf.index')}}">Request Personnel Action Form</a></li>
-                                                    <li class="alert alert-warning"><a href="{{route('paf.list.reassess')}}">You have reassessment request</a></li>
+                                                    <li><a href="{{route('paf.list.reassess')}}">Request PAF lists</a></li>
                                                 @endcan
 
                                                 @can('hr_view')

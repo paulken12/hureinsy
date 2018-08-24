@@ -68,12 +68,7 @@
 					<div class="col">
 						<div class="form-group">
 							<label for="employment_status">Employment Status</label>
-							<select name="employment_status" id="employment_status" class="form-control" required>
-								<option style="display:none" value="{{$form->master_key_employment_status}}" selected>{{$form->employmentStatus->employment_status}}</option>
-								@foreach ($employment_status as $employment)
-									<option value="{{$employment->key}}">{{$employment->employment_status}}</option>
-								@endforeach
-							</select>
+							<input type="text" id="employment_status" name="employment_status" class="form-control-plaintext" title="Employment_status" value="{{$form->employmentStatus->employment_status}}" readonly>
 						</div>
 					</div>
 				</div>
@@ -81,22 +76,46 @@
 					<div class="col">
 						<div class="form-group">
 							<label for="remarks">Remarks</label>
-							<input type="text" id="remarks" name="remarks" class="form-control" title="Remarks" value="{{$form->remarks}}">
+							<input type="text" id="remarks" name="remarks" class="form-control-plaintext" title="Remarks" value="{{$form->remarks}}" readonly>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		@include('mpaf.include.showjob')
-		@include('mpaf.include.showschedule')
-		@include('mpaf.include.showcompensation')
+		@include('mpaf.include.readjob')
+		@include('mpaf.include.readschedule')
+		@include('mpaf.include.readcompensation')
 		<div class="card">
 			<div class="card-body">
-				<div class="form-group text-center">
-					<input type="text" id="tohr" name="tohr" class="form-control" title="tohr" value="rev-ma" hidden readonly>
-					<input type="text" id="clos" name="clos" class="form-control" title="clos" value="rev-mat" hidden readonly>
-					<button class="btn btn-success" name="resubmit" type="submit" value="pen">Resubmit to Human Resource</button>
-					<button class="btn" name="resubmit" type="submit" value="clo">Close Request</button>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-2">
+							<div class="form-group">
+								<label for="reportto">Assessed By</label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+								@if(!empty($form->assessed_by_company_id))
+									<input type="text" id="current_reportto" name="current_reportto" class="form-control-plaintext" title="Current_reportto" value="{{$hr_name->company_id}} - {{$hr_name->last_name}} {{$hr_name->first_name}} {{$hr_name->middle_name}}" readonly>
+								@endif
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-2">
+							<div class="form-group">
+								<label for="reportto">Approved By</label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+								@if(!empty($form->approved_by_company_id))
+									<input type="text" id="current_reportto" name="current_reportto" class="form-control-plaintext" title="Current_reportto" value="{{$hr_name->company_id}} - {{$exec_name->last_name}} {{$exec_name->first_name}} {{$exec_name->middle_name}}" readonly>
+								@endif
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -39,7 +39,7 @@
 		        </div>
 		    </div>
 			@foreach ($requestList as $lists)
-				<a href="{{route('paf.list.show', $lists->employee_company_id)}}">
+				<a href="{{route('paf.list.show', $lists->id)}}">
 					<div class="row">
 				    	<div class="col">
 		                    <div class="container">

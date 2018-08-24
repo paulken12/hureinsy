@@ -27,12 +27,12 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_days_of_work" name="current_days_of_work" class="form-control-plaintext" title="Current_days_of_work" value="{{$value->company_id}}" disabled>
+					<input type="text" id="current_days_of_work" name="current_days_of_work" class="form-control-plaintext" title="Current_days_of_work" value="" disabled>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_days_of_work" name="proposed_days_of_work" class="form-control" title="Proposed_days_of_work">
+					<input type="text" id="proposed_days_of_work" name="proposed_days_of_work" class="form-control" title="Proposed_days_of_work" value="{{$get_schedule_details->proposed_days_of_work}}">
 				</div>
 			</div>
 		</div>
@@ -44,12 +44,12 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_work_hours_per_week" name="current_work_hours_per_week" class="form-control-plaintext" title="Current_work_hours_per_week" value="{{$value->company_id}}" disabled>
+					<input type="text" id="current_work_hours_per_week" name="current_work_hours_per_week" class="form-control-plaintext" title="Current_work_hours_per_week" value="" disabled>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_work_hours_per_week" name="proposed_work_hours_per_week" class="form-control" title="Proposed_work_hours_per_week">
+					<input type="text" id="proposed_work_hours_per_week" name="proposed_work_hours_per_week" class="form-control" title="Proposed_work_hours_per_week" value="{{$get_schedule_details->proposed_work_hours_per_week}}">
 				</div>
 			</div>
 		</div>
@@ -61,12 +61,12 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_type_of_shift" name="current_type_of_shift" class="form-control-plaintext" title="Current_type_of_shift" value="{{$value->company_id}}" disabled>
+					<input type="text" id="current_type_of_shift" name="current_type_of_shift" class="form-control-plaintext" title="Current_type_of_shift" value="" disabled>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_type_of_shift" name="proposed_type_of_shift" class="form-control" title="Proposed_type_of_shift">
+					<input type="text" id="proposed_type_of_shift" name="proposed_type_of_shift" class="form-control" title="Proposed_type_of_shift" value="{{$get_schedule_details->proposed_type_of_shift}}">
 				</div>
 			</div>
 		</div>
@@ -78,12 +78,12 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_work_hours_per_day" name="current_work_hours_per_day" class="form-control-plaintext" title="Current_work_hours_per_day" value="{{$value->company_id}}" disabled>
+					<input type="text" id="current_work_hours_per_day" name="current_work_hours_per_day" class="form-control-plaintext" title="Current_work_hours_per_day" value="" disabled>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_work_hours_per_day" name="proposed_work_hours_per_day" class="form-control" title="Proposed_work_hours_per_day">
+					<input type="text" id="proposed_work_hours_per_day" name="proposed_work_hours_per_day" class="form-control" title="Proposed_work_hours_per_day" value="{{$get_schedule_details->proposed_work_hours_per_day}}">
 				</div>
 			</div>
 		</div>
@@ -95,27 +95,50 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_work_location" name="current_work_location" class="form-control-plaintext" title="Current_work_location" value="{{$value->company_id}}" disabled>
+					<input type="text" id="current_work_location" name="current_work_location" class="form-control-plaintext" title="Current_work_location" value="" disabled>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_work_location" name="proposed_work_location" class="form-control" title="Proposed_work_location">
+					<input type="text" id="proposed_work_location" name="proposed_work_location" class="form-control" title="Proposed_work_location" value="{{$get_schedule_details->proposed_work_location}}">
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-2">
 				<div class="form-group">
+					<label for="sched_type">Sched Type</label>
 				</div>
 			</div>
-			@foreach($sched_type as $schedule)
-				<div class="col">
-					<div class="form-group">
-						<input type="radio" name="sched_type" value="{{$schedule->key}}">{{$schedule->schedule_type}}<br>
-					</div>
+			<div class="col">
+				<div class="form-group">
 				</div>
-			@endforeach
+			</div>
+			<div class="col">
+				<div class="form-group">
+				<select name="sched_type" id="sched_type" class="form-control">
+					@if(!empty($get_schedule_details->proposed_key_schedule_type))
+						<option style="display:none" value="{{$get_schedule_details->schedType->key}}" selected>{{$get_schedule_details->schedType->schedule_type}}</option>
+					@endif
+					<option value="">--select--</option>
+					@foreach ($sched_type as $schedule)
+						<option value="{{$schedule->key}}">{{$schedule->schedule_type}}</option>
+					@endforeach
+				</select>
+				</div>
+			</div>
+		</div>
+		<div class="row alert alert-warning">
+			<div class="col-2">
+				<div class="form-group">
+					<label for="proposed_remarks_job">HR Remarks</label>
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<input type="text" id="proposed_remarks_job" name="proposed_remarks_job" class="form-control-plaintext " title="proposed_remarks_job" value="{{$get_schedule_details->proposed_remarks_hr}}" readonly>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

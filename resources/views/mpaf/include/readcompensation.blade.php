@@ -70,17 +70,21 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-2">
-				<div class="form-group">
-					<label for="proposed_remarks_compensation">HR Remarks</label>
+
+		@if($form->masterPafStatus->request_status == 'Pending')
+		@else
+			<div class="row">
+				<div class="col-2">
+					<div class="form-group">
+						<label for="proposed_remarks_compensation">HR Remarks</label>
+					</div>
+				</div>
+				<div class="col">
+					<div class="form-group">
+						<input type="text" id="proposed_remarks_compensation" name="proposed_remarks_compensation" class="form-control" title="proposed_remarks_compensation" value="{{$get_compensation_details->proposed_remarks_hr}}">
+					</div>
 				</div>
 			</div>
-			<div class="col">
-				<div class="form-group">
-					<input type="text" id="proposed_remarks_compensation" name="proposed_remarks_compensation" class="form-control" title="proposed_remarks_compensation" value="{{$get_compensation_details->proposed_remarks_hr}}">
-				</div>
-			</div>
-		</div>
+		@endif
 	</div>
 </div>

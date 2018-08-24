@@ -40,8 +40,9 @@ class AssessmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(PafNatureOfAction $form)
-    {
+    public function show($form)
+    {   
+        dd($form);
         $user_role= Auth::user()->roles->first();
 
         $request_status = MasterPafStatus::all();
@@ -65,6 +66,8 @@ class AssessmentController extends Controller
     {
 
         $form_update = PafNatureOfAction::where('id', $request->input('req_id'))->first();
+
+        dd($form_update);
 
         $form_update->master_key_request_status = $request->input('request_status');
 

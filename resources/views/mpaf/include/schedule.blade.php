@@ -107,15 +107,23 @@
 		<div class="row">
 			<div class="col-2">
 				<div class="form-group">
+					<label for="sched_type">Sched Type</label>
 				</div>
 			</div>
-			@foreach($sched_type as $schedule)
-				<div class="col">
-					<div class="form-group">
-						<input type="radio" name="sched_type" value="{{$schedule->key}}">{{$schedule->schedule_type}}<br>
-					</div>
+			<div class="col">
+				<div class="form-group">
 				</div>
-			@endforeach
+			</div>
+			<div class="col">
+				<div class="form-group">
+				<select name="sched_type" id="sched_type" class="form-control">
+					<option value="" selected>--select--</option>
+					@foreach ($sched_type as $schedule)
+						<option value="{{$schedule->key}}">{{$schedule->schedule_type}}</option>
+					@endforeach
+				</select>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

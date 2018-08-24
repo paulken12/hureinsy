@@ -86,7 +86,6 @@
 	@include('hpaf.include.job')
 	@include('hpaf.include.schedule')
 	@include('hpaf.include.compensation')
-	
 	<div class="card">
 		<div class="card-body">
 			<div class="row">
@@ -94,15 +93,24 @@
 					<div class="form-group">
 						<label for="request_status">Action</label>
 						<select name="request_status" id="request_status" class="form-control" required>
-							<option style="display:none" value="" selected>--select--</option>
-								@foreach ($request_status->whereNotIn('key', $form->master_key_request_status) as $status)
-									<option value="{{$status->key}}">{{$status->request_status}}</option>
-								@endforeach
+							<option style="display:none" value="{{$form->masterPafStatus->key}}" selected>{{$form->masterPafStatus->request_status}}</option>
+								@if($get_schedule_details->proposed_key_schedule_type == 'dept')
+									@foreach ($request_status->whereNotIn('key', 'com') as $status)
+										<option value="{{$status->key}}">{{$status->request_status}}</option>
+									@endforeach
+								@else
+									@foreach ($request_status as $status)
+										<option value="{{$status->key}}">{{$status->request_status}}</option>
+									@endforeach
+								@endif
 						</select>
 						<select name="sub_request_status" id="sub_request_status" class="form-control" required>
 							<option style="display:none" value="" selected>--select--</option>
-								@foreach ($sub_request_status->whereNotIn('key', $form->master_key_sub_request_status) as $substatus)
-									<option value="{{$substatus->key}}">{{$substatus->sub_request_status}}</option>
+								@foreach ($sub_request_status as $substatus)
+									@if($substatus->id < 5)
+										<option value="{{$substatus->key}}">{{$substatus->sub_request_status}}</option>
+									@else
+									@endif
 								@endforeach
 						</select>
 					</div>
