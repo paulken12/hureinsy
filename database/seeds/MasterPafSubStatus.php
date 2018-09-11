@@ -13,38 +13,55 @@ class MasterPafSubStatus extends Seeder
     {
         $values = [
             [
-                'key'=>'acc',
-                'sub_request_status'=>'Accepted'
+                'master_id_status'=>'1',
+                'sub_request_status'=>'HR Pending',
+                'description'=>'Available HR will review the PAF request'
             ],
             [
-                'key'=>'den',
-                'sub_request_status'=>'Denied'
+                'master_id_status'=>'1',
+                'sub_request_status'=>'Executive Pending',
+                'description'=>'Executive will final review the PAF request'
             ],
             [
-                'key'=>'inc-inf',
-                'sub_request_status'=>'HR needs more info'
+                'master_id_status'=>'1',
+                'sub_request_status'=>'Manager Pending',
+                'description'=>'HR returned the request to the manager to reassess the PAF request'
             ],
             [
-                'key'=>'rev-ex',
-                'sub_request_status'=>'Executive is currently reviewing your request'
+                'master_id_status'=>'2',
+                'sub_request_status'=>'HR Approved',
+                'description'=>'HR approved the PAF request but for employee request only'
             ],
             [
-                'key'=>'rev-hr',
-                'sub_request_status'=>'HR is currently reviewing your request'
+                'master_id_status'=>'2',
+                'sub_request_status'=>'HR Denied',
+                'description'=>'HR denied the PAF request but for employee request only'
             ],
             [
-                'key'=>'rev-ma',
-                'sub_request_status'=>'Manager and Employee has canceled the request'
+                'master_id_status'=>'2',
+                'sub_request_status'=>'Executive Approved',
+                'description'=>'The Executive has approved the paf request'
             ],
             [
-                'key'=>'rev-mat',
-                'sub_request_status'=>'Manager has resubmitted the request'
+                'master_id_status'=>'2',
+                'sub_request_status'=>'Executive Denied',
+                'description'=>'The Executive has denied the paf request'
+            ],
+            [
+                'master_id_status'=>'3',
+                'sub_request_status'=>'Duplicate Request',
+                'description'=>'The PAF request submitted was a duplicate'
+            ],
+            [
+                'master_id_status'=>'3',
+                'sub_request_status'=>'Closed Request',
+                'description'=>'The PAF request was closed after reassessment'
             ],
         ];
 
         foreach ($values as $value)
         {
-            \App\MasterPafSubStatus::create($value);
+            \App\SubStatus::create($value);
         }
     }
 }

@@ -123,17 +123,33 @@
 			</div>
 		</div>
 
-		@if($form->masterPafStatus->request_status == 'Pending')
+		@if(empty($get_schedule_details->proposed_remarks_hr))
 		@else
-			<div class="row">
+			<div class="row alert alert-primary">
 				<div class="col-2">
 					<div class="form-group">
-						<label for="proposed_remarks_schedule">HR Remarks</label>
+						<label for="proposed_remarks_schedule_hr">HR Remarks</label>
 					</div>
 				</div>
 				<div class="col">
 					<div class="form-group">
-						<input type="text" id="proposed_remarks_schedule" name="proposed_remarks_schedule" class="form-control" title="proposed_remarks_schedule" value="{{$get_schedule_details->proposed_remarks_hr}}">
+						<input type="text" id="proposed_remarks_schedule_hr" name="proposed_remarks_schedule_hr" class="form-control-plaintext" title="proposed_remarks_schedule_hr" value="{{$get_schedule_details->proposed_remarks_hr}}" readonly>
+					</div>
+				</div>
+			</div>
+		@endif
+
+		@if(empty($get_schedule_details->proposed_remarks_exec))
+		@else
+			<div class="row alert alert-primary">
+				<div class="col-2">
+					<div class="form-group">
+						<label for="proposed_remarks_schedule_exec">Executive Remarks</label>
+					</div>
+				</div>
+				<div class="col">
+					<div class="form-group">
+						<input type="text" id="proposed_remarks_schedule_exec" name="proposed_remarks_schedule_exec" class="form-control-plaintext" title="proposed_remarks_schedule_exec" value="{{$get_schedule_details->proposed_remarks_hr}}" readonly>
 					</div>
 				</div>
 			</div>

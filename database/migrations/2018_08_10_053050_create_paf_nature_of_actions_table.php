@@ -21,8 +21,8 @@ class CreatePafNatureOfActionsTable extends Migration
             $table->string('assessed_by_company_id');
             $table->string('approved_by_company_id');
             $table->string('comfirmed_by_company_id');
-            $table->string('master_key_request_status');
-            $table->string('master_key_sub_request_status');
+            $table->string('master_id_request_status');
+            $table->string('master_id_sub_request_status');
             $table->string('remarks')->nullable();
             $table->date('date_effective');
             $table->timestamps();

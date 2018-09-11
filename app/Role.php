@@ -21,4 +21,15 @@ class Role extends Model
     {
         return $this->permissions()->save($permission);
     }
+
+    public function status()
+    {
+        return $this->belongsToMany(Status::class);
+    }
+    
+    public function sub_status()
+    {
+        return $this->belongsToMany(SubStatus::class);
+    }
+
 }

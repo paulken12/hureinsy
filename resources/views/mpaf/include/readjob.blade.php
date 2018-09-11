@@ -96,17 +96,33 @@
 			</div>
 		</div>
 
-		@if($form->masterPafStatus->request_status == 'Pending')
+		@if(empty($get_job_details->proposed_remarks_hr))
 		@else
-			<div class="row">
+			<div class="row alert alert-primary">
 				<div class="col-2">
 					<div class="form-group">
-						<label for="proposed_remarks_job">HR Remarks</label>
+						<label for="proposed_remarks_job_hr">HR Remarks</label>
 					</div>
 				</div>
 				<div class="col">
 					<div class="form-group">
-						<input type="text" id="proposed_remarks_job" name="proposed_remarks_job" class="form-control" title="proposed_remarks_job" value="{{$get_job_details->proposed_remarks_hr}}">
+						<input type="text" id="proposed_remarks_job_hr" name="proposed_remarks_job_hr" class="form-control-plaintext" title="proposed_remarks_job_hr" value="{{$get_job_details->proposed_remarks_hr}}" readonly>
+					</div>
+				</div>
+			</div>
+		@endif
+
+		@if(empty($get_job_details->proposed_remarks_exec))
+		@else
+			<div class="row alert alert-primary">
+				<div class="col-2">
+					<div class="form-group">
+						<label for="proposed_remarks_job_exec">Executive Remarks</label>
+					</div>
+				</div>
+				<div class="col">
+					<div class="form-group">
+						<input type="text" id="proposed_remarks_job" name="proposed_remarks_job" class="form-control-plaintext" title="proposed_remarks_job_exec" value="{{$get_job_details->proposed_remarks_exec}}" readonly>
 					</div>
 				</div>
 			</div>

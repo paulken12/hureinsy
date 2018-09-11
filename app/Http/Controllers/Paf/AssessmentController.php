@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Paf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Role;
+use App\Status;
+use App\SubStatus;
 use App\EmpBasicInfo;
 use App\MasterJobTitle;
-use App\MasterPafStatus;
 use App\MasterDepartment;
 use App\PafNatureOfAction;
-use App\MasterPafSubStatus;
 use App\MasterEmploymentStatus;
 use App\PafProposedChangeJobDetail;
 use App\PafProposedChangeScheduleDetail;
@@ -23,13 +24,8 @@ class AssessmentController extends Controller
 
     public function list()
     {
-        $request_status = MasterPafStatus::all();
-
-        $sub_request_status = MasterPafSubStatus::all();
 
         $requestList = PafNatureOfAction::paginate(15);
-
-        $employment_status = MasterEmploymentStatus::all();
 
         return view('hpaf.list', compact('requestList', 'sub_request_status', 'request_status','employment_status'));
     }
@@ -42,36 +38,45 @@ class AssessmentController extends Controller
      */
     public function show($form)
     {   
-        dd($form);
         $user_role= Auth::user()->roles->first();
 
-        $request_status = MasterPafStatus::all();
+        $request_status = Status::all();
 
-        $sub_request_status = MasterPafSubStatus::all();
+        $sub_request_status = SubStatus::all();
 
-        $employee_name = EmpBasicInfo::where('company_id', $form->employee_company_id)->first();
+        $get_paf_details = PafNatureOfAction::where('id', $form)->first();
 
-        $manager_name = EmpBasicInfo::where('company_id', $form->requested_by_company_id)->first();
+        $get_job_details = PafProposedChangeJobDetail::where('request_id', $form)->first(); 
 
-        $get_job_details = PafProposedChangeJobDetail::where('request_id', $form->id)->first(); 
+        $get_schedule_details = PafProposedChangeScheduleDetail::where('request_id', $form)->first(); 
 
-        $get_schedule_details = PafProposedChangeScheduleDetail::where('request_id', $form->id)->first(); 
-
-        $get_compensation_details = PafProposedChangeCompensationDetail::where('request_id', $form->id)->first(); 
+        $get_compensation_details = PafProposedChangeCompensationDetail::where('request_id', $form)->first(); 
         
-        return view('hpaf.pending', compact('form', 'employee_name', 'manager_name', 'get_job_details', 'request_status', 'sub_request_status', 'user_role', 'get_schedule_details', 'get_compensation_details'));
+        $employee_name = EmpBasicInfo::where('company_id', $get_paf_details->employee_company_id)->first();
+
+        $manager_name = EmpBasicInfo::where('company_id', $get_paf_details->requested_by_company_id)->first();
+
+        return view('hpaf.pending', compact('form', 'employee_name', 'manager_name', 'get_job_details', 'request_status', 'sub_request_status', 'user_role', 'get_schedule_details', 'get_compensation_details', 'get_paf_details'));
     }
 
     public function assessment(Request $request)
     {
 
+        $validator = $request->validate([
+            'employment_status' => 'exists:master_employment_statuses,key|required',
+            'remarks'=>'required|max:255',
+            'proposed_remarks_job' => 'nullable|max:255',
+            'proposed_remarks_schedule' => 'nullable|max:255',
+            'proposed_remarks_compensation' => 'nullable|max:255',
+            'request_status' => 'exists:statuses,id|required',
+            'sub_request_status' => 'exists:sub_statuses,id|required',
+       ]);
+
         $form_update = PafNatureOfAction::where('id', $request->input('req_id'))->first();
 
-        dd($form_update);
+        $form_update->master_id_request_status = $request->input('request_status');
 
-        $form_update->master_key_request_status = $request->input('request_status');
-
-        $form_update->master_key_sub_request_status = $request->input('sub_request_status');
+        $form_update->master_id_sub_request_status = $request->input('sub_request_status');
 
         $form_update->assessed_by_company_id = EmpBasicInfo::where('user_id', Auth::user()->id)->first()->company_id;
 

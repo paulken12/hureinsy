@@ -73,12 +73,12 @@
 		<div class="row alert alert-warning">
 			<div class="col-2">
 				<div class="form-group">
-					<label for="proposed_remarks_job">HR Remarks</label>
+					<label for="proposed_remarks_compensation">HR Remarks</label>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_remarks_job" name="proposed_remarks_job" class="form-control-plaintext " title="proposed_remarks_job" value="{{$get_job_details->proposed_remarks_hr}}" readonly>
+					<input type="text" id="proposed_remarks_compensation" name="proposed_remarks_compensation" class="form-control-plaintext " title="proposed_remarks_compensation" value="{{$get_compensation_details->proposed_remarks_hr}}" readonly>
 				</div>
 			</div>
 		</div>

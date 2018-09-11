@@ -1,15 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
+	@if(session('error'))
+		<div class="alert alert-danger">
+			{{session('error')}}
+		</div>
+	@elseif(session('success'))
+		<div class="alert alert-success">
+			{{session('success')}}
+		</div>
+	@endif	
     <div class="card">
         <div class="card-header">
             <h4>Personnel Action Form Pendings</h4>
         </div>
-		@if(session('error'))
-			<h4 class="alert-danger">{{session('error')}}</h4>
-		@else
-			<h4 class="alert-success">{{session('success')}}</h4>
-		@endif
         <div class="card-body">
 		    <div class="row">
 		    	<div class="col">

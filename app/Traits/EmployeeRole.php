@@ -6,7 +6,7 @@ use App\Role;
 
 trait EmployeeRole
 {
-	public function roles()
+    public function roles()
     {
         return $this->belongsToMany(Role::class);
     }

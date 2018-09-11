@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMasterPafSubStatusesTable extends Migration
+class CreateSubStatusesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateMasterPafSubStatusesTable extends Migration
      */
     public function up()
     {
-        Schema::create('master_paf_sub_statuses', function (Blueprint $table) {
+        Schema::create('sub_statuses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('key');
+            $table->string('master_id_status');
             $table->string('sub_request_status');
+            $table->string('description');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateMasterPafSubStatusesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('master_paf_sub_statuses');
+        Schema::dropIfExists('sub_statuses');
     }
 }

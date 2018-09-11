@@ -32,11 +32,11 @@ class PafNatureOfAction extends Model
     }
     public function masterPafStatus()
     {
-        return $this->belongsTo(MasterPafStatus::class, 'master_key_request_status');
+        return $this->belongsTo(Status::class, 'master_id_request_status');
     } 
     public function masterPafSubStatus()
     {
-        return $this->belongsTo(MasterPafSubStatus::class, 'master_key_sub_request_status');
+        return $this->belongsTo(SubStatus::class, 'master_id_sub_request_status');
     } 
     public function employmentStatus() 
     {
@@ -44,6 +44,6 @@ class PafNatureOfAction extends Model
     }
     public function scopeRequest(){
         return $this->where('requested_by_company_id', Auth::user()->basicInfo->pluck('company_id')->first())->paginate(15);
-    }
+    } 
 
 }

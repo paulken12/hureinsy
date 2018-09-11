@@ -12,7 +12,7 @@
 					<div class="form-group">
 						<label for="raj_id">Employee ID:</label>
 						<input type="text" id="raj_id" name="raj_id" class="form-control-plaintext" title="raj_id" value="{{$employee_name->company_id}}" readonly>
-						<input type="text" id="req_id" name="req_id" class="form-control-plaintext" title="req_id" value="{{$form->id}}" readonly hidden>
+						<input type="text" id="req_id" name="req_id" class="form-control-plaintext" title="req_id" value="{{$get_paf_details->id}}" readonly hidden>
 					</div>
 				</div>
 				<div class="col">
@@ -69,7 +69,7 @@
 				<div class="col">
 					<div class="form-group">
 						<label for="employment_status">Employment Status</label>
-						<input type="text" id="employment_status" name="employment_status" class="form-control-plaintext" title="Employment_status" value="{{$form->employmentStatus->employment_status}}" readonly>
+						<input type="text" id="employment_status" name="employment_status" class="form-control-plaintext" title="Employment_status" value="{{$get_paf_details->employmentStatus->employment_status}}" readonly>
 					</div>
 				</div>
 			</div>
@@ -77,7 +77,7 @@
 				<div class="col">
 					<div class="form-group">
 						<label for="remarks">Remarks</label>
-						<input type="text" id="remarks" name="remarks" class="form-control-plaintext" title="Remarks" value="{{$form->remarks}}" readonly>
+						<input type="text" id="remarks" name="remarks" class="form-control-plaintext" title="Remarks" value="{{$get_paf_details->remarks}}" readonly>
 					</div>
 				</div>
 			</div>
@@ -92,27 +92,10 @@
 				<div class="col">
 					<div class="form-group">
 						<label for="request_status">Action</label>
-						<select name="request_status" id="request_status" class="form-control" required>
-							<option style="display:none" value="{{$form->masterPafStatus->key}}" selected>{{$form->masterPafStatus->request_status}}</option>
-								@if($get_schedule_details->proposed_key_schedule_type == 'dept')
-									@foreach ($request_status->whereNotIn('key', 'com') as $status)
-										<option value="{{$status->key}}">{{$status->request_status}}</option>
-									@endforeach
-								@else
-									@foreach ($request_status as $status)
-										<option value="{{$status->key}}">{{$status->request_status}}</option>
-									@endforeach
-								@endif
-						</select>
-						<select name="sub_request_status" id="sub_request_status" class="form-control" required>
-							<option style="display:none" value="" selected>--select--</option>
-								@foreach ($sub_request_status as $substatus)
-									@if($substatus->id < 5)
-										<option value="{{$substatus->key}}">{{$substatus->sub_request_status}}</option>
-									@else
-									@endif
-								@endforeach
-						</select>
+						<action-management 	
+											:categories="{{ $request_status}}"
+											:subcategories="{{$sub_request_status}}">
+						</action-management>
 					</div>
 				</div>
 			</div>

@@ -131,12 +131,12 @@
 		<div class="row alert alert-warning">
 			<div class="col-2">
 				<div class="form-group">
-					<label for="proposed_remarks_job">HR Remarks</label>
+					<label for="proposed_remarks_schedule">HR Remarks</label>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_remarks_job" name="proposed_remarks_job" class="form-control-plaintext " title="proposed_remarks_job" value="{{$get_schedule_details->proposed_remarks_hr}}" readonly>
+					<input type="text" id="proposed_remarks_schedule" name="proposed_remarks_schedule" class="form-control-plaintext " title="proposed_remarks_schedule" value="{{$get_schedule_details->proposed_remarks_hr}}" readonly>
 				</div>
 			</div>
 		</div>

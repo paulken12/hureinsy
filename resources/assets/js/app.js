@@ -45,8 +45,10 @@ window.flash = function (message, level = 'success') {
 Vue.component('flash', require('./components/Flash.vue'));
 Vue.component('avatar-form', require('./components/AvatarForm.vue'));
 Vue.component('education-form', require('./components/Education.vue'));
+Vue.component('action-management', require('./components/ActionManagement.vue'));
 
 
 const app = new Vue({
     el: '#app',
+
 });

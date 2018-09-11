@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Paf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Role;
+use App\Status;
+use App\SubStatus;
 use App\EmpBasicInfo;
 use App\MasterCompany;
 use App\MasterJobTitle;
-use App\MasterPafStatus;
 use App\MasterDepartment;
 use App\PafNatureOfAction;
 use App\MasterPafScheduleType;
@@ -24,12 +26,12 @@ class RequestController extends Controller
 
     public function index()
     {   
-        
+
         $user =EmpBasicInfo::where('user_id', Auth::user()->id)->first();
 
         $list = PafNatureOfAction::where('requested_by', $user->id);
 
-        return view('mpaf.request', compact('user', 'list'));
+        return view('mpaf.search', compact('user', 'list'));
         
     }
 
@@ -37,20 +39,6 @@ class RequestController extends Controller
     {        
 
         $emp_id = $request->input('raj_id');
-
-        $jobTitles = MasterJobTitle::all();
-
-        $department = MasterDepartment::all();
-
-        $project_assignment = MasterCompany::all();
-
-        $employment_status = MasterEmploymentStatus::all();
-
-        $request_status = MasterPafStatus::all();
-
-        $sched_type = MasterPafScheduleType::all();
-
-        $reportTo = User::all();
 
         $value = EmpBasicInfo::where('company_id', $emp_id)->first();  
 
@@ -60,13 +48,61 @@ class RequestController extends Controller
 
         }else{
 
-            return view('mpaf.request', compact('value', 'employment_status', 'department', 'reportTo', 'jobTitles', 'request_status', 'project_assignment', 'sched_type'));
-
+            return redirect(route('paf.show', $emp_id));
+        
         }
+    }
+
+
+    public function show($emplid)
+    {   
+
+        $user_log = Auth::user()->roles->first(); 
+
+        $get_status = $user_log->status->whereIn('id', '1');
+
+        $get_sub_status =$user_log->sub_status->whereIn('id', '1');
+
+        $jobTitles = MasterJobTitle::all();
+
+        $department = MasterDepartment::all();
+
+        $project_assignment = MasterCompany::all();
+
+        $employment_status = MasterEmploymentStatus::all();
+
+        $sched_type = MasterPafScheduleType::all();
+
+        $reportTo = User::all();
+
+        $value = EmpBasicInfo::where('company_id', $emplid)->first();  
+
+        return view('mpaf.request', compact('value', 'employment_status', 'department', 'reportTo', 'jobTitles', 'project_assignment', 'sched_type', 'get_status', 'get_sub_status'));
+        
     }
 
     public function store(Request $request)
     {
+        $validator = $request->validate([
+            'employment_status' => 'exists:master_employment_statuses,key|required',
+            'remarks'=>'required|max:255',
+            'proposed_department' => 'nullable',
+            'proposed_department' => 'nullable',
+            'proposed_reportto' => 'nullable',
+            'proposed_position_title' => 'nullable',
+            'proposed_project_assignment' => 'nullable',
+            'proposed_days_of_work' => 'nullable',
+            'proposed_work_hours_per_week' => 'nullable',
+            'proposed_type_of_shift' => 'nullable',
+            'proposed_work_hours_per_day' => 'nullable',
+            'proposed_work_location' => 'nullable',
+            'sched_type' => 'nullable',
+            'proposed_salary' => 'nullable',
+            'proposed_bonus_allowance' => 'nullable',
+            'proposed_benefits' => 'nullable',
+            'request_status' => 'exists:statuses,id|required',
+            'sub_request_status' => 'exists:sub_statuses,id|required',
+       ]);
 
         $user = Auth::user()->basicInfo->pluck('company_id')->first();
 
@@ -81,9 +117,9 @@ class RequestController extends Controller
 
             'remarks' => $request->input('remarks'),
 
-            'master_key_request_status' => 'pen',
+            'master_id_request_status' => $request->input('request_status'),
 
-            'master_key_sub_request_status' => 'rev-hr',
+            'master_id_sub_request_status' => $request->input('sub_request_status'),
 
         ]);
 
