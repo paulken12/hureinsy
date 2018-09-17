@@ -70,15 +70,29 @@
 				</div>
 			</div>
 		</div>
+		@if(!empty($get_compensation_details->proposed_remarks_hr))
+			<div class="row alert alert-primary">
+				<div class="col-2">
+					<div class="form-group">
+						<label for="proposed_remarks_compensation_hr">HR Remarks</label>
+					</div>
+				</div>
+				<div class="col">
+					<div class="form-group">
+						<input type="text" id="proposed_remarks_compensation_hr" name="proposed_remarks_compensation_hr" class="form-control-plaintext" title="proposed_remarks_compensation_hr" value="{{$get_compensation_details->proposed_remarks_hr}}" readonly>
+					</div>
+				</div>
+			</div>
+		@endif
 		<div class="row">
 			<div class="col-2">
 				<div class="form-group">
-					<label for="proposed_remarks_compensation">HR Remarks</label>
+					<label for="proposed_remarks_compensation_exec">Executive Remarks</label>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_remarks_compensation" name="proposed_remarks_compensation" class="form-control" title="proposed_remarks_compensation" value="{{$get_compensation_details->proposed_remarks_hr}}">
+					<input type="text" id="proposed_remarks_compensation_exec" name="proposed_remarks_compensation_exec" class="form-control" title="proposed_remarks_compensation_exec">
 				</div>
 			</div>
 		</div>

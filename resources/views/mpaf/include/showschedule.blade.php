@@ -32,7 +32,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_days_of_work" name="proposed_days_of_work" class="form-control" title="Proposed_days_of_work" value="{{$get_schedule_details->proposed_days_of_work}}">
+					<input type="text" id="proposed_days_of_work" name="proposed_days_of_work" class="form-control" title="Proposed_days_of_work" value="{{empty($get_schedule_details->proposed_days_of_work) ? '' : $get_schedule_details->proposed_days_of_work}}">
 				</div>
 			</div>
 		</div>
@@ -49,7 +49,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_work_hours_per_week" name="proposed_work_hours_per_week" class="form-control" title="Proposed_work_hours_per_week" value="{{$get_schedule_details->proposed_work_hours_per_week}}">
+					<input type="text" id="proposed_work_hours_per_week" name="proposed_work_hours_per_week" class="form-control" title="Proposed_work_hours_per_week" value="{{empty($get_schedule_details->proposed_work_hours_per_week) ? '' : $get_schedule_details->proposed_work_hours_per_week}}">
 				</div>
 			</div>
 		</div>
@@ -66,7 +66,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_type_of_shift" name="proposed_type_of_shift" class="form-control" title="Proposed_type_of_shift" value="{{$get_schedule_details->proposed_type_of_shift}}">
+					<input type="text" id="proposed_type_of_shift" name="proposed_type_of_shift" class="form-control" title="Proposed_type_of_shift" value="{{empty($get_schedule_details->proposed_type_of_shift) ? '' : $get_schedule_details->proposed_type_of_shift}}">
 				</div>
 			</div>
 		</div>
@@ -83,7 +83,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_work_hours_per_day" name="proposed_work_hours_per_day" class="form-control" title="Proposed_work_hours_per_day" value="{{$get_schedule_details->proposed_work_hours_per_day}}">
+					<input type="text" id="proposed_work_hours_per_day" name="proposed_work_hours_per_day" class="form-control" title="Proposed_work_hours_per_day" value="{{empty($get_schedule_details->proposed_work_hours_per_day) ? '' : $get_schedule_details->proposed_work_hours_per_day}}">
 				</div>
 			</div>
 		</div>
@@ -100,7 +100,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_work_location" name="proposed_work_location" class="form-control" title="Proposed_work_location" value="{{$get_schedule_details->proposed_work_location}}">
+					<input type="text" id="proposed_work_location" name="proposed_work_location" class="form-control" title="Proposed_work_location" value="{{empty($get_schedule_details->proposed_work_location) ? '' : $get_schedule_details->proposed_work_location}}">
 				</div>
 			</div>
 		</div>
@@ -117,9 +117,7 @@
 			<div class="col">
 				<div class="form-group">
 				<select name="sched_type" id="sched_type" class="form-control">
-					@if(!empty($get_schedule_details->proposed_key_schedule_type))
-						<option style="display:none" value="{{$get_schedule_details->schedType->key}}" selected>{{$get_schedule_details->schedType->schedule_type}}</option>
-					@endif
+					<option style="display:none" value="{{empty($get_schedule_details->schedType->key) ? '' : $get_schedule_details->schedType->key}}" selected>{{empty($get_schedule_details->schedType->schedule_type) ? '--select--' : $get_schedule_details->schedType->schedule_type}}</option>
 					<option value="">--select--</option>
 					@foreach ($sched_type as $schedule)
 						<option value="{{$schedule->key}}">{{$schedule->schedule_type}}</option>
@@ -128,17 +126,19 @@
 				</div>
 			</div>
 		</div>
-		<div class="row alert alert-warning">
-			<div class="col-2">
-				<div class="form-group">
-					<label for="proposed_remarks_schedule">HR Remarks</label>
+		@if(!empty($get_job_details->proposed_remarks_hr))
+			<div class="row alert alert-warning">
+				<div class="col-2">
+					<div class="form-group">
+						<label for="proposed_remarks_schedule">HR Remarks</label>
+					</div>
+				</div>
+				<div class="col">
+					<div class="form-group">
+						<input type="text" id="proposed_remarks_schedule" name="proposed_remarks_schedule" class="form-control-plaintext " title="proposed_remarks_schedule" value="{{$get_schedule_details->proposed_remarks_hr}}" readonly>
+					</div>
 				</div>
 			</div>
-			<div class="col">
-				<div class="form-group">
-					<input type="text" id="proposed_remarks_schedule" name="proposed_remarks_schedule" class="form-control-plaintext " title="proposed_remarks_schedule" value="{{$get_schedule_details->proposed_remarks_hr}}" readonly>
-				</div>
-			</div>
-		</div>
+		@endif
 	</div>
 </div>

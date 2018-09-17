@@ -22,7 +22,7 @@
         <div class="form-group">
             <label for="add_street_name">Street name</label>
             <input type="text" id="add_street_name" name="add_street_name[]" class="form-control" title="Street name"
-                   value="{{empty($address->street_name) ? '': $address->street_name}}">
+                   value="{{empty($address->street_name) ? 'ping': $address->street_name}}">
         </div>
     </div>
     <div class="col">

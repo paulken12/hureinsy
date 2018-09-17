@@ -32,7 +32,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_salary" name="proposed_salary" class="form-control" title="Proposed_salary" value="{{$get_compensation_details->proposed_salary}}">
+					<input type="text" id="proposed_salary" name="proposed_salary" class="form-control" title="Proposed_salary" value="{{empty($get_compensation_details->proposed_salary) ? '' : $get_compensation_details->proposed_salary}}">
 				</div>
 			</div>
 		</div>
@@ -49,7 +49,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_bonus_allowance" name="proposed_bonus_allowance" class="form-control" title="Proposed_bonus_allowance" value="{{$get_compensation_details->proposed_bonus_allowance}}">
+					<input type="text" id="proposed_bonus_allowance" name="proposed_bonus_allowance" class="form-control" title="Proposed_bonus_allowance" value="{{empty($get_compensation_details->proposed_bonus_allowance) ? '' : $get_compensation_details->proposed_bonus_allowance}}">
 				</div>
 			</div>
 		</div>
@@ -66,21 +66,23 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="proposed_benefits" name="proposed_benefits" class="form-control" title="Proposed_benefits" value="{{$get_compensation_details->proposed_benefits}}">
+					<input type="text" id="proposed_benefits" name="proposed_benefits" class="form-control" title="Proposed_benefits" value="{{empty($get_compensation_details->proposed_benefits) ? '' : $get_compensation_details->proposed_benefits}}">
 				</div>
 			</div>
 		</div>
-		<div class="row alert alert-warning">
-			<div class="col-2">
-				<div class="form-group">
-					<label for="proposed_remarks_compensation">HR Remarks</label>
+		@if(!empty($get_job_details->proposed_remarks_hr))
+			<div class="row alert alert-warning">
+				<div class="col-2">
+					<div class="form-group">
+						<label for="proposed_remarks_compensation">HR Remarks</label>
+					</div>
+				</div>
+				<div class="col">
+					<div class="form-group">
+						<input type="text" id="proposed_remarks_compensation" name="proposed_remarks_compensation" class="form-control-plaintext " title="proposed_remarks_compensation" value="{{$get_compensation_details->proposed_remarks_hr}}" readonly>
+					</div>
 				</div>
 			</div>
-			<div class="col">
-				<div class="form-group">
-					<input type="text" id="proposed_remarks_compensation" name="proposed_remarks_compensation" class="form-control-plaintext " title="proposed_remarks_compensation" value="{{$get_compensation_details->proposed_remarks_hr}}" readonly>
-				</div>
-			</div>
-		</div>
+		@endif
 	</div>
 </div>

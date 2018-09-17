@@ -139,6 +139,12 @@ Route::group(['middleware' => ['auth','confirmed','permissions']],function()
 
     //=================================================== PAF EXECUTIVE  ================================================================ 
 
+    Route::get('paf/approval/list', 'Paf\ApprovalController@list')->name('paf.list.approval');
+
+    Route::get('paf/approval/list/show/{form}', 'Paf\ApprovalController@show')->name('paf.list.approval.show');
+
+    Route::post('paf/approval/list/store', 'Paf\ApprovalController@store')->name('paf.list.approval.store');
+
     //=================================================== PAF EMPLOYEE ================================================================
 
 });

@@ -1,33 +1,31 @@
 @extends('layouts.app')
 @section('content')
-<form action="{{route('paf.store')}}" method="post">	
+<form action="{{route('paf.list.approval.store')}}" method="post">
+	{{csrf_field()}}
 	@if(count($errors))
-		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+		<div class="alert alert-warning">
 			@foreach($errors->all() as $err)
 				<li>{!!$err!!}</li>
 			@endforeach
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
 		</div>
-	@endif
+	@endif	
 	<div class="card">
 		<div class="card-header">
 			<h4>Personnel Action Form</h4>
 		</div>
 		<div class="card-body">
-			{{csrf_field()}}
 			<div class="row">
 				<div class="col">
 					<div class="form-group">
 						<label for="raj_id">Employee ID:</label>
-						<input type="text" id="raj_id" name="raj_id" class="form-control-plaintext" title="raj_id" value="{{$value->company_id}}" readonly>
+						<input type="text" id="raj_id" name="raj_id" class="form-control-plaintext" title="raj_id" value="{{$employee_name->company_id}}" readonly>
+						<input type="text" id="req_id" name="req_id" class="form-control-plaintext" title="req_id" value="{{$get_paf_details->id}}" readonly hidden>
 					</div>
 				</div>
 				<div class="col">
 					<div class="form-group">
 						<label for="name">Name of Employee:</label>
-						<input type="text" id="name" name="name" class="form-control-plaintext" title="Name" value="{{$value->first_name}} {{$value->middle_name}} {{$value->last_name}}" readonly>
+						<input type="text" id="name" name="name" class="form-control-plaintext" title="Name" value="{{$employee_name->first_name}} {{$employee_name->middle_name}} {{$employee_name->last_name}}" readonly>
 					</div>
 				</div>
 			</div>
@@ -78,12 +76,7 @@
 				<div class="col">
 					<div class="form-group">
 						<label for="employment_status">Employment Status</label>
-						<select name="employment_status" id="employment_status" class="form-control" required>
-							<option value="" >--select--</option>
-							@foreach ($employment_status as $employment)
-								<option value="{{$employment->key}}">{{$employment->employment_status}}</option>
-							@endforeach
-						</select>
+						<input type="text" id="employment_status" name="employment_status" class="form-control-plaintext" title="Employment_status" value="{{empty($get_paf_details->employmentStatus->employment_status) ? '' : $get_paf_details->employmentStatus->employment_status}}" readonly>
 					</div>
 				</div>
 			</div>
@@ -91,26 +84,34 @@
 				<div class="col">
 					<div class="form-group">
 						<label for="remarks">Remarks</label>
-						<input type="text" id="remarks" name="remarks" class="form-control" title="Remarks">
+						<input type="text" id="remarks" name="remarks" class="form-control-plaintext" title="Remarks" value="{{$get_paf_details->remarks}}" readonly>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	@include('mpaf.include.job')
-	@include('mpaf.include.schedule')
-	@include('mpaf.include.compensation')
-	
+	@include('epaf.include.job')
+	@include('epaf.include.schedule')
+	@include('epaf.include.compensation')
 	<div class="card">
 		<div class="card-body">
-			<h4>Nature of Action</h4>
-			<action-management 	
-					:categories="{{ $get_status}}"
-					:subcategories="{{$get_sub_status}}">
-			</action-management>
-			<div class="form-group text-center">
-				<button class="btn btn-success" type="submit">Request to Human Resource</button>
+			<div class="row">
+				<div class="col">
+					<div class="form-group">
+						<label for="request_status">Action</label>
+						<action-management 	
+											:categories="{{ $request_status}}"
+											:subcategories="{{$sub_request_status}}">
+						</action-management>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<div class="form-group text-center">
+						<button class="btn btn-success" type="submit">Submit</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

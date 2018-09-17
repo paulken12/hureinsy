@@ -81,9 +81,9 @@
 		</div>
 	</div>
 </div>
-@include('mpaf.include.readjob')
-@include('mpaf.include.readschedule')
-@include('mpaf.include.readcompensation')
+@include('epaf.include.readjob')
+@include('epaf.include.readschedule')
+@include('epaf.include.readcompensation')
 <div class="card">
 	<div class="card-body">
 		<div class="form-group">

@@ -32,9 +32,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					@if(!empty($get_job_details->proposed_key_department))
-					<input type="text" id="proposed_department" name="proposed_department" class="form-control-plaintext" title="Proposed_department" value="{{$get_job_details->masterDepartment->department}}" readonly>
-					@endif
+					<input type="text" id="proposed_department" name="proposed_department" class="form-control-plaintext" title="Proposed_department" value="{{empty($get_job_details->masterDepartment->department) ? '' : $get_job_details->masterDepartment->department}}" readonly>
 				</div>
 			</div>
 		</div>
@@ -51,9 +49,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					@if(!empty($get_job_details->proposed_reports_to))
-					<input type="text" id="proposed_reportto" name="proposed_reportto" class="form-control-plaintext" title="Proposed_reportto" value="{{$get_job_details->user->name}}" readonly>
-					@endif
+					<input type="text" id="proposed_reportto" name="proposed_reportto" class="form-control-plaintext" title="Proposed_reportto" value="{{empty($get_job_details->user->name) ? '' : $get_job_details->user->name}}" readonly>
 				</div>
 			</div>
 		</div>
@@ -70,9 +66,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					@if(!empty($get_job_details->proposed_key_position_title))
-					<input type="text" id="proposed_position/title" name="proposed_position/title" class="form-control-plaintext" title="Proposed_position/title" value="{{$get_job_details->masterJobTitle->job_titles}}" readonly>
-					@endif
+					<input type="text" id="proposed_position_title" name="proposed_position_title" class="form-control-plaintext" title="Proposed_position_title" value="{{empty($get_job_details->masterJobTitle->job_titles) ? '' : $get_job_details->masterJobTitle->job_titles}}" readonly>
 				</div>
 			</div>
 		</div>
@@ -89,9 +83,7 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					@if(!empty($get_job_details->proposed_key_project_assignment))
-					<input type="text" id="proposed_project_assignment" name="proposed_project_assignment" class="form-control-plaintext" title="Proposed_project_assignment" value="{{$get_job_details->masterCompany->name}}" readonly>
-					@endif
+					<input type="text" id="proposed_project_assignment" name="proposed_project_assignment" class="form-control-plaintext" title="Proposed_project_assignment" value="{{empty($get_job_details->masterCompany->name) ? '' : $get_job_details->masterCompany->name}}" readonly>
 				</div>
 			</div>
 		</div>

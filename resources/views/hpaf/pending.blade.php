@@ -1,7 +1,17 @@
 @extends('layouts.app')
 @section('content')
 <form action="{{route('paf.hrassessment')}}" method="post">
-	{{csrf_field()}}	
+	{{csrf_field()}}
+	@if(count($errors))
+		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+			@foreach($errors->all() as $err)
+				<li>{!!$err!!}</li>
+			@endforeach
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+	@endif	
 	<div class="card">
 		<div class="card-header">
 			<h4>Personnel Action Form</h4>
@@ -69,7 +79,7 @@
 				<div class="col">
 					<div class="form-group">
 						<label for="employment_status">Employment Status</label>
-						<input type="text" id="employment_status" name="employment_status" class="form-control-plaintext" title="Employment_status" value="{{$get_paf_details->employmentStatus->employment_status}}" readonly>
+						<input type="text" id="employment_status" name="employment_status" class="form-control-plaintext" title="Employment_status" value="{{empty($get_paf_details->employmentStatus->employment_status) ? '' : $get_paf_details->employmentStatus->employment_status}}" readonly>
 					</div>
 				</div>
 			</div>

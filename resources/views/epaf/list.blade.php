@@ -49,7 +49,7 @@
 		        </div>
 		    </div>
 			@foreach ($requestList as $lists)
-				<a href="{{route('paf.list.show', $lists->id)}}">
+				<a href="{{route('paf.list.approval.show', $lists->id)}}">
 					<div class="row">
 				    	<div class="col">
 		                    <div class="container">

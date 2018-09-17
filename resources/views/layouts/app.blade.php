@@ -129,9 +129,9 @@
                                                     <li><a href="{{route('paf.index')}}">Request Personnel Action Form</a></li>
                                                     <li><a href="{{route('paf.list.reassess')}}">Request PAF lists</a></li>
                                                 @endcan
-
                                                 @can('hr_view')
                                                     <li><a href="{{route('paf.list')}}">Pending Personnel Action Form</a></li>
+                                                    <li><a href="{{route('paf.list.approval')}}">Pending Personnel Action Form For Approval</a></li>
                                                 @endcan
                                             </ul>
                                         </li>
