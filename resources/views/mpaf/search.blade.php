@@ -19,15 +19,14 @@
 	@endif	
 	<div class="card">
 		<div class="card-header">
-			<h4>Personnel Action Form</h4>
+			<h4>Request for Personnel Action Form</h4>
 		</div>
 		<div class="card-body">
-			<div class="form-group">
-				<label for="raj_id">Enter employee ID</label>
-				<input type="text" id="raj_id" name="raj_id" class="form-control " title="Id" required>
-			</div>
-			<div class="form-group text-center">
-				<button class="btn btn-success" type="submit">Search Employee</button>
+			<div class="input-group">
+				<input type="text" id="raj_id" name="raj_id" class="form-control" title="employee ID" placeholder="Enter employee ID" required>
+				<div class="input-group-append">
+					<button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+				</div>	
 			</div>
 		</div>
 	</div>

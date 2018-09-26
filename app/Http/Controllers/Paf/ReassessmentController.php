@@ -4,21 +4,10 @@ namespace App\Http\Controllers\Paf;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\User;
-use App\Status;
-use App\SubStatus;
-use App\EmpBasicInfo;
-use App\MasterCompany;
-use App\MasterJobTitle;
-use App\MasterDepartment;
 use App\PafNatureOfAction;
-use App\MasterPafScheduleType;
-use App\MasterEmploymentStatus;
-use App\PafProposedChangeJobDetail;
-use App\PafProposedChangeScheduleDetail;
-use App\PafProposedChangeCompensationDetail;
 use App\Http\Controllers\Controller;    
 use App\Http\Controllers\RoleController;
+use App\Helpers\Paf\PersonnelActionManagement;
 
 class ReassessmentController extends Controller
 {
@@ -26,44 +15,46 @@ class ReassessmentController extends Controller
     {
     	$request_list = PafNatureOfAction::request();
 
-
-
     	return view('mpaf.list', compact('request_list'));
     }
 
     public function show($form){
 
-        $reportTo = User::all();
-
-        $jobTitles = MasterJobTitle::all();
-
+        //Get Status 
         $user_log = Auth::user()->roles->first(); 
 
         $get_status = $user_log->status;
 
         $get_sub_status =$user_log->sub_status;
 
-        $department = MasterDepartment::all();
+        //Get Master details
+        $reportTo = PersonnelActionManagement::call_user();
 
-        $sched_type = MasterPafScheduleType::all();
+        $jobTitles = PersonnelActionManagement::call_master_job_title();
 
-        $project_assignment = MasterCompany::all();
+        $department = PersonnelActionManagement::call_master_department();
 
-        $employment_status = MasterEmploymentStatus::all();
+        $sched_type = PersonnelActionManagement::call_master_paf_schedule_type();
 
-        $get_paf_details = PafNatureOfAction::where('id', $form)->first();
+        $project_assignment = PersonnelActionManagement::call_master_company();
 
-        $get_job_details = PafProposedChangeJobDetail::where('request_id', $form)->first(); 
+        $employment_status = PersonnelActionManagement::call_master_employment_status();
 
-        $employee_name = EmpBasicInfo::where('company_id', $get_paf_details->employee_company_id)->first();
+        //Get paf details
+        $get_paf_details = PersonnelActionManagement::get_paf_request($form);
 
-        $hr_name =EmpBasicInfo::where('company_id', $get_paf_details->assessed_by_company_id)->first();
+        $get_job_details = PersonnelActionManagement::get_paf_job_detail($form); 
 
-        $exec_name =EmpBasicInfo::where('company_id', $get_paf_details->approved_by_company_id)->first();
+        $get_schedule_details = PersonnelActionManagement::get_paf_schedule_detail($form); 
 
-        $get_schedule_details = PafProposedChangeScheduleDetail::where('request_id', $form)->first(); 
+        $get_compensation_details = PersonnelActionManagement::get_paf_compensation_detail($form); 
 
-        $get_compensation_details = PafProposedChangeCompensationDetail::where('request_id', $form)->first(); 
+        //Get employee details
+        $employee_name = PersonnelActionManagement::get_employee_info($get_paf_details->employee_company_id);
+
+        $hr_name = PersonnelActionManagement::get_employee_info($get_paf_details->assessed_by_company_id);
+
+        $exec_name = PersonnelActionManagement::get_employee_info($get_paf_details->approved_by_company_id);
 
         if($get_paf_details->masterPafSubStatus->id == '3'){
     	   return view('mpaf.showrequest', compact('form', 'employee_name', 'employment_status', 'jobTitles', 'department', 'sched_type', 'project_assignment', 'get_job_details', 'get_schedule_details', 'get_compensation_details', 'reportTo', 'sched_type', 'get_paf_details', 'get_status', 'get_sub_status'));
@@ -96,7 +87,7 @@ class ReassessmentController extends Controller
             'sub_request_status' => 'exists:sub_statuses,id|required',
        ]);
 
-        $form_update = PafNatureOfAction::where('id', $form)->first();  
+        $form_update = PersonnelActionManagement::get_paf_request($form);  
 
         $form_update->master_key_employment_status = $request->input('employment_status');
 
@@ -108,7 +99,7 @@ class ReassessmentController extends Controller
 
         $form_update->save();
 
-        $job_update = PafProposedChangeJobDetail::where('request_id', $form)->first(); 
+        $job_update = PersonnelActionManagement::get_paf_job_detail($form); 
 
         $job_update->proposed_key_department = $request->input('proposed_department');
 
@@ -122,7 +113,7 @@ class ReassessmentController extends Controller
 
         $job_update->save();
 
-        $sched_update = PafProposedChangeScheduleDetail::where('request_id', $form)->first(); 
+        $sched_update = PersonnelActionManagement::get_paf_schedule_detail($form); 
 
         $sched_update->proposed_days_of_work = $request->input('proposed_days_of_work');
 
@@ -140,7 +131,7 @@ class ReassessmentController extends Controller
 
         $sched_update->save(); 
 
-        $compensation_update = PafProposedChangeCompensationDetail::where('request_id', $form)->first();
+        $compensation_update = PersonnelActionManagement::get_paf_compensation_detail($form);
 
         $compensation_update->proposed_salary = $request->input('proposed_salary');
 

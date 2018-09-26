@@ -145,7 +145,7 @@
 				</div>
 				<div class="col">
 					<div class="form-group">
-						<input type="text" id="proposed_remarks_schedule_exec" name="proposed_remarks_schedule_exec" class="form-control-plaintext" title="proposed_remarks_schedule_exec" value="{{$get_schedule_details->proposed_remarks_hr}}" readonly>
+						<input type="text" id="proposed_remarks_schedule_exec" name="proposed_remarks_schedule_exec" class="form-control-plaintext" title="proposed_remarks_schedule_exec" value="{{$get_schedule_details->proposed_remarks_exec}}" readonly>
 					</div>
 				</div>
 			</div>

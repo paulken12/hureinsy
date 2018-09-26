@@ -48572,6 +48572,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -48594,108 +48603,141 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "select",
-      {
-        directives: [
+    _c("div", { staticClass: "input-group mb-3" }, [
+      _c("div", { staticClass: "input-group-prepend" }, [
+        _c(
+          "select",
           {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.Categories,
-            expression: "Categories"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { name: "request_status", id: "request_status", required: "" },
-        on: {
-          change: function($event) {
-            var $$selectedVal = Array.prototype.filter
-              .call($event.target.options, function(o) {
-                return o.selected
-              })
-              .map(function(o) {
-                var val = "_value" in o ? o._value : o.value
-                return val
-              })
-            _vm.Categories = $event.target.multiple
-              ? $$selectedVal
-              : $$selectedVal[0]
-          }
-        }
-      },
-      [
-        _c("option", { attrs: { value: "", selected: "" } }, [
-          _vm._v("--Select Category--")
-        ]),
-        _vm._v(" "),
-        _vm._l(_vm.categories, function(category) {
-          return _c("option", { domProps: { value: category.id } }, [
-            _vm._v(_vm._s(category.request_status))
-          ])
-        })
-      ],
-      2
-    ),
-    _vm._v(" "),
-    _vm.Categories !== ""
-      ? _c("div", [
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.SubCategories,
-                  expression: "SubCategories"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                name: "sub_request_status",
-                id: "sub_request_status",
-                required: ""
-              },
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.SubCategories = $event.target.multiple
-                    ? $$selectedVal
-                    : $$selectedVal[0]
-                }
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.Categories,
+                expression: "Categories"
               }
-            },
-            [
-              _c("option", { attrs: { value: "", selected: "" } }, [
-                _vm._v("--Select SubCategory--")
-              ]),
-              _vm._v(" "),
-              _vm._l(_vm.subcategories, function(subcategory) {
-                return subcategory.master_id_status == _vm.Categories
-                  ? _c("option", { domProps: { value: subcategory.id } }, [
-                      _vm._v(
-                        _vm._s(subcategory.sub_request_status) +
-                          " - " +
-                          _vm._s(subcategory.description)
-                      )
-                    ])
-                  : _vm._e()
-              })
             ],
-            2
-          )
-        ])
+            staticClass: "form-control",
+            attrs: {
+              name: "request_status",
+              id: "request_status",
+              required: ""
+            },
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.Categories = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              }
+            }
+          },
+          [
+            _c("option", { attrs: { value: "", selected: "" } }, [
+              _vm._v("--Select Category--")
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.categories, function(category) {
+              return _c("option", { domProps: { value: category.id } }, [
+                _vm._v(_vm._s(category.request_status))
+              ])
+            })
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.SubCategories,
+              expression: "SubCategories"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            name: "sub_request_status",
+            id: "sub_request_status",
+            required: ""
+          },
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.SubCategories = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
+        },
+        [
+          _c("option", { attrs: { value: "", selected: "" } }, [
+            _vm._v("--Select SubCategory--")
+          ]),
+          _vm._v(" "),
+          _vm._l(_vm.subcategories, function(subcategory) {
+            return subcategory.master_id_status == _vm.Categories
+              ? _c("option", { domProps: { value: subcategory.id } }, [
+                  _vm._v(
+                    _vm._s(subcategory.sub_request_status) +
+                      " - " +
+                      _vm._s(subcategory.description)
+                  )
+                ])
+              : _vm._e()
+          })
+        ],
+        2
+      )
+    ]),
+    _vm._v(" "),
+    (_vm.Categories == "2" && _vm.SubCategories == "4") ||
+    _vm.SubCategories == "6"
+      ? _c("div", { staticClass: "row" }, [_vm._m(0)])
       : _vm._e()
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-2" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "proposed_effective_date" } }, [
+          _c("strong", [_vm._v("Date Effective")])
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            type: "date",
+            id: "date_effective",
+            name: "date_effective",
+            title: "Date_effective",
+            required: ""
+          }
+        })
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

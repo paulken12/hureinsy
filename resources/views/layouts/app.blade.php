@@ -12,6 +12,7 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
 
 
@@ -131,6 +132,7 @@
                                                 @endcan
                                                 @can('hr_view')
                                                     <li><a href="{{route('paf.list')}}">Pending Personnel Action Form</a></li>
+
                                                     <li><a href="{{route('paf.list.approval')}}">Pending Personnel Action Form For Approval</a></li>
                                                 @endcan
                                             </ul>

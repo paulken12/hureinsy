@@ -4,20 +4,10 @@ namespace App\Http\Controllers\Paf;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\User;
-use App\Role;
-use App\Status;
-use App\SubStatus;
 use App\EmpBasicInfo;
-use App\MasterJobTitle;
-use App\MasterDepartment;
-use App\PafNatureOfAction;
-use App\MasterEmploymentStatus;
-use App\PafProposedChangeJobDetail;
-use App\PafProposedChangeScheduleDetail;
-use App\PafProposedChangeCompensationDetail;
 use App\Http\Controllers\Controller;    
 use App\Http\Controllers\RoleController;
+use App\Helpers\Paf\PersonnelActionManagement;
 
 class AssessmentController extends Controller
 {
@@ -25,7 +15,7 @@ class AssessmentController extends Controller
     public function list()
     {
 
-        $requestList = PafNatureOfAction::paginate(15);
+        $requestList = PersonnelActionManagement::call_paf_lists();
 
         return view('hpaf.list', compact('requestList'));
     }
@@ -38,35 +28,28 @@ class AssessmentController extends Controller
      */
     public function show($form)
     {  
-        $get_paf_details = PafNatureOfAction::where('id', $form)->first();
-
-        $get_job_details = PafProposedChangeJobDetail::where('request_id', $form)->first(); 
-
-        $get_schedule_details = PafProposedChangeScheduleDetail::where('request_id', $form)->first(); 
-
-        $get_compensation_details = PafProposedChangeCompensationDetail::where('request_id', $form)->first(); 
-        
-        $employee_name = EmpBasicInfo::where('company_id', $get_paf_details->employee_company_id)->first();
-
-        $manager_name = EmpBasicInfo::where('company_id', $get_paf_details->requested_by_company_id)->first();
-
         $user_role= Auth::user()->roles->first();
 
-        $employee_name = EmpBasicInfo::where('company_id', $get_paf_details->employee_company_id)->first();
+        //Get Paf details
+        $get_paf_details = PersonnelActionManagement::get_paf_request($form);
 
-        $hr_name =EmpBasicInfo::where('company_id', $get_paf_details->assessed_by_company_id)->first();
+        $get_job_details = PersonnelActionManagement::get_paf_job_detail($form); 
 
-        $exec_name =EmpBasicInfo::where('company_id', $get_paf_details->approved_by_company_id)->first();
+        $get_schedule_details = PersonnelActionManagement::get_paf_schedule_detail($form); 
 
-        if ($get_schedule_details->proposed_key_schedule_type == 'empl') {
-            
-            $request_status = $user_role->status;
+        $get_compensation_details = PersonnelActionManagement::get_paf_compensation_detail($form); 
 
-        }else{
+        //Get Employee details
+        $employee_name = PersonnelActionManagement::get_employee_info($get_paf_details->employee_company_id);
 
-            $request_status = $user_role->status->whereNotIn('id', '2');
+        $manager_name = PersonnelActionManagement::get_employee_info($get_paf_details->requested_by_company_id);
 
-        }
+        $hr_name = PersonnelActionManagement::get_employee_info($get_paf_details->assessed_by_company_id);
+
+        $exec_name = PersonnelActionManagement::get_employee_info($get_paf_details->approved_by_company_id);
+
+        //Get Statuses
+        $request_status = $user_role->status;
 
         $sub_request_status = $user_role->sub_status;
 
@@ -96,9 +79,8 @@ class AssessmentController extends Controller
             'proposed_remarks_compensation.required_with' => 'You need to fill out remarks on change in compensation and benefit details field.',
 
         ]);
-        
 
-        $form_update = PafNatureOfAction::where('id', $request->input('req_id'))->first();
+        $form_update = PersonnelActionManagement::get_paf_request($request->input('req_id'));
 
         $form_update->master_id_request_status = $request->input('request_status');
 
@@ -108,19 +90,19 @@ class AssessmentController extends Controller
 
         $form_update->save();
 
-        $job_update = PafProposedChangeJobDetail::where('request_id', $request->input('req_id'))->first(); 
+        $job_update = PersonnelActionManagement::get_paf_job_detail($request->input('req_id')); 
 
         $job_update->proposed_remarks_hr = $request->input('proposed_remarks_job');
 
         $job_update->save();
 
-        $sched_update = PafProposedChangeScheduleDetail::where('request_id', $request->input('req_id'))->first(); 
+        $sched_update =  PersonnelActionManagement::get_paf_schedule_detail($request->input('req_id')); 
 
         $sched_update->proposed_remarks_hr = $request->input('proposed_remarks_schedule');
 
         $sched_update->save(); 
 
-        $compensation_update = PafProposedChangeCompensationDetail::where('request_id', $request->input('req_id'))->first(); 
+        $compensation_update = PersonnelActionManagement::get_paf_compensation_detail($request->input('req_id')); 
 
         $compensation_update->proposed_remarks_hr = $request->input('proposed_remarks_compensation');
 
@@ -129,26 +111,4 @@ class AssessmentController extends Controller
         return redirect(route('paf.list'))->with('success', 'Request form updated');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

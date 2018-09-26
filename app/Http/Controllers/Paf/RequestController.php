@@ -4,22 +4,13 @@ namespace App\Http\Controllers\Paf;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\User;
-use App\Role;
-use App\Status;
-use App\SubStatus;
-use App\EmpBasicInfo;
-use App\MasterCompany;
-use App\MasterJobTitle;
-use App\MasterDepartment;
 use App\PafNatureOfAction;
-use App\MasterPafScheduleType;
-use App\MasterEmploymentStatus;
 use App\PafProposedChangeJobDetail;
 use App\PafProposedChangeScheduleDetail;
 use App\PafProposedChangeCompensationDetail;
 use App\Http\Controllers\Controller;    
 use App\Http\Controllers\RoleController;
+use App\Helpers\Paf\PersonnelActionManagement;
 
 class RequestController extends Controller
 {
@@ -27,28 +18,22 @@ class RequestController extends Controller
     public function index()
     {   
 
-        $user =EmpBasicInfo::where('user_id', Auth::user()->id)->first();
-
-        $list = PafNatureOfAction::where('requested_by', $user->id);
-
-        return view('mpaf.search', compact('user', 'list'));
+        return view('mpaf.search');
         
     }
 
     public function search(Request $request)
     {        
 
-        $emp_id = $request->input('raj_id');
+        $employee_info = PersonnelActionManagement::get_employee_info($request->input('raj_id'));  
 
-        $value = EmpBasicInfo::where('company_id', $emp_id)->first();  
-
-        if (empty($value)) {
+        if (empty($employee_info)) {
 
             return redirect(route('paf.index'))->with('error', 'Mismatched identity, Try again.');
 
         }else{
 
-            return redirect(route('paf.show', $emp_id));
+            return redirect(route('paf.show', $employee_info->company_id));
         
         }
     }
@@ -57,27 +42,21 @@ class RequestController extends Controller
     public function show($emplid)
     {   
 
-        $user_log = Auth::user()->roles->first(); 
+        $jobTitles = PersonnelActionManagement::call_master_job_title();
 
-        $get_status = $user_log->status->whereIn('id', '1');
+        $department = PersonnelActionManagement::call_master_department();
 
-        $get_sub_status =$user_log->sub_status->whereIn('id', '1');
+        $project_assignment = PersonnelActionManagement::call_master_company();
 
-        $jobTitles = MasterJobTitle::all();
+        $employment_status = PersonnelActionManagement::call_master_employment_status();
 
-        $department = MasterDepartment::all();
+        $sched_type = PersonnelActionManagement::call_master_paf_schedule_type();
 
-        $project_assignment = MasterCompany::all();
+        $reportTo = PersonnelActionManagement::call_user();
 
-        $employment_status = MasterEmploymentStatus::all();
+        $employee_info = PersonnelActionManagement::get_employee_info($emplid);  
 
-        $sched_type = MasterPafScheduleType::all();
-
-        $reportTo = User::all();
-
-        $value = EmpBasicInfo::where('company_id', $emplid)->first();  
-
-        return view('mpaf.request', compact('value', 'employment_status', 'department', 'reportTo', 'jobTitles', 'project_assignment', 'sched_type', 'get_status', 'get_sub_status'));
+        return view('mpaf.request', compact('employee_info', 'employment_status', 'department', 'reportTo', 'jobTitles', 'project_assignment', 'sched_type'));
         
     }
 
@@ -91,22 +70,19 @@ class RequestController extends Controller
             'proposed_reportto' => 'nullable|max:255',
             'proposed_position_title' => 'nullable|max:255',
             'proposed_project_assignment' => 'nullable|max:255',
-            'proposed_days_of_work' => 'nullable|max:255',
-            'proposed_work_hours_per_week' => 'nullable|max:255',
+            'proposed_days_of_work' => 'nullable|max:255|integer',
+            'proposed_work_hours_per_week' => 'nullable|max:255|integer',
             'proposed_type_of_shift' => 'nullable|max:255',
-            'proposed_work_hours_per_day' => 'nullable|max:255',
+            'proposed_work_hours_per_day' => 'nullable|max:255|integer',
             'proposed_work_location' => 'nullable|max:255',
             'sched_type' => 'nullable|max:255',
-            'proposed_salary' => 'nullable|max:255',
+            'proposed_salary' => 'nullable|max:255|integer',
             'proposed_bonus_allowance' => 'nullable|max:255',
             'proposed_benefits' => 'nullable|max:255',
-            'request_status' => 'exists:statuses,id|required',
-            'sub_request_status' => 'exists:sub_statuses,id|required',
        ]);
 
         $user = Auth::user()->basicInfo->pluck('company_id')->first();
 
-        //dd($request->all());
         $request_id = PafNatureOfAction::create([
 
             'employee_company_id' => $request->input('raj_id'),
@@ -117,9 +93,9 @@ class RequestController extends Controller
 
             'remarks' => $request->input('remarks'),
 
-            'master_id_request_status' => $request->input('request_status'),
+            'master_id_request_status' => '1',
 
-            'master_id_sub_request_status' => $request->input('sub_request_status'),
+            'master_id_sub_request_status' => '1',
 
         ]);
 

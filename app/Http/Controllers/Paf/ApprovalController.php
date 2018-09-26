@@ -4,20 +4,11 @@ namespace App\Http\Controllers\Paf;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\User;
-use App\Role;
-use App\Status;
-use App\SubStatus;
 use App\EmpBasicInfo;
-use App\MasterJobTitle;
-use App\MasterDepartment;
 use App\PafNatureOfAction;
-use App\MasterEmploymentStatus;
-use App\PafProposedChangeJobDetail;
-use App\PafProposedChangeScheduleDetail;
-use App\PafProposedChangeCompensationDetail;
 use App\Http\Controllers\Controller;    
 use App\Http\Controllers\RoleController;
+use App\Helpers\Paf\PersonnelActionManagement;
 
 class ApprovalController extends Controller
 {
@@ -30,25 +21,26 @@ class ApprovalController extends Controller
 
     public function show($form){
 
-        $get_paf_details = PafNatureOfAction::where('id', $form)->first();
+        //Get paf details
+        $get_paf_details = PersonnelActionManagement::get_paf_request($form);
 
-        $get_job_details = PafProposedChangeJobDetail::where('request_id', $form)->first(); 
+        $get_job_details = PersonnelActionManagement::get_paf_job_detail($form); 
 
-        $get_schedule_details = PafProposedChangeScheduleDetail::where('request_id', $form)->first(); 
+        $get_schedule_details = PersonnelActionManagement::get_paf_schedule_detail($form); 
 
-        $get_compensation_details = PafProposedChangeCompensationDetail::where('request_id', $form)->first(); 
-        
-        $employee_name = EmpBasicInfo::where('company_id', $get_paf_details->employee_company_id)->first();
+        $get_compensation_details = PersonnelActionManagement::get_paf_compensation_detail($form); 
 
-        $manager_name = EmpBasicInfo::where('company_id', $get_paf_details->requested_by_company_id)->first();
+        //Get employee details
+        $employee_name = PersonnelActionManagement::get_employee_info($get_paf_details->employee_company_id);
 
+        $manager_name = PersonnelActionManagement::get_employee_info($get_paf_details->requested_by_company_id);
+
+        $hr_name = PersonnelActionManagement::get_employee_info($get_paf_details->assessed_by_company_id);
+
+        $exec_name = PersonnelActionManagement::get_employee_info($get_paf_details->approved_by_company_id);
+
+        //Get Status details.
         $user_role= Auth::user()->roles->first();
-
-        $employee_name = EmpBasicInfo::where('company_id', $get_paf_details->employee_company_id)->first();
-
-        $hr_name =EmpBasicInfo::where('company_id', $get_paf_details->assessed_by_company_id)->first();
-
-        $exec_name =EmpBasicInfo::where('company_id', $get_paf_details->approved_by_company_id)->first();
 
         $request_status = $user_role->status;
 
@@ -82,7 +74,7 @@ class ApprovalController extends Controller
 
         ]);
 
-        $form_update = PafNatureOfAction::where('id', $request->input('req_id'))->first();
+        $form_update = PersonnelActionManagement::get_paf_request($request->input('req_id'));
 
         $form_update->master_id_request_status = $request->input('request_status');
 
@@ -90,21 +82,23 @@ class ApprovalController extends Controller
 
         $form_update->approved_by_company_id = EmpBasicInfo::where('user_id', Auth::user()->id)->first()->company_id;
 
+        $form_update->date_effective =$request->input('date_effective');
+
         $form_update->save();
 
-        $job_update = PafProposedChangeJobDetail::where('request_id', $request->input('req_id'))->first(); 
+        $job_update = PersonnelActionManagement::get_paf_job_detail($request->input('req_id')); 
 
         $job_update->proposed_remarks_exec = $request->input('proposed_remarks_job_exec');
 
         $job_update->save();
 
-        $sched_update = PafProposedChangeScheduleDetail::where('request_id', $request->input('req_id'))->first(); 
+        $sched_update = PersonnelActionManagement::get_paf_schedule_detail($request->input('req_id')); 
 
         $sched_update->proposed_remarks_exec = $request->input('proposed_remarks_schedule_exec');
 
         $sched_update->save(); 
 
-        $compensation_update = PafProposedChangeCompensationDetail::where('request_id', $request->input('req_id'))->first(); 
+        $compensation_update = PersonnelActionManagement::get_paf_compensation_detail($request->input('req_id')); 
 
         $compensation_update->proposed_remarks_exec = $request->input('proposed_remarks_compensation_exec');
 

@@ -21,6 +21,7 @@
         "vue-template-compiler": "^2.5.17"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-free": "^5.3.1",
         "vue-instantsearch": "^1.7.0"
     }
 }

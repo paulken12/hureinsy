@@ -1,8 +1,19 @@
 <div class="card">
-	<div class="card-header">
-		<h4>Change in Job Title, Duties, and Responsibilities Details</h4>
+
+	<div class="card-header" id="job-heading">
+		<div class="btn-toolbar justify-content-between">
+			<a href="" data-toggle="collapse" data-target="#collapse-job" aria-controls="collapse-job">
+				<h4><strong>Change in Job Title, Duties, and Responsibilities Details</strong></h4>
+			</a>
+		</div>
 	</div>
-	<div class="card-body">
+
+	@if(!empty($get_job_details->proposed_key_department) || !empty($get_job_details->proposed_reports_to) || !empty($get_job_details->proposed_key_position_title) || !empty($get_job_details->proposed_key_project_assignment))
+		<div class="card-body collapse show" id="collapse-job" aria-labledby="job-heading">
+	@else
+		<div class="card-body collapse" id="collapse-job" aria-labledby="job-heading">
+	@endif
+	
 		<div class="row">
 			<div class="col-2">
 				<div class="form-group">
@@ -10,24 +21,25 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<label for="current">Current</label>
+					<label for="current"><strong>Current</strong></label>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<label for="proposed">Proposed</label>
+					<label for="proposed"><strong>Proposed</strong></label>
 				</div>
 			</div>
 		</div>
+
 		<div class="row">
 			<div class="col-2">
 				<div class="form-group">
-					<label for="department">Department</label>
+					<label for="department"><strong>Department</strong></label>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_department" name="current_department" class="form-control-plaintext" title="Current_department" readonly>
+					{{--placeholder here--}}
 				</div>
 			</div>
 			<div class="col">
@@ -36,15 +48,16 @@
 				</div>
 			</div>
 		</div>
+
 		<div class="row">
 			<div class="col-2">
 				<div class="form-group">
-					<label for="reportto">Report To</label>
+					<label for="reportto"><strong>Report To</strong></label>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_reportto" name="current_reportto" class="form-control-plaintext" title="Current_reportto" readonly>
+					{{--placeholder here--}}
 				</div>
 			</div>
 			<div class="col">
@@ -53,15 +66,16 @@
 				</div>
 			</div>
 		</div>
+
 		<div class="row">
 			<div class="col-2">
 				<div class="form-group">
-					<label for="position/title">Position/Title</label>
+					<label for="position_title"><strong>Position/Title</strong></label>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_position/title" name="current_position/title" class="form-control-plaintext" title="Current_reportto" readonly>
+					{{--placeholder here--}}
 				</div>
 			</div>
 			<div class="col">
@@ -70,15 +84,16 @@
 				</div>
 			</div>
 		</div>
+
 		<div class="row">
 			<div class="col-2">
 				<div class="form-group">
-					<label for="project_assignment">Project Assignment</label>
+					<label for="project_assignment"><strong>Project Assignment</strong></label>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<input type="text" id="current_project_assignment" name="current_project_assignment" class="form-control-plaintext" title="Current_project_assignmento" readonly>
+					{{--placeholder here--}}
 				</div>
 			</div>
 			<div class="col">
@@ -117,5 +132,6 @@
 				</div>
 			</div>
 		@endif
+
 	</div>
 </div>
