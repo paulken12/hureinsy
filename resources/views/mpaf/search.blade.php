@@ -19,7 +19,7 @@
 	@endif	
 	<div class="card">
 		<div class="card-header">
-			<h4>Request for Personnel Action Form</h4>
+			<h4><i class="fab fa-wpforms"></i> &nbsp; Request for Personnel Action Form</h4>
 		</div>
 		<div class="card-body">
 			<div class="input-group">

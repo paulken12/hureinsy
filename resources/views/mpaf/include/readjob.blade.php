@@ -2,8 +2,8 @@
 
 	<div class="card-header" id="job-heading">
 		<div class="btn-toolbar justify-content-between">
-			<a href="" data-toggle="collapse" data-target="#collapse-job" aria-controls="collapse-job">
-				<h4><strong>Change in Job Title, Duties, and Responsibilities Details</strong></h4>
+			<a href="" data-toggle="collapse" data-target="#collapse-job" aria-controls="collapse-job" style="text-decoration:none;color:#000000">
+				<h4><i class="fas fa-briefcase"></i> &nbsp; <strong>Change in Job Title, Duties, and Responsibilities Details</strong></h4>
 			</a>
 		</div>
 	</div>

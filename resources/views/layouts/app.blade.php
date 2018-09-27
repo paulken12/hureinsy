@@ -127,13 +127,17 @@
                                             </a>
                                             <ul class="collapse" id="personnelActionManagement">
                                                 @can('manager_view')
+                                                {{-- can be accessible by all users --}}
+                                                    <li><a href="{{route('paf.myrequest.list')}}">My PAF requests</a></li>
+                                                {{-- can be accessible by managers and higher --}}
                                                     <li><a href="{{route('paf.index')}}">Request Personnel Action Form</a></li>
-                                                    <li><a href="{{route('paf.list.reassess')}}">Request PAF lists</a></li>
+                                                    <li><a href="{{route('paf.list.reassess')}}">Manager's request lists</a></li>
                                                 @endcan
                                                 @can('hr_view')
-                                                    <li><a href="{{route('paf.list')}}">Pending Personnel Action Form</a></li>
-
-                                                    <li><a href="{{route('paf.list.approval')}}">Pending Personnel Action Form For Approval</a></li>
+                                                {{-- can be accessible by hr and higher --}}
+                                                    <li><a href="{{route('paf.list')}}">Hr's assessment lists</a></li>
+                                                {{-- can be accessible by executives and higher --}}
+                                                    <li><a href="{{route('paf.list.approval')}}">For Executive's approval</a></li>
                                                 @endcan
                                             </ul>
                                         </li>

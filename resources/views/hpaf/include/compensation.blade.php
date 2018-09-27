@@ -2,8 +2,8 @@
 
 	<div class="card-header" id="compensation-heading">
 		<div class="btn-toolbar justify-content-between">
-			<a href="" data-toggle="collapse" data-target="#collapse-compensation" aria-controls="collapse-compensation">
-				<h4><strong>Change in Compensation and Benefit Details</strong></h4>			
+			<a href="" data-toggle="collapse" data-target="#collapse-compensation" aria-controls="collapse-compensation" style="text-decoration:none;color:#000000">
+				<h4><i class="fas fa-coins"></i> &nbsp; <strong>Change in Compensation and Benefit Details</strong></h4>			
 			</a>
 		</div>
 	</div>

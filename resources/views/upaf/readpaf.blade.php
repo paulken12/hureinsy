@@ -79,9 +79,9 @@
 		</div>	
 
 		<div id="accordion">
-			@include('hpaf.include.readjob')
-			@include('hpaf.include.readschedule')
-			@include('hpaf.include.readcompensation')
+			@include('upaf.include.readjob')
+			@include('upaf.include.readschedule')
+			@include('upaf.include.readcompensation')
 		</div>
 		<hr>
 

@@ -18,7 +18,7 @@
 	@endif	
     <div class="card">
         <div class="card-header">
-            <h4>Paf request for approval</h4>
+            <h4><i class="fas fa-list"></i> &nbsp; Requests for approval</h4>
         </div>
         <div class="card-body">
 			<table class="table table-striped table-md">

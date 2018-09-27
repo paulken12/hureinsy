@@ -3,13 +3,13 @@
 
 <div class="card">
 	<div class="card-header">
-		<h4><strong>Personnel Action Form</strong></h4>
+		<h4><i class="fab fa-wpforms"></i> &nbsp; <strong>Personnel Action Form</strong></h4>
 	</div>
 
 	<div class="card-body">
 		{{csrf_field()}}
 
-		<h4><strong>Employee Information</strong></h4>
+		<h4><i class="fas fa-user"></i> &nbsp; <strong>Employee Information</strong></h4>
 		<hr>
 
 		<div class="row">
@@ -57,7 +57,7 @@
 		</div>
 
 		<hr>
-		<h4><strong>Nature of Action</strong></h4>
+		<h4><strong><i class="fas fa-pencil-alt"></i> &nbsp; Nature of Action</strong></h4>
 		<hr>
 
 		<div class="row">

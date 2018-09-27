@@ -2,8 +2,8 @@
 
 	<div class="card-header" id="schedule-heading">
 		<div class="btn-toolbar justify-content-between">
-			<a href="" data-toggle="collapse" data-target="#collapse-schedule" aria-controls="collapse-schedule">
-				<h4><strong>Change in Work Schedule Details</strong></h4>
+			<a href="" data-toggle="collapse" data-target="#collapse-schedule" aria-controls="collapse-schedule" style="text-decoration:none;color:#000000">
+				<h4><i class="far fa-clock"></i> &nbsp; <strong>Change in Work Schedule Details</strong></h4>
 			</a>
 		</div>
 	</div>

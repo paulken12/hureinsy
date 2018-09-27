@@ -18,7 +18,7 @@
 	@endif	
     <div class="card">
         <div class="card-header">
-            <h4><i class="fas fa-list"></i> &nbsp; Requests for reassessment</h4>
+            <h4><i class="fas fa-list"></i> &nbsp; My request lists</h4>
         </div>
         <div class="card-body">
 			<table class="table table-striped table-md">
@@ -27,27 +27,29 @@
 						<th scope="col">Request no.</th>
 						<th scope="col">Employee id</th>
 						<th scope="col">Purpose</th>
+						<th scope="col">Requested by</th>
 						<th scope="col">Assessed by</th>
 						<th scope="col">Status</th>
 						<th scope="col"></th>
 					</tr>
 				</thead>
 				<tbody>
-					@foreach($request_list as $lists)
+					@foreach ($requestList as $lists)
 						<tr>
 							<th scope="row">{{$lists->id}}</th>
 							<td>{{$lists->employee_company_id}}</td>
 							<td>{{$lists->employmentStatus->employment_status}}</td>
+							<td>{{empty($lists->requested_by_company_id) ? '' : $lists->requested_by_company_id}}</td>
 							<td>{{empty($lists->assessed_by_company_id) ? '' : $lists->assessed_by_company_id}}</td>
 							<td>{{$lists->masterPafStatus->request_status}} - {{$lists->masterPafSubStatus->sub_request_status}}</td>
-							<td class="form-group text-center"><a class="btn btn-secondary btn-sm" href="{{route('paf.list.reassess.show', $lists->id)}}">View</a></td>
+							<td class="form-group text-center"><a class="btn btn-secondary btn-sm" href="{{route('paf.list.approval.show', $lists->id)}}">View</a></td>
 						</tr>
 					@endforeach
 				</tbody>
 			</table>
 	    </div>
 	    <div class="row mt-2">
-	        <span class="mr-auto ml-auto">{{$request_list->links()}}</span>
+	        <span class="mr-auto ml-auto">{{$requestList->links()}}</span>
 	    </div>
     </div>
 @endsection
